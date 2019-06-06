@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TextService } from '../text.service';
 
 @Component({
   selector: 'app-text-section',
@@ -9,7 +10,7 @@ export class TextSectionComponent implements OnInit {
 
   sectionName = 'Texto';
 
-  constructor() { }
+  constructor(private textService: TextService) { }
 
   ngOnInit() {
   }
