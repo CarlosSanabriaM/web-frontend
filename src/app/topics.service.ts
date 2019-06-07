@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { Topic } from './topic';
+import { Topic } from './dtos/topic';
 import { catchError, tap } from 'rxjs/operators';
 import { environment } from '../environments/environment';
+import { TopicImageUrl } from './dtos/topic-image-url';
 
 @Injectable({
   providedIn: 'root'
@@ -21,15 +22,30 @@ export class TopicsService {
   getTopicsText(numKeywords: number): Observable<Topic[]> {
     const url = `${this.apiTopicsUrl}/text?num_keywords=${numKeywords}`;
     return this.http.get<Topic[]>(url).pipe(
+      // TODO: Modify tap?
       tap(_ => console.log(`fetched topics in text format with num_keywords=${numKeywords}`)),
       catchError(this.handleError)
     );
   }
 
   /**
+   * GET topics in wordcloud image format from the REST API.
+   * @param numKeywords Number of keywords to retrieve for each topic image
+   */
+  getTopicsWordcloudImagesUrls(numKeywords: number): Observable<TopicImageUrl[]> {
+    const url = `${this.apiTopicsUrl}//topics/wordcloud?num_keywords=${numKeywords}`;
+    return this.http.get<TopicImageUrl[]>(url).pipe(
+      // TODO: Modify tap?
+      tap(_ => console.log(`fetched topics in wordcloud image format with num_keywords=${numKeywords}`)),
+      catchError(this.handleError)
+    );
+  }
+
+  // TODO: Revise this method
+  /**
    * Method for handling http errors.
    */
-  private handleError(error: HttpErrorResponse) { // TODO: Revise this method
+  private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
       console.error('An error occurred:', error.error.message);

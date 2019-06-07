@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TopicsService } from '../topics.service';
-import { Topic } from '../topic';
+import { Topic } from '../dtos/topic';
+import { TopicImageUrl } from '../dtos/topic-image-url';
 
 @Component({
   selector: 'app-topics-section',
@@ -11,6 +12,7 @@ export class TopicsSectionComponent implements OnInit {
 
   sectionName = 'Topics';
   topics: Topic[];
+  topicImageUrls: TopicImageUrl[];
   // TODO: This values shouldn't be hardcoded here
   numKeywordsTextFormat = 5;
   numKeywordsWordcloudFormat = 20;
@@ -22,9 +24,22 @@ export class TopicsSectionComponent implements OnInit {
     this.getTopicsText();
   }
 
+  /**
+   * Call the TopicsService to obtain the topics in text format and
+   * updates the HTML table with the topics returned by the service.
+   */
   getTopicsText(): void {
     this.topicsService.getTopicsText(this.numKeywordsTextFormat)
       .subscribe(topics => this.topics = topics);
+  }
+
+  /**
+   * Call the TopicsService to obtain the topics in wordcloud format and
+   * updates the HTML images showed.
+   */
+  getTopicsWordcloudImagesUrls(): void {
+    this.topicsService.getTopicsWordcloudImagesUrls(this.numKeywordsWordcloudFormat)
+      .subscribe(topicImageUrls => this.topicImageUrls = topicImageUrls);
   }
 
   /**
@@ -41,6 +56,6 @@ export class TopicsSectionComponent implements OnInit {
     this.numTopicDocuments = numTopicDocuments;
     // Call the API with the new values to obtain the topics in text and wordcloud formats
     this.getTopicsText();
-    // TODO: this.getTopicsWordcloudImagesUrls();
+    this.getTopicsWordcloudImagesUrls();
   }
 }
