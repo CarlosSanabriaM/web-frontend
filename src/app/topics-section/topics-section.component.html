@@ -15,7 +15,14 @@
           {{keyword.name}}: {{keyword.probability | percent:'1.2'}}
         </span>
       </td>
-      <td><!--TODO: Include icon to show topic documents--></td>
+      <td>
+        <!-- Document icon -->
+        <i #documentTooltip="matTooltip" (click)="getTopicDocuments(topic.topic)"
+           (mouseenter)="documentTooltip.show()"
+           (mouseleave)="documentTooltip.hide()"
+           class="material-icons" matTooltip="Click to show the most representative documents of topic {{topic.topic}}"
+           matTooltipPosition="left">description</i>
+      </td>
     </tr>
   </table>
 </div>
