@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { Topic } from './dtos/topic';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from '../environments/environment';
 import { TopicImageUrl } from './dtos/topic-image-url';
 
@@ -11,7 +11,7 @@ import { TopicImageUrl } from './dtos/topic-image-url';
 })
 export class TopicsService {
 
-  private apiTopicsUrl = `${environment.userApiBaseUrl}/topics`;  // URL to topics and summary API topics 'section'
+  private apiTopicsUrl = `${environment.baseUrl}/user/api/topics`;  // URL to topics and summary API topics 'section'
 
   constructor(private http: HttpClient) { }
 
@@ -21,6 +21,7 @@ export class TopicsService {
    */
   getTopicsText(numKeywords: number): Observable<Topic[]> {
     const url = `${this.apiTopicsUrl}/text?num_keywords=${numKeywords}`;
+
     return this.http.get<Topic[]>(url).pipe(
       // TODO: Modify tap?
       tap(_ => console.log(`fetched topics in text format with num_keywords=${numKeywords}`)),
@@ -33,10 +34,16 @@ export class TopicsService {
    * @param numKeywords Number of keywords to retrieve for each topic image
    */
   getTopicsWordcloudImagesUrls(numKeywords: number): Observable<TopicImageUrl[]> {
-    const url = `${this.apiTopicsUrl}//topics/wordcloud?num_keywords=${numKeywords}`;
+    const url = `${this.apiTopicsUrl}/wordcloud?num_keywords=${numKeywords}`;
+
     return this.http.get<TopicImageUrl[]>(url).pipe(
       // TODO: Modify tap?
       tap(_ => console.log(`fetched topics in wordcloud image format with num_keywords=${numKeywords}`)),
+      // Create new TopicImageUrl objects with the baseUrl added at the beginning of the image_url
+      map(topicImageUrls => topicImageUrls.map(topicImageUrl => ({
+        topic: topicImageUrl.topic,
+        image_url: `${environment.baseUrl}${topicImageUrl.image_url}`
+      }))),
       catchError(this.handleError)
     );
   }

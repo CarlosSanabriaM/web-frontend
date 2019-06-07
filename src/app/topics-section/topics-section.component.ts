@@ -22,6 +22,7 @@ export class TopicsSectionComponent implements OnInit {
 
   ngOnInit() {
     this.getTopicsText();
+    this.getTopicsWordcloudImagesUrls();
   }
 
   /**

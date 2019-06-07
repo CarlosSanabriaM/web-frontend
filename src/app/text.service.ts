@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class TextService {
 
-  private apiTextUrl = `${environment.userApiBaseUrl}/text`;  // URL to topics and summary API text 'section'
+  private apiTextUrl = `${environment.baseUrl}/user/api/text`;  // URL to topics and summary API text 'section'
 
   constructor(private http: HttpClient) { }
 }

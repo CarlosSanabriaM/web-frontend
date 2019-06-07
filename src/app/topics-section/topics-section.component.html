@@ -1,21 +1,30 @@
 <h2>{{sectionName}}</h2>
 
-<table>
-  <tr>
-    <th>Núm. topic</th>
-    <th>Keywords</th>
-    <th></th>
-  </tr>
-  <tr *ngFor="let topic of topics">
-    <td>{{topic.topic}}</td>
-    <td>
-      <span *ngFor="let keyword of topic.keywords">
-        {{keyword.name}}: {{keyword.probability | percent:'1.2'}}
-      </span>
-    </td>
-    <td><!--TODO: Include icon to show topic documents--></td>
-  </tr>
-</table>
+<div>
+  <h3>Topics en formato texto</h3>
+  <table>
+    <tr>
+      <th>Núm. topic</th>
+      <th>Keywords</th>
+      <th></th>
+    </tr>
+    <tr *ngFor="let topic of topics">
+      <td>{{topic.topic}}</td>
+      <td>
+        <span *ngFor="let keyword of topic.keywords">
+          {{keyword.name}}: {{keyword.probability | percent:'1.2'}}
+        </span>
+      </td>
+      <td><!--TODO: Include icon to show topic documents--></td>
+    </tr>
+  </table>
+</div>
+
+<div>
+  <h3>Topics en formato nube de palabras</h3>
+  <img *ngFor="let topicImageUrl of topicImageUrls"
+       [src]="topicImageUrl.image_url" alt="Topic{{topicImageUrl.topic}} wordcloud image" class="topic-wordcloud-image">
+</div>
 
 <div id="configuration-section">
   <h3>Configuración</h3>
