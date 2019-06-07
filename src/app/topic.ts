@@ -1,6 +1,6 @@
 import { Keyword } from './keyword';
 
-export class Topic {
-  id: number;
+export interface Topic {
+  topic: number;  // topic id
   keywords: Keyword[];
 }

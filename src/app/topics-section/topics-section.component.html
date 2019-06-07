@@ -1,1 +1,17 @@
 <h2>{{sectionName}}</h2>
+
+
+<table>
+  <tr>
+    <th>Núm. topic</th>
+    <th>Keywords</th>
+  </tr>
+  <tr *ngFor="let topic of topics">
+    <td>{{topic.topic}}</td>
+    <td>
+      <span *ngFor="let keyword of topic.keywords">
+        {{keyword.name}}: {{keyword.probability | percent:'1.2'}}
+      </span>
+    </td>
+  </tr>
+</table>
