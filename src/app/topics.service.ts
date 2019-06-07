@@ -3,13 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Topic } from './topic';
 import { tap } from 'rxjs/operators';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TopicsService {
 
-  private apiTopicsUrl = 'user/api/topics';  // URL to topics and summary API topics 'section'
+  private apiTopicsUrl = `${environment.userApiBaseUrl}/topics`;  // URL to topics and summary API topics 'section'
 
   constructor(private http: HttpClient) { }
 
