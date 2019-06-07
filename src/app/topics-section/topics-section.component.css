@@ -16,3 +16,8 @@ table tr:nth-child(odd) {
 table tr:nth-child(even) {
   background-color: #ffffff;
 }
+
+mat-slider {
+  /* TODO: Modify this to don't use absolute width */
+  width: 300px;
+}

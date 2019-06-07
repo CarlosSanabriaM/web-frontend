@@ -1,10 +1,10 @@
 <h2>{{sectionName}}</h2>
 
-
 <table>
   <tr>
     <th>Núm. topic</th>
     <th>Keywords</th>
+    <th></th>
   </tr>
   <tr *ngFor="let topic of topics">
     <td>{{topic.topic}}</td>
@@ -13,5 +13,34 @@
         {{keyword.name}}: {{keyword.probability | percent:'1.2'}}
       </span>
     </td>
+    <td><!--TODO: Include icon to show topic documents--></td>
   </tr>
 </table>
+
+<div id="configuration-section">
+  <h3>Configuración</h3>
+  <div>
+    Número de keywords (formato texto):
+    <mat-slider #sliderNumKeywordsTextFormat [value]="numKeywordsTextFormat" color="primary" max="30" min="1"
+                thumbLabel></mat-slider>
+  </div>
+
+  <div>
+    Número de keywords (formato nube de palabras):
+    <mat-slider #sliderNumKeywordsWordcloudFormat [value]="numKeywordsWordcloudFormat" color="primary" max="100" min="1"
+                thumbLabel></mat-slider>
+  </div>
+
+  <div>
+    Número de documentos (documentos más representativos de un topic):
+    <mat-slider #sliderNumTopicDocuments [value]="numTopicDocuments" color="primary" max="30" min="1"
+                thumbLabel></mat-slider>
+  </div>
+
+  <button (click)="updateVariablesAndRefreshTopics(sliderNumKeywordsTextFormat.value,
+                                                   sliderNumKeywordsWordcloudFormat.value,
+                                                   sliderNumTopicDocuments.value)" color="primary"
+          mat-raised-button>
+    Actualizar
+  </button>
+</div>
