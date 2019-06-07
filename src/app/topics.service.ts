@@ -5,6 +5,7 @@ import { Topic } from './dtos/topic';
 import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from '../environments/environment';
 import { TopicImageUrl } from './dtos/topic-image-url';
+import { ReprDocOfTopic } from './dtos/repr-doc-of-topic';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class TopicsService {
 
   /**
    * GET topics in text format from the REST API.
-   * @param numKeywords Number of keywords to retrieve for each topic
+   * @param numKeywords: Number of keywords to retrieve for each topic
    */
   getTopicsText(numKeywords: number): Observable<Topic[]> {
     const url = `${this.apiTopicsUrl}/text?num_keywords=${numKeywords}`;
@@ -31,7 +32,7 @@ export class TopicsService {
 
   /**
    * GET topics in wordcloud image format from the REST API.
-   * @param numKeywords Number of keywords to retrieve for each topic image
+   * @param numKeywords: Number of keywords to retrieve for each topic image
    */
   getTopicsWordcloudImagesUrls(numKeywords: number): Observable<TopicImageUrl[]> {
     const url = `${this.apiTopicsUrl}/wordcloud?num_keywords=${numKeywords}`;
@@ -44,6 +45,21 @@ export class TopicsService {
         topic: topicImageUrl.topic,
         image_url: `${environment.baseUrl}${topicImageUrl.image_url}`
       }))),
+      catchError(this.handleError)
+    );
+  }
+
+  /**
+   * GET the most representative documents of a topic from the REST API.
+   * @param topicId: Id of the topic which documents want to be retrieved
+   * @param numDocuments: Number of documents to retrieve
+   */
+  getTopicDocuments(topicId: number, numDocuments: number) {
+    const url = `${this.apiTopicsUrl}/${topicId}/documents?num_documents=${numDocuments}`;
+
+    return this.http.get<ReprDocOfTopic[]>(url).pipe(
+      // TODO: Modify tap?
+      tap(_ => console.log(`fetched the ${numDocuments} most representative documents of topic ${topicId}`)),
       catchError(this.handleError)
     );
   }

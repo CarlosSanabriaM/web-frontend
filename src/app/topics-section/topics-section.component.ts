@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TopicsService } from '../topics.service';
 import { Topic } from '../dtos/topic';
 import { TopicImageUrl } from '../dtos/topic-image-url';
+import { ReprDocOfTopic } from '../dtos/repr-doc-of-topic';
 
 @Component({
   selector: 'app-topics-section',
@@ -13,6 +14,7 @@ export class TopicsSectionComponent implements OnInit {
   sectionName = 'Topics';
   topics: Topic[];
   topicImageUrls: TopicImageUrl[];
+  topicDocuments: ReprDocOfTopic[];
   // TODO: This values shouldn't be hardcoded here
   numKeywordsTextFormat = 5;
   numKeywordsWordcloudFormat = 20;
@@ -26,8 +28,8 @@ export class TopicsSectionComponent implements OnInit {
   }
 
   /**
-   * Call the TopicsService to obtain the topics in text format and
-   * updates the HTML table with the topics returned by the service.
+   * Calls the TopicsService to obtain the topics in text format and
+   * stores the result in a variable.
    */
   getTopicsText(): void {
     this.topicsService.getTopicsText(this.numKeywordsTextFormat)
@@ -35,12 +37,22 @@ export class TopicsSectionComponent implements OnInit {
   }
 
   /**
-   * Call the TopicsService to obtain the topics in wordcloud format and
-   * updates the HTML images showed.
+   * Calls the TopicsService to obtain the topics in wordcloud format and
+   * stores the result in a variable.
    */
   getTopicsWordcloudImagesUrls(): void {
     this.topicsService.getTopicsWordcloudImagesUrls(this.numKeywordsWordcloudFormat)
       .subscribe(topicImageUrls => this.topicImageUrls = topicImageUrls);
+  }
+
+  /**
+   * Calls the TopicsService to obtain the most representative documents of a topic and
+   * stores the result in a variable.
+   * @param topicId: Id of the topic which documents want to be retrieved
+   */
+  getTopicDocuments(topicId: number): void {
+    this.topicsService.getTopicDocuments(topicId, this.numTopicDocuments)
+      .subscribe(topicDocuments => this.topicDocuments = topicDocuments);
   }
 
   /**
