@@ -1,8 +1,44 @@
 <h2>{{sectionName}}</h2>
 
-<form>
-  <mat-form-field appearance="outline" id="text-textarea-form-field">
-    <textarea matInput placeholder="Introduce un texto" rows="{{textAreaNumRows}}"></textarea>
-    <mat-hint>Texto que será utilizado por las opciones a su derecha</mat-hint>
-  </mat-form-field>
-</form>
+<!-- TODO: This grid isn't adaptable! In a mobile phone, the textarea should be displayed above the options -->
+<mat-grid-list cols="2" rowHeight="85%">
+  <!-- Textarea at the left -->
+  <mat-grid-tile>
+    <form>
+      <mat-form-field appearance="outline" id="text-textarea-form-field">
+        <textarea matInput placeholder="Introduce un texto" rows="{{textAreaNumRows}}"></textarea>
+        <mat-hint>Texto que será utilizado por las opciones a su derecha</mat-hint>
+      </mat-form-field>
+    </form>
+  </mat-grid-tile>
+  <!-- Options at the right -->
+  <mat-grid-tile>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Topics relacionados</mat-panel-title>
+        </mat-expansion-panel-header>
+        <div>
+          <!-- TODO: Content here -->
+        </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Documentos similares</mat-panel-title>
+        </mat-expansion-panel-header>
+        <div>
+          <!-- TODO: Content here -->
+        </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Resumir texto</mat-panel-title>
+        </mat-expansion-panel-header>
+        <div>
+          <!-- TODO: Content here -->
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-grid-tile>
+</mat-grid-list>
+

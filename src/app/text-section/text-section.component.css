@@ -1,9 +1,15 @@
 #text-textarea-form-field {
-  width: 50%;
+  width: 100%;
 }
 
 #text-textarea-form-field textarea {
   resize: none;
 }
 
+mat-accordion {
+  width: 98%;
+}
 
+form {
+  width: 98%;
+}
