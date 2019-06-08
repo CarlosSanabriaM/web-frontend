@@ -5,6 +5,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { TextTopicProb } from './dtos/text-topic-prob';
 import { TextRelatedDoc } from './dtos/text-related-doc';
+import { TextSummary } from './dtos/text-summary';
 
 @Injectable({
   providedIn: 'root'
@@ -50,6 +51,25 @@ export class TextService {
     return this.http.post<TextRelatedDoc[]>(url, formData).pipe(
       // TODO: Modify tap?
       tap(_ => console.log(`fetched related documents with num_documents=${numDocuments}`)),
+      catchError(this.handleError)
+    );
+  }
+
+  /**
+   * POST the given text to the REST API and return a summary of the text.
+   * @param text: Text to be summarized.
+   * @param numSentences: Number of sentences that will contain the summary.
+   */
+  getTextSummary(text: string, numSentences: number): Observable<TextSummary[]> {
+    const url = `${this.apiTextUrl}/summary?num_summary_sentences=${numSentences}`;
+
+    // Create FormData object, because the API expects 'Content-Type': 'application/x-www-form-urlencoded' with text attribute
+    const formData = new FormData();
+    formData.append('text', text);
+
+    return this.http.post<TextSummary[]>(url, formData).pipe(
+      // TODO: Modify tap?
+      tap(_ => console.log(`fetched text summary with num_summary_sentences=${numSentences}`)),
       catchError(this.handleError)
     );
   }
