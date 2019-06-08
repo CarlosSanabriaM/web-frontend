@@ -60,14 +60,14 @@ export class TextService {
    * @param text: Text to be summarized.
    * @param numSentences: Number of sentences that will contain the summary.
    */
-  getTextSummary(text: string, numSentences: number): Observable<TextSummary[]> {
+  getTextSummary(text: string, numSentences: number): Observable<TextSummary> {
     const url = `${this.apiTextUrl}/summary?num_summary_sentences=${numSentences}`;
 
     // Create FormData object, because the API expects 'Content-Type': 'application/x-www-form-urlencoded' with text attribute
     const formData = new FormData();
     formData.append('text', text);
 
-    return this.http.post<TextSummary[]>(url, formData).pipe(
+    return this.http.post<TextSummary>(url, formData).pipe(
       // TODO: Modify tap?
       tap(_ => console.log(`fetched text summary with num_summary_sentences=${numSentences}`)),
       catchError(this.handleError)
