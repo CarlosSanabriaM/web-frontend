@@ -37,14 +37,22 @@
         <mat-expansion-panel-header>
           <mat-panel-title>Documentos similares</mat-panel-title>
         </mat-expansion-panel-header>
+        <!-- Related documents options -->
         <div class="text-option" id="related-documents-options">
-          <!-- TODO: Content here -->
+          <mat-slider #sliderNumDocuments [max]="maxNumDocuments" [value]="initialNumDocuments"
+                      color="primary" min="1" thumbLabel></mat-slider>
+          <p class="slider-footer">Número de documentos devueltos</p>
+          <button (click)="getRelatedDocuments(textArea.value, sliderNumDocuments.value)" color="primary"
+                  mat-raised-button>
+            Obtener
+          </button>
         </div>
       </mat-expansion-panel>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title>Resumir texto</mat-panel-title>
         </mat-expansion-panel-header>
+        <!-- Text summary options -->
         <div class="text-option" id="text-summary-options">
           <!-- TODO: Content here -->
         </div>
@@ -66,4 +74,34 @@
       <td>{{textTopicProb.text_topic_prob | percent:'1.6'}}</td>
     </tr>
   </table>
+</div>
+
+<!-- TODO: If the X button is pressed, topicDocuments = null -->
+<!-- TODO: Show a mat-progress-spinner when loading the documents -->
+<div *ngIf="relatedDocuments">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Documentos más similares al texto</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-accordion>
+        <mat-expansion-panel *ngFor="let relatedDoc of relatedDocuments">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{relatedDoc.doc_content_summary | slice:0:relatedDocumentSummaryMaxLength}}
+              {{relatedDoc.doc_content_summary.length > relatedDocumentSummaryMaxLength ? '...' : ''}}
+            </mat-panel-title>
+            <mat-panel-description>
+              Topic: {{relatedDoc.doc_topic}}
+              &nbsp;&nbsp;&nbsp;
+              Probabilidad: {{relatedDoc.doc_text_prob | percent:'1.2'}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <pre>
+            {{relatedDoc.doc_content}}
+          </pre>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-card-content>
+  </mat-card>
 </div>
