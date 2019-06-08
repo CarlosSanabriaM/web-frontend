@@ -21,6 +21,11 @@ export class TextSectionComponent implements OnInit {
   }
 
   getRelatedTopics(text: string, maxNumTopics: number) {
+    if (text.length === 0) {
+      // TODO: Show warning message
+      return;
+    }
+
     this.textService.getRelatedTopics(text, maxNumTopics)
       .subscribe(relatedTopics => this.relatedTopics = relatedTopics);
   }

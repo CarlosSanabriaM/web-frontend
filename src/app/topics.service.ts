@@ -54,7 +54,7 @@ export class TopicsService {
    * @param topicId: Id of the topic which documents want to be retrieved
    * @param numDocuments: Number of documents to retrieve
    */
-  getTopicDocuments(topicId: number, numDocuments: number) {
+  getTopicDocuments(topicId: number, numDocuments: number): Observable<ReprDocOfTopic[]> {
     const url = `${this.apiTopicsUrl}/${topicId}/documents?num_documents=${numDocuments}`;
 
     return this.http.get<ReprDocOfTopic[]>(url).pipe(
@@ -65,6 +65,7 @@ export class TopicsService {
   }
 
   // TODO: Revise this method
+  // TODO: Don't repeat the code of this method in the 2 services. Move to a common place.
   /**
    * Method for handling http errors.
    */
