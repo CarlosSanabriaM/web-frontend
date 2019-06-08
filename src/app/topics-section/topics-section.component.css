@@ -30,3 +30,15 @@ mat-slider {
 [id^='document-icon-topic'] {
   cursor: pointer;
 }
+
+/* Angular Material expansion panel header fits the text height, but with a min height of 48px */
+mat-expansion-panel-header {
+  min-height: 48px;
+  height: 100% !important;
+}
+
+/* Right align the description of the Angular Material expansion panel header */
+.mat-expansion-panel-header-description {
+  display: flex;
+  justify-content: flex-end;
+}

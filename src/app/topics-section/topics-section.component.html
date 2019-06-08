@@ -11,6 +11,7 @@
     <tr *ngFor="let topic of topics">
       <td>{{topic.topic}}</td>
       <td>
+        <!-- TODO: keyword.name should have a different style, for example, bold -->
         <span *ngFor="let keyword of topic.keywords">
           {{keyword.name}}: {{keyword.probability | percent:'1.2'}}
         </span>
@@ -25,6 +26,7 @@
            class="material-icons" matTooltip="Click to show the most representative documents of topic {{topic.topic}}"
            matTooltipPosition="left">description</i>
       </td>
+      <!-- TODO: When clicked, the page should move the user to the place where the documents will appear -->
     </tr>
   </table>
 </div>
@@ -61,4 +63,32 @@
           mat-raised-button>
     Actualizar
   </button>
+</div>
+
+<!-- TODO: If the X button is pressed, topicDocuments = null -->
+<!-- TODO: Show a mat-progress-spinner when loading the documents -->
+<div *ngIf="topicDocuments">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Documentos más representativos del topic {{selectedTopicId}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-accordion>
+        <mat-expansion-panel *ngFor="let topicDocument of topicDocuments">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{topicDocument.doc_content_summary | slice:0:topicDocumentSummaryMaxLength}}
+              {{topicDocument.doc_content_summary.length > topicDocumentSummaryMaxLength ? '...' : ''}}
+            </mat-panel-title>
+            <mat-panel-description>
+              Probabilidad: {{topicDocument.doc_topic_prob | percent:'1.2'}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <pre>
+            {{topicDocument.doc_content}}
+          </pre>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-card-content>
+  </mat-card>
 </div>

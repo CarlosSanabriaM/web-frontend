@@ -15,10 +15,12 @@ export class TopicsSectionComponent implements OnInit {
   topics: Topic[];
   topicImageUrls: TopicImageUrl[];
   topicDocuments: ReprDocOfTopic[];
+  selectedTopicId: number;  // selected topic id to obtain the topics documents
   // TODO: This values shouldn't be hardcoded here
   numKeywordsTextFormat = 5;
   numKeywordsWordcloudFormat = 20;
-  numTopicDocuments = 10;
+  numTopicDocuments = 2;
+  topicDocumentSummaryMaxLength = 150;
 
   constructor(private topicsService: TopicsService) { }
 
@@ -52,7 +54,10 @@ export class TopicsSectionComponent implements OnInit {
    */
   getTopicDocuments(topicId: number): void {
     this.topicsService.getTopicDocuments(topicId, this.numTopicDocuments)
-      .subscribe(topicDocuments => this.topicDocuments = topicDocuments);
+      .subscribe(topicDocuments => {
+        this.selectedTopicId = topicId;
+        this.topicDocuments = topicDocuments;
+      });
   }
 
   /**
