@@ -42,3 +42,8 @@ mat-expansion-panel-header {
   display: flex;
   justify-content: flex-end;
 }
+
+/* Tab icons have a margin of 8px at the left */
+.tab-icon {
+  margin-left: 8px;
+}

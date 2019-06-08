@@ -1,41 +1,67 @@
 <h2>{{sectionName}}</h2>
 
-<div>
-  <h3>Topics en formato texto</h3>
-  <table>
-    <tr>
-      <th>Núm. topic</th>
-      <th>Keywords</th>
-      <th></th>
-    </tr>
-    <tr *ngFor="let topic of topics">
-      <td>{{topic.topic}}</td>
-      <td>
-        <!-- TODO: keyword.name should have a different style, for example, bold -->
-        <span *ngFor="let keyword of topic.keywords">
+<!-- TODO: Change backgroundColor -->
+<mat-tab-group color="primary" dynamicHeight mat-stretch-tabs>
+  <!-- Tab 1 -->
+  <mat-tab>
+    <!-- Mat tab header content -->
+    <ng-template mat-tab-label>
+      <h3>Texto</h3>
+      <mat-icon class="tab-icon">text_format</mat-icon>
+    </ng-template>
+    <!-- Mat tab content -->
+    <!-- TODO: Move this div to the HTML of another Component -->
+    <div id="topics-text-format">
+      <table>
+        <tr>
+          <th>Núm. topic</th>
+          <th>Keywords</th>
+          <th></th>
+        </tr>
+        <tr *ngFor="let topic of topics">
+          <td>{{topic.topic}}</td>
+          <td>
+            <!-- TODO: keyword.name should have a different style, for example, bold -->
+            <span *ngFor="let keyword of topic.keywords">
           {{keyword.name}}: {{keyword.probability | percent:'1.2'}}
         </span>
-      </td>
-      <td>
-        <!-- Document icon -->
-        <!-- When the mouse hovers the document icon, a tooltip explains how to use it -->
-        <i #documentTooltip="matTooltip" (click)="getTopicDocuments(topic.topic)"
-           id="document-icon-topic{{topic.topic}}"
-           (mouseenter)="documentTooltip.show()"
-           (mouseleave)="documentTooltip.hide()"
-           class="material-icons" matTooltip="Click to show the most representative documents of topic {{topic.topic}}"
-           matTooltipPosition="left">description</i>
-      </td>
-      <!-- TODO: When clicked, the page should move the user to the place where the documents will appear -->
-    </tr>
-  </table>
-</div>
+          </td>
+          <td>
+            <!-- TODO: Wrapp the icon in a button tag -->
+            <!-- TODO: Change the i by <mat-icon> and remove the class attribute. The tooltip must be moved to the button. -->
+            <!-- Document icon -->
+            <!-- When the mouse hovers the document icon, a tooltip explains how to use it -->
+            <i #documentTooltip="matTooltip" (click)="getTopicDocuments(topic.topic)"
+               (mouseenter)="documentTooltip.show()"
+               (mouseleave)="documentTooltip.hide()"
+               class="material-icons"
+               id="document-icon-topic{{topic.topic}}"
+               matTooltip="Click to show the most representative documents of topic {{topic.topic}}"
+               matTooltipPosition="left">description
+            </i>
+          </td>
+          <!-- TODO: When clicked, the page should move the user to the place where the documents will appear -->
+        </tr>
+      </table>
+    </div>
+  </mat-tab>
 
-<div>
-  <h3>Topics en formato nube de palabras</h3>
-  <img *ngFor="let topicImageUrl of topicImageUrls"
-       [src]="topicImageUrl.image_url" alt="Topic{{topicImageUrl.topic}} wordcloud image" class="topic-wordcloud-image">
-</div>
+  <!-- Tab 2 -->
+  <mat-tab>
+    <!-- Mat tab header content -->
+    <ng-template mat-tab-label>
+      <h3>Nube de palabras</h3>
+      <mat-icon class="tab-icon">cloud</mat-icon>
+    </ng-template>
+    <!-- Mat tab content -->
+    <!-- TODO: Move this div to the HTML of another Component -->
+    <div id="topics-wordcloud-format">
+      <img *ngFor="let topicImageUrl of topicImageUrls"
+           [src]="topicImageUrl.image_url" alt="Topic{{topicImageUrl.topic}} wordcloud image"
+           class="topic-wordcloud-image">
+    </div>
+  </mat-tab>
+</mat-tab-group>
 
 <div id="configuration-section">
   <h3>Configuración</h3>
