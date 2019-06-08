@@ -3,6 +3,7 @@ import { TextService } from '../text.service';
 import { TextTopicProb } from '../dtos/text-topic-prob';
 import { TextRelatedDoc } from '../dtos/text-related-doc';
 import { TextSummary } from '../dtos/text-summary';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-text-section',
@@ -15,6 +16,7 @@ export class TextSectionComponent implements OnInit {
   relatedTopics: TextTopicProb[];
   relatedDocuments: TextRelatedDoc[];
   textSummary: TextSummary;
+  numSummarySentencesFormControl: FormControl;
   // TODO: This values shouldn't be hardcoded here
   textAreaNumRows = 30;
   initialMaxNumTopics = 6; // initial value for the max num topics slider
@@ -22,10 +24,16 @@ export class TextSectionComponent implements OnInit {
   initialNumDocuments = 2;
   maxNumDocuments = 10;
   relatedDocumentSummaryMaxLength = 150;
+  initialNumSummarySentences = 2;
 
   constructor(private textService: TextService) { }
 
   ngOnInit() {
+    this.numSummarySentencesFormControl = new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^[+]?\d+$/),
+      Validators.min(1)
+    ]);
   }
 
   getRelatedTopics(text: string, maxNumTopics: number) {
@@ -56,6 +64,13 @@ export class TextSectionComponent implements OnInit {
 
     this.textService.getTextSummary(text, numSentences)
       .subscribe(textSummary => this.textSummary = textSummary);
+  }
+
+  getNumSummarySentencesErrorMessage() {
+    return this.numSummarySentencesFormControl.hasError('required') ? 'Valor requerido' :
+      this.numSummarySentencesFormControl.hasError('pattern') ? 'Debe ser un entero' :
+        this.numSummarySentencesFormControl.hasError('min') ? 'Min 1' :
+          '';
   }
 
 }

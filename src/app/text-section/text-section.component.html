@@ -55,6 +55,12 @@
         <!-- Text summary options -->
         <div class="text-option" id="text-summary-options">
           <!-- TODO: Content here -->
+          <mat-form-field>
+            <input [formControl]="numSummarySentencesFormControl" [value]="initialNumSummarySentences" matInput
+                   min="1" step="1" type="number">
+            <mat-error
+              *ngIf="numSummarySentencesFormControl.invalid">{{getNumSummarySentencesErrorMessage()}}</mat-error>
+          </mat-form-field>
         </div>
       </mat-expansion-panel>
     </mat-accordion>
