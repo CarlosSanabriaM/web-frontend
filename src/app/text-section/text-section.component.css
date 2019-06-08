@@ -1,0 +1,9 @@
+#text-textarea-form-field {
+  width: 50%;
+}
+
+#text-textarea-form-field textarea {
+  resize: none;
+}
+
+

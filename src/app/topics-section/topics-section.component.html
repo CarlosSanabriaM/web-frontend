@@ -89,12 +89,11 @@
     <div id="configuration-section">
       <div id="configuration-section-text">
         <h4>Formato Texto</h4>
-        <p>Número de keywords:</p>
         <div>
           <mat-slider #sliderNumKeywordsTextFormat [value]="numKeywordsTextFormat" color="primary"
                       max="30" min="1" thumbLabel></mat-slider>
-          <p>Número de keywords</p>
         </div>
+        <p class="slider-footer">Número de keywords</p>
         <!-- TODO: Show min and max values at both sides of the slider -->
       </div>
 
@@ -102,9 +101,9 @@
 
       <div id="configuration-section-wordcloud">
         <h4>Formato Nube de palabras</h4>
-        <p>Número de keywords:</p>
         <mat-slider #sliderNumKeywordsWordcloudFormat [value]="numKeywordsWordcloudFormat" color="primary"
                     max="100" min="1" thumbLabel></mat-slider>
+        <p class="slider-footer">Número de keywords</p>
         <!-- TODO: Show min and max values at both sides of the slider -->
       </div>
 
@@ -112,15 +111,17 @@
 
       <div id="configuration-section-topic-documents">
         <h4>Documentos más representativos</h4>
-        <p>Número de documentos:</p>
         <mat-slider #sliderNumTopicDocuments [value]="numTopicDocuments" color="primary"
                     max="30" min="1" thumbLabel></mat-slider>
+        <p class="slider-footer">Número de documentos</p>
         <!-- TODO: Show min and max values at both sides of the slider -->
       </div>
 
+      <mat-divider></mat-divider>
+
       <button (click)="updateVariablesAndRefreshTopics(sliderNumKeywordsTextFormat.value,
-                                                   sliderNumKeywordsWordcloudFormat.value,
-                                                   sliderNumTopicDocuments.value)" color="primary"
+                                                       sliderNumKeywordsWordcloudFormat.value,
+                                                       sliderNumTopicDocuments.value)" color="primary"
               mat-raised-button>
         Actualizar
       </button>

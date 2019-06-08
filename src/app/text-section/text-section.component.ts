@@ -9,6 +9,8 @@ import { TextService } from '../text.service';
 export class TextSectionComponent implements OnInit {
 
   sectionName = 'Texto';
+  // TODO: This values shouldn't be hardcoded here
+  textAreaNumRows = 30;
 
   constructor(private textService: TextService) { }
 
