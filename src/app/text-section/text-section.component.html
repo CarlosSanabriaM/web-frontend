@@ -7,6 +7,7 @@
     <form>
       <mat-form-field appearance="outline" id="text-textarea-form-field">
         <textarea #textArea matInput placeholder="Introduce un texto" rows="{{textAreaNumRows}}"></textarea>
+        <!-- TODO: <mat-error *ngIf="textEmpty">Debes introducir un texto</mat-error> -->
         <mat-hint>Texto que será utilizado por las opciones a su derecha</mat-hint>
       </mat-form-field>
     </form>
@@ -21,7 +22,7 @@
         <!-- Related topics options -->
         <div class="text-option" id="related-topics-options">
           <mat-slider #sliderMaxNumTopics [value]="initialMaxNumTopics" color="primary"
-                      max="20" min="1" thumbLabel></mat-slider>
+                      [max]="maxNumTopics" min="1" thumbLabel></mat-slider>
           <p class="slider-footer">Número máx. de topics devueltos</p>
 
           <!-- TODO: Add checkbox "Show visualization" and implement that behaviour -->
@@ -52,3 +53,17 @@
   </mat-grid-tile>
 </mat-grid-list>
 
+<!-- TODO: If the X button is pressed, relatedTopics = null -->
+<!-- TODO: Show a mat-progress-spinner when loading the related topics -->
+<div *ngIf="relatedTopics">
+  <table>
+    <tr>
+      <th>Núm. topic</th>
+      <th>Probabilidad</th>
+    </tr>
+    <tr *ngFor="let textTopicProb of relatedTopics">
+      <td>{{textTopicProb.topic}}</td>
+      <td>{{textTopicProb.text_topic_prob | percent:'1.6'}}</td>
+    </tr>
+  </table>
+</div>

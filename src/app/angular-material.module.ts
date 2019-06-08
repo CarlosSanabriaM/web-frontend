@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 /**
  * This module is used to import all the Angular Material components that will be used in the application.
@@ -27,7 +28,8 @@ import { MatInputModule } from '@angular/material/input';
     MatIconModule,
     MatGridListModule,
     MatDividerModule,
-    MatInputModule
+    MatInputModule,
+    MatFormFieldModule
   ],
   exports: [
     MatTableModule,
@@ -40,7 +42,8 @@ import { MatInputModule } from '@angular/material/input';
     MatIconModule,
     MatGridListModule,
     MatDividerModule,
-    MatInputModule
+    MatInputModule,
+    MatFormFieldModule
   ]
 })
 export class AngularMaterialModule {}
