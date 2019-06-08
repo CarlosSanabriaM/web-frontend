@@ -83,3 +83,13 @@ mat-expansion-panel-header {
 .tab-icon {
   margin-left: 8px;
 }
+
+/* TODO: Try to find a more elegant solution. This specifies values for the different browsers */
+/* Wrap lines in <pre> tags that are larger than the screen width */
+pre {
+  overflow-x: auto;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
