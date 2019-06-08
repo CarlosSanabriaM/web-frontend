@@ -4,6 +4,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { TextTopicProb } from './dtos/text-topic-prob';
+import { TextRelatedDoc } from './dtos/text-related-doc';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class TextService {
 
   /**
    * POST the given text to the REST API and return the text-topics probabilities.
-   * @param text: Text used to obtain the related topics
+   * @param text: Text used to obtain the related topics.
    * @param maxNumTopics: Max number of topics to retrieve.
    */
   getRelatedTopics(text: string, maxNumTopics: number): Observable<TextTopicProb[]> {
@@ -30,6 +31,25 @@ export class TextService {
     return this.http.post<TextTopicProb[]>(url, formData).pipe(
       // TODO: Modify tap?
       tap(_ => console.log(`fetched related topics with max_num_topics=${maxNumTopics}`)),
+      catchError(this.handleError)
+    );
+  }
+
+  /**
+   * POST the given text to the REST API and return the documents more related to the text.
+   * @param text: Text used to obtain the related documents.
+   * @param numDocuments: Number of documents to retrieve.
+   */
+  getRelatedDocuments(text: string, numDocuments: number): Observable<TextRelatedDoc[]> {
+    const url = `${this.apiTextUrl}/related/documents?num_documents=${numDocuments}`;
+
+    // Create FormData object, because the API expects 'Content-Type': 'application/x-www-form-urlencoded' with text attribute
+    const formData = new FormData();
+    formData.append('text', text);
+
+    return this.http.post<TextRelatedDoc[]>(url, formData).pipe(
+      // TODO: Modify tap?
+      tap(_ => console.log(`fetched related documents with num_documents=${numDocuments}`)),
       catchError(this.handleError)
     );
   }
