@@ -7,6 +7,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 /**
  * This module is used to import all the Angular Material components that will be used in the application.
@@ -21,7 +22,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatExpansionModule,
     MatCardModule,
     MatTabsModule,
-    MatIconModule
+    MatIconModule,
+    MatGridListModule
   ],
   exports: [
     MatTableModule,
@@ -31,7 +33,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatExpansionModule,
     MatCardModule,
     MatTabsModule,
-    MatIconModule
+    MatIconModule,
+    MatGridListModule
   ]
 })
 export class AngularMaterialModule {}

@@ -54,11 +54,23 @@
       <mat-icon class="tab-icon">cloud</mat-icon>
     </ng-template>
     <!-- Mat tab content -->
+    <!-- TODO: Don't show the images when they are loading -->
     <!-- TODO: Move this div to the HTML of another Component -->
     <div id="topics-wordcloud-format">
-      <img *ngFor="let topicImageUrl of topicImageUrls"
-           [src]="topicImageUrl.image_url" alt="Topic{{topicImageUrl.topic}} wordcloud image"
-           class="topic-wordcloud-image">
+      <!-- TODO: Number of cols must adapt to the screen size -->
+      <mat-grid-list cols="4">
+        <mat-grid-tile *ngFor="let topicImageUrl of topicImageUrls">
+          <img [src]="topicImageUrl.image_url" alt="Topic{{topicImageUrl.topic}} wordcloud image"
+               class="topic-wordcloud-image">
+          <mat-grid-tile-footer>
+            <button (click)="getTopicDocuments(topicImageUrl.topic)" class="topic-wordcloud-image-footer-button"
+                    color="primary"
+                    mat-raised-button>
+              Documentos más representativos
+            </button>
+          </mat-grid-tile-footer>
+        </mat-grid-tile>
+      </mat-grid-list>
     </div>
   </mat-tab>
 </mat-tab-group>
