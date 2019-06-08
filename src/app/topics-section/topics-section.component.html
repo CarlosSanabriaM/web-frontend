@@ -1,6 +1,7 @@
 <h2>{{sectionName}}</h2>
 
 <!-- TODO: Change backgroundColor -->
+<!-- TODO: Add a border to the tab-group -->
 <mat-tab-group color="primary" dynamicHeight mat-stretch-tabs>
   <!-- Tab 1 -->
   <mat-tab>
@@ -56,6 +57,7 @@
     <!-- Mat tab content -->
     <!-- TODO: Don't show the images when they are loading -->
     <!-- TODO: Move this div to the HTML of another Component -->
+    <!-- TODO: Implement this with Bootstrap cards: https://getbootstrap.com/docs/4.3/components/card/#images -->
     <div id="topics-wordcloud-format">
       <!-- TODO: Number of cols must adapt to the screen size -->
       <mat-grid-list cols="4">
@@ -73,35 +75,58 @@
       </mat-grid-list>
     </div>
   </mat-tab>
-</mat-tab-group>
 
-<div id="configuration-section">
-  <h3>Configuración</h3>
-  <div>
-    Número de keywords (formato texto):
-    <mat-slider #sliderNumKeywordsTextFormat [value]="numKeywordsTextFormat" color="primary" max="30" min="1"
-                thumbLabel></mat-slider>
-  </div>
+  <!-- TODO: Implement this with Bootstrap modal: https://getbootstrap.com/docs/4.3/components/modal/ -->
+  <!-- Tab 3 -->
+  <mat-tab>
+    <!-- TODO: Try to decrease this tab header width -->
+    <!-- Mat tab header content -->
+    <ng-template mat-tab-label>
+      <h3>Configuración</h3>
+      <mat-icon class="tab-icon">settings</mat-icon>
+    </ng-template>
+    <!-- Mat tab content -->
+    <div id="configuration-section">
+      <div id="configuration-section-text">
+        <h4>Formato Texto</h4>
+        <p>Número de keywords:</p>
+        <div>
+          <mat-slider #sliderNumKeywordsTextFormat [value]="numKeywordsTextFormat" color="primary"
+                      max="30" min="1" thumbLabel></mat-slider>
+          <p>Número de keywords</p>
+        </div>
+        <!-- TODO: Show min and max values at both sides of the slider -->
+      </div>
 
-  <div>
-    Número de keywords (formato nube de palabras):
-    <mat-slider #sliderNumKeywordsWordcloudFormat [value]="numKeywordsWordcloudFormat" color="primary" max="100" min="1"
-                thumbLabel></mat-slider>
-  </div>
+      <mat-divider></mat-divider>
 
-  <div>
-    Número de documentos (documentos más representativos de un topic):
-    <mat-slider #sliderNumTopicDocuments [value]="numTopicDocuments" color="primary" max="30" min="1"
-                thumbLabel></mat-slider>
-  </div>
+      <div id="configuration-section-wordcloud">
+        <h4>Formato Nube de palabras</h4>
+        <p>Número de keywords:</p>
+        <mat-slider #sliderNumKeywordsWordcloudFormat [value]="numKeywordsWordcloudFormat" color="primary"
+                    max="100" min="1" thumbLabel></mat-slider>
+        <!-- TODO: Show min and max values at both sides of the slider -->
+      </div>
 
-  <button (click)="updateVariablesAndRefreshTopics(sliderNumKeywordsTextFormat.value,
+      <mat-divider></mat-divider>
+
+      <div id="configuration-section-topic-documents">
+        <h4>Documentos más representativos</h4>
+        <p>Número de documentos:</p>
+        <mat-slider #sliderNumTopicDocuments [value]="numTopicDocuments" color="primary"
+                    max="30" min="1" thumbLabel></mat-slider>
+        <!-- TODO: Show min and max values at both sides of the slider -->
+      </div>
+
+      <button (click)="updateVariablesAndRefreshTopics(sliderNumKeywordsTextFormat.value,
                                                    sliderNumKeywordsWordcloudFormat.value,
                                                    sliderNumTopicDocuments.value)" color="primary"
-          mat-raised-button>
-    Actualizar
-  </button>
-</div>
+              mat-raised-button>
+        Actualizar
+      </button>
+    </div>
+  </mat-tab>
+</mat-tab-group>
 
 <!-- TODO: If the X button is pressed, topicDocuments = null -->
 <!-- TODO: Show a mat-progress-spinner when loading the documents -->
@@ -130,3 +155,5 @@
     </mat-card-content>
   </mat-card>
 </div>
+
+<!-- TODO: Implement error messages with Boostrap alerts: https://getbootstrap.com/docs/4.3/components/alerts/ -->
