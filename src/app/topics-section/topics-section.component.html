@@ -17,7 +17,9 @@
       </td>
       <td>
         <!-- Document icon -->
+        <!-- When the mouse hovers the document icon, a tooltip explains how to use it -->
         <i #documentTooltip="matTooltip" (click)="getTopicDocuments(topic.topic)"
+           id="document-icon-topic{{topic.topic}}"
            (mouseenter)="documentTooltip.show()"
            (mouseleave)="documentTooltip.hide()"
            class="material-icons" matTooltip="Click to show the most representative documents of topic {{topic.topic}}"

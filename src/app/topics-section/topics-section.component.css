@@ -25,3 +25,8 @@ mat-slider {
 .topic-wordcloud-image {
   width: 300px;
 }
+
+/* Elements whose id begins with document-icon-topic */
+[id^='document-icon-topic'] {
+  cursor: pointer;
+}
