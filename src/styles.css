@@ -61,3 +61,8 @@ body {
 .material-icons.md-light.md-inactive {
   color: rgba(255, 255, 255, 0.3);
 }
+
+/* Text below the slider doesn't have top margin */
+.slider-footer {
+  margin-top: 0px;
+}

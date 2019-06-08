@@ -13,3 +13,11 @@ mat-accordion {
 form {
   width: 98%;
 }
+
+mat-slider {
+  width: 80%;
+}
+
+.text-option {
+  text-align: center;
+}

@@ -6,7 +6,7 @@
   <mat-grid-tile>
     <form>
       <mat-form-field appearance="outline" id="text-textarea-form-field">
-        <textarea matInput placeholder="Introduce un texto" rows="{{textAreaNumRows}}"></textarea>
+        <textarea #textArea matInput placeholder="Introduce un texto" rows="{{textAreaNumRows}}"></textarea>
         <mat-hint>Texto que será utilizado por las opciones a su derecha</mat-hint>
       </mat-form-field>
     </form>
@@ -18,15 +18,25 @@
         <mat-expansion-panel-header>
           <mat-panel-title>Topics relacionados</mat-panel-title>
         </mat-expansion-panel-header>
-        <div>
-          <!-- TODO: Content here -->
+        <!-- Related topics options -->
+        <div class="text-option" id="related-topics-options">
+          <mat-slider #sliderMaxNumTopics [value]="initialMaxNumTopics" color="primary"
+                      max="20" min="1" thumbLabel></mat-slider>
+          <p class="slider-footer">Número máx. de topics devueltos</p>
+
+          <!-- TODO: Add checkbox "Show visualization" and implement that behaviour -->
+
+          <button (click)="getRelatedTopics(textArea.value, sliderMaxNumTopics.value)" color="primary"
+                  mat-raised-button>
+            Obtener
+          </button>
         </div>
       </mat-expansion-panel>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title>Documentos similares</mat-panel-title>
         </mat-expansion-panel-header>
-        <div>
+        <div class="text-option" id="related-documents-options">
           <!-- TODO: Content here -->
         </div>
       </mat-expansion-panel>
@@ -34,7 +44,7 @@
         <mat-expansion-panel-header>
           <mat-panel-title>Resumir texto</mat-panel-title>
         </mat-expansion-panel-header>
-        <div>
+        <div class="text-option" id="text-summary-options">
           <!-- TODO: Content here -->
         </div>
       </mat-expansion-panel>
