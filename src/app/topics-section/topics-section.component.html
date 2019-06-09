@@ -1,141 +1,145 @@
 <h2>{{sectionName}}</h2>
 
 <!-- TODO: Change backgroundColor -->
-<!-- TODO: Add a border to the tab-group -->
-<mat-tab-group color="primary" dynamicHeight mat-stretch-tabs>
-  <!-- Tab 1 -->
-  <mat-tab>
-    <!-- Mat tab header content -->
-    <ng-template mat-tab-label>
-      <!-- TODO: In small screen sizes, remove the text of the tab and show only the icon -->
-      <h3>Texto</h3>
-      <mat-icon class="tab-icon">text_format</mat-icon>
-    </ng-template>
-    <!-- Mat tab content -->
-    <!-- TODO: Move this div to the HTML of another Component -->
-    <div id="topics-text-format">
-      <table class="table table-striped table-hover table-sm">
-        <thead class="thead-light">
-        <tr>
-          <th scope="col">Núm. topic</th>
-          <th scope="col">Keywords</th>
-          <th scope="col"></th>
-        </tr>
-        </thead>
+<div class="card">
+  <mat-tab-group color="primary" dynamicHeight mat-stretch-tabs>
+    <!-- Tab 1 -->
+    <mat-tab>
+      <!-- Mat tab header content -->
+      <ng-template mat-tab-label>
+        <!-- TODO: In small screen sizes, remove the text of the tab and show only the icon -->
+        <h3>Texto</h3>
+        <mat-icon class="tab-icon">text_format</mat-icon>
+      </ng-template>
+      <!-- Mat tab content -->
+      <!-- TODO: Move this div to the HTML of another Component -->
+      <!-- m-2 sets margin on 4 sides to $spacer * .5 -->
+      <div class="m-2" id="topics-text-format">
+        <table class="table table-striped table-hover table-sm">
+          <thead class="thead-light">
+          <tr>
+            <th scope="col">Núm. topic</th>
+            <th scope="col">Keywords</th>
+            <th scope="col"></th>
+          </tr>
+          </thead>
 
-        <tr *ngFor="let topic of topics">
-          <th scope="row">{{topic.topic}}</th>
-          <td>
-            <!-- TODO: keyword.name should have a different style, for example, bold -->
-            <span *ngFor="let keyword of topic.keywords">
+          <tr *ngFor="let topic of topics">
+            <th scope="row">{{topic.topic}}</th>
+            <td>
+              <!-- TODO: keyword.name should have a different style, for example, bold -->
+              <span *ngFor="let keyword of topic.keywords">
               {{keyword.name}}: {{keyword.probability | percent:'1.2'}}
             </span>
-          </td>
-          <td>
-            <!-- TODO: Wrapp the icon in a button tag -->
-            <!-- TODO: Change the i by <mat-icon> and remove the class attribute. The tooltip must be moved to the button. -->
-            <!-- Document icon -->
-            <!-- When the mouse hovers the document icon, a tooltip explains how to use it -->
-            <i #documentTooltip="matTooltip" (click)="getTopicDocuments(topic.topic)"
-               (mouseenter)="documentTooltip.show()"
-               (mouseleave)="documentTooltip.hide()"
-               class="material-icons"
-               id="document-icon-topic{{topic.topic}}"
-               matTooltip="Click to show the most representative documents of topic {{topic.topic}}"
-               matTooltipPosition="left">description
-            </i>
-          </td>
-          <!-- TODO: When clicked, the page should move the user to the place where the documents will appear -->
-        </tr>
-      </table>
-    </div>
-  </mat-tab>
+            </td>
+            <td>
+              <!-- TODO: Wrapp the icon in a button tag -->
+              <!-- TODO: Change the i by <mat-icon> and remove the class attribute. The tooltip must be moved to the button. -->
+              <!-- Document icon -->
+              <!-- When the mouse hovers the document icon, a tooltip explains how to use it -->
+              <i #documentTooltip="matTooltip" (click)="getTopicDocuments(topic.topic)"
+                 (mouseenter)="documentTooltip.show()"
+                 (mouseleave)="documentTooltip.hide()"
+                 class="material-icons"
+                 id="document-icon-topic{{topic.topic}}"
+                 matTooltip="Click to show the most representative documents of topic {{topic.topic}}"
+                 matTooltipPosition="left">description
+              </i>
+            </td>
+            <!-- TODO: When clicked, the page should move the user to the place where the documents will appear -->
+          </tr>
+        </table>
+      </div>
+    </mat-tab>
 
-  <!-- Tab 2 -->
-  <mat-tab>
-    <!-- Mat tab header content -->
-    <ng-template mat-tab-label>
-      <h3>Nube de palabras</h3>
-      <mat-icon class="tab-icon">cloud</mat-icon>
-    </ng-template>
-    <!-- Mat tab content -->
-    <!-- TODO: Don't show the images when they are loading -->
-    <!-- TODO: Move this div to the HTML of another Component -->
-    <div id="topics-wordcloud-format">
-      <div class="row">
-        <!--
-          * In extra large screens, each wordcloud has width 3/12, so there are 4 wordclouds per row.
-          * In medium and large screens, each wordcloud has width 4/12, so there are 3 wordclouds per row.
-          * In small screens, each wordcloud has width 6/12, so there are 2 wordclouds per row.
-          * In extra small screens, each wordcloud has width 12/12, so there is only 1 wordcloud per row.
-        -->
-        <div *ngFor="let topicImageUrl of topicImageUrls" class="col-xl-3 col-md-4 col-sm-6 col-12">
-          <div class="card">
-            <img [src]="topicImageUrl.image_url" alt="Topic{{topicImageUrl.topic}} wordcloud image"
-                 class="topic-wordcloud-image">
-            <div class="card-body">
-              <button (click)="getTopicDocuments(topicImageUrl.topic)" class="topic-wordcloud-image-footer-button"
-                      color="primary" mat-raised-button>
-                Documentos más representativos
-              </button>
+    <!-- Tab 2 -->
+    <mat-tab>
+      <!-- Mat tab header content -->
+      <ng-template mat-tab-label>
+        <h3>Nube de palabras</h3>
+        <mat-icon class="tab-icon">cloud</mat-icon>
+      </ng-template>
+      <!-- Mat tab content -->
+      <!-- TODO: Don't show the images when they are loading -->
+      <!-- TODO: Move this div to the HTML of another Component -->
+      <!-- m-2 sets margin on 4 sides to $spacer * .5 -->
+      <div class="m-2" id="topics-wordcloud-format">
+        <div class="row">
+          <!--
+            * In extra large screens, each wordcloud has width 3/12, so there are 4 wordclouds per row.
+            * In medium and large screens, each wordcloud has width 4/12, so there are 3 wordclouds per row.
+            * In small screens, each wordcloud has width 6/12, so there are 2 wordclouds per row.
+            * In extra small screens, each wordcloud has width 12/12, so there is only 1 wordcloud per row.
+          -->
+          <div *ngFor="let topicImageUrl of topicImageUrls" class="col-xl-3 col-md-4 col-sm-6 col-12">
+            <div class="card">
+              <img [src]="topicImageUrl.image_url" alt="Topic{{topicImageUrl.topic}} wordcloud image"
+                   class="topic-wordcloud-image">
+              <div class="card-body">
+                <button (click)="getTopicDocuments(topicImageUrl.topic)" class="topic-wordcloud-image-footer-button"
+                        color="primary" mat-raised-button>
+                  Documentos más representativos
+                </button>
+              </div>
             </div>
-          </div>
 
+          </div>
         </div>
       </div>
-    </div>
-  </mat-tab>
+    </mat-tab>
 
-  <!-- TODO: Implement this with Bootstrap modal: https://getbootstrap.com/docs/4.3/components/modal/ -->
-  <!-- Tab 3 -->
-  <mat-tab>
-    <!-- TODO: Try to decrease this tab header width -->
-    <!-- Mat tab header content -->
-    <ng-template mat-tab-label>
-      <h3>Configuración</h3>
-      <mat-icon class="tab-icon">settings</mat-icon>
-    </ng-template>
-    <!-- Mat tab content -->
-    <div id="configuration-section">
-      <div id="configuration-section-text">
-        <h4>Formato Texto</h4>
-        <mat-slider #sliderNumKeywordsTextFormat [value]="numKeywordsTextFormat" color="primary"
-                    max="30" min="1" thumbLabel></mat-slider>
-        <p class="slider-footer">Número de keywords</p>
-        <!-- TODO: Show min and max values at both sides of the slider -->
-      </div>
+    <!-- TODO: Implement this with Bootstrap modal: https://getbootstrap.com/docs/4.3/components/modal/ -->
+    <!-- Tab 3 -->
+    <mat-tab>
+      <!-- TODO: Try to decrease this tab header width -->
+      <!-- Mat tab header content -->
+      <ng-template mat-tab-label>
+        <h3>Configuración</h3>
+        <mat-icon class="tab-icon">settings</mat-icon>
+      </ng-template>
+      <!-- Mat tab content -->
+      <!-- m-2 sets margin on 4 sides to $spacer * .5 -->
+      <div class="m-2" id="configuration-section">
+        <div id="configuration-section-text">
+          <h4>Formato Texto</h4>
+          <mat-slider #sliderNumKeywordsTextFormat [value]="numKeywordsTextFormat" color="primary"
+                      max="30" min="1" thumbLabel></mat-slider>
+          <p class="slider-footer">Número de keywords</p>
+          <!-- TODO: Show min and max values at both sides of the slider -->
+        </div>
 
-      <mat-divider></mat-divider>
+        <mat-divider></mat-divider>
 
-      <div id="configuration-section-wordcloud">
-        <h4>Formato Nube de palabras</h4>
-        <mat-slider #sliderNumKeywordsWordcloudFormat [value]="numKeywordsWordcloudFormat" color="primary"
-                    max="100" min="1" thumbLabel></mat-slider>
-        <p class="slider-footer">Número de keywords</p>
-        <!-- TODO: Show min and max values at both sides of the slider -->
-      </div>
+        <div id="configuration-section-wordcloud">
+          <h4>Formato Nube de palabras</h4>
+          <mat-slider #sliderNumKeywordsWordcloudFormat [value]="numKeywordsWordcloudFormat" color="primary"
+                      max="100" min="1" thumbLabel></mat-slider>
+          <p class="slider-footer">Número de keywords</p>
+          <!-- TODO: Show min and max values at both sides of the slider -->
+        </div>
 
-      <mat-divider></mat-divider>
+        <mat-divider></mat-divider>
 
-      <div id="configuration-section-topic-documents">
-        <h4>Documentos más representativos</h4>
-        <mat-slider #sliderNumTopicDocuments [value]="numTopicDocuments" color="primary"
-                    max="30" min="1" thumbLabel></mat-slider>
-        <p class="slider-footer">Número de documentos</p>
-        <!-- TODO: Show min and max values at both sides of the slider -->
-      </div>
+        <div id="configuration-section-topic-documents">
+          <h4>Documentos más representativos</h4>
+          <mat-slider #sliderNumTopicDocuments [value]="numTopicDocuments" color="primary"
+                      max="30" min="1" thumbLabel></mat-slider>
+          <p class="slider-footer">Número de documentos</p>
+          <!-- TODO: Show min and max values at both sides of the slider -->
+        </div>
 
-      <mat-divider></mat-divider>
+        <mat-divider></mat-divider>
 
-      <button (click)="updateVariablesAndRefreshTopics(sliderNumKeywordsTextFormat.value,
+        <button (click)="updateVariablesAndRefreshTopics(sliderNumKeywordsTextFormat.value,
                                                        sliderNumKeywordsWordcloudFormat.value,
                                                        sliderNumTopicDocuments.value)" color="primary"
-              mat-raised-button>
-        Actualizar
-      </button>
-    </div>
-  </mat-tab>
-</mat-tab-group>
+                mat-raised-button>
+          Actualizar
+        </button>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
 
 <!-- TODO: Show a mat-progress-spinner when loading the documents -->
 <div *ngIf="topicDocuments" class="card">
