@@ -7,6 +7,7 @@
   <mat-tab>
     <!-- Mat tab header content -->
     <ng-template mat-tab-label>
+      <!-- TODO: In small screen sizes, remove the text of the tab and show only the icon -->
       <h3>Texto</h3>
       <mat-icon class="tab-icon">text_format</mat-icon>
     </ng-template>
@@ -57,22 +58,31 @@
     <!-- Mat tab content -->
     <!-- TODO: Don't show the images when they are loading -->
     <!-- TODO: Move this div to the HTML of another Component -->
-    <!-- TODO: Implement this with Bootstrap cards: https://getbootstrap.com/docs/4.3/components/card/#images -->
     <div id="topics-wordcloud-format">
-      <!-- TODO: Number of cols must adapt to the screen size -->
-      <mat-grid-list cols="4">
-        <mat-grid-tile *ngFor="let topicImageUrl of topicImageUrls">
-          <img [src]="topicImageUrl.image_url" alt="Topic{{topicImageUrl.topic}} wordcloud image"
-               class="topic-wordcloud-image">
-          <mat-grid-tile-footer>
-            <button (click)="getTopicDocuments(topicImageUrl.topic)" class="topic-wordcloud-image-footer-button"
-                    color="primary"
-                    mat-raised-button>
-              Documentos más representativos
-            </button>
-          </mat-grid-tile-footer>
-        </mat-grid-tile>
-      </mat-grid-list>
+      <div class="container-fluid">
+        <div class="row">
+          <!--
+            * In extra large screens, each wordcloud has width 3/12, so there are 4 wordclouds per row.
+            * In medium and large screens, each wordcloud has width 4/12, so there are 3 wordclouds per row.
+            * In small screens, each wordcloud has width 6/12, so there are 2 wordclouds per row.
+            * In extra small screens, each wordcloud has width 12/12, so there is only 1 wordcloud per row.
+          -->
+          <div *ngFor="let topicImageUrl of topicImageUrls" class="col-xl-3 col-md-4 col-sm-6 col-12">
+            <div class="card">
+              <img [src]="topicImageUrl.image_url" alt="Topic{{topicImageUrl.topic}} wordcloud image"
+                   class="topic-wordcloud-image">
+              <div class="card-body">
+                <button (click)="getTopicDocuments(topicImageUrl.topic)" class="topic-wordcloud-image-footer-button"
+                        color="primary" mat-raised-button>
+                  Documentos más representativos
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
     </div>
   </mat-tab>
 
