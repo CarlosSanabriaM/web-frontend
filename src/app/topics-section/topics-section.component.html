@@ -59,30 +59,27 @@
     <!-- TODO: Don't show the images when they are loading -->
     <!-- TODO: Move this div to the HTML of another Component -->
     <div id="topics-wordcloud-format">
-      <div class="container-fluid">
-        <div class="row">
-          <!--
-            * In extra large screens, each wordcloud has width 3/12, so there are 4 wordclouds per row.
-            * In medium and large screens, each wordcloud has width 4/12, so there are 3 wordclouds per row.
-            * In small screens, each wordcloud has width 6/12, so there are 2 wordclouds per row.
-            * In extra small screens, each wordcloud has width 12/12, so there is only 1 wordcloud per row.
-          -->
-          <div *ngFor="let topicImageUrl of topicImageUrls" class="col-xl-3 col-md-4 col-sm-6 col-12">
-            <div class="card">
-              <img [src]="topicImageUrl.image_url" alt="Topic{{topicImageUrl.topic}} wordcloud image"
-                   class="topic-wordcloud-image">
-              <div class="card-body">
-                <button (click)="getTopicDocuments(topicImageUrl.topic)" class="topic-wordcloud-image-footer-button"
-                        color="primary" mat-raised-button>
-                  Documentos más representativos
-                </button>
-              </div>
+      <div class="row">
+        <!--
+          * In extra large screens, each wordcloud has width 3/12, so there are 4 wordclouds per row.
+          * In medium and large screens, each wordcloud has width 4/12, so there are 3 wordclouds per row.
+          * In small screens, each wordcloud has width 6/12, so there are 2 wordclouds per row.
+          * In extra small screens, each wordcloud has width 12/12, so there is only 1 wordcloud per row.
+        -->
+        <div *ngFor="let topicImageUrl of topicImageUrls" class="col-xl-3 col-md-4 col-sm-6 col-12">
+          <div class="card">
+            <img [src]="topicImageUrl.image_url" alt="Topic{{topicImageUrl.topic}} wordcloud image"
+                 class="topic-wordcloud-image">
+            <div class="card-body">
+              <button (click)="getTopicDocuments(topicImageUrl.topic)" class="topic-wordcloud-image-footer-button"
+                      color="primary" mat-raised-button>
+                Documentos más representativos
+              </button>
             </div>
-
           </div>
+
         </div>
       </div>
-
     </div>
   </mat-tab>
 
@@ -137,33 +134,35 @@
   </mat-tab>
 </mat-tab-group>
 
-<!-- TODO: If the X button is pressed, topicDocuments = null -->
 <!-- TODO: Show a mat-progress-spinner when loading the documents -->
-<div *ngIf="topicDocuments">
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>Documentos más representativos del topic {{selectedTopicId}}</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <!-- With multi, more than one panel can be opened at the same time -->
-      <mat-accordion multi>
-        <mat-expansion-panel *ngFor="let topicDocument of topicDocuments">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              {{topicDocument.doc_content_summary | slice:0:topicDocumentSummaryMaxLength}}
-              {{topicDocument.doc_content_summary.length > topicDocumentSummaryMaxLength ? '...' : ''}}
-            </mat-panel-title>
-            <mat-panel-description>
-              Probabilidad: {{topicDocument.doc_topic_prob | percent:'1.2'}}
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <pre>
+<div *ngIf="topicDocuments" class="card">
+  <h3 class="card-header">
+    Documentos más representativos del topic {{selectedTopicId}}
+    <!-- Button to close the card -->
+    <button (click)="topicDocuments=null" aria-label="Close" class="close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </h3>
+
+  <div class="card-body">
+    <!-- With multi, more than one panel can be opened at the same time -->
+    <mat-accordion multi>
+      <mat-expansion-panel *ngFor="let topicDocument of topicDocuments">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{topicDocument.doc_content_summary | slice:0:topicDocumentSummaryMaxLength}}
+            {{topicDocument.doc_content_summary.length > topicDocumentSummaryMaxLength ? '...' : ''}}
+          </mat-panel-title>
+          <mat-panel-description>
+            Probabilidad: {{topicDocument.doc_topic_prob | percent:'1.2'}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <pre>
             {{topicDocument.doc_content}}
           </pre>
-        </mat-expansion-panel>
-      </mat-accordion>
-    </mat-card-content>
-  </mat-card>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
 </div>
 
 <!-- TODO: Implement error messages with Boostrap alerts: https://getbootstrap.com/docs/4.3/components/alerts/ -->

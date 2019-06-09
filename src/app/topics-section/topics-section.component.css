@@ -1,3 +1,27 @@
+mat-slider {
+  /* TODO: Modify this to don't use absolute width */
+  width: 300px;
+}
+
+.topic-wordcloud-image {
+  width: 100%;
+}
+
+/* Elements whose id begins with document-icon-topic */
+[id^='document-icon-topic'] {
+  cursor: pointer;
+}
+
+.topic-wordcloud-image-footer-button {
+  width: 100%;
+  height: 100%;
+  /* TODO: Modify font size and button height to adjust to the screen size */
+}
+
+#configuration-section {
+  text-align: center;
+}
+
 /* TODO: Remove when table style of Angular Material or Bootstrap is used */
 table {
   width: 100%;
@@ -16,32 +40,4 @@ table tr:nth-child(odd) {
 
 table tr:nth-child(even) {
   background-color: #ffffff;
-}
-
-mat-slider {
-  /* TODO: Modify this to don't use absolute width */
-  width: 300px;
-}
-
-.topic-wordcloud-image {
-  width: 100%;
-}
-
-/* Elements whose id begins with document-icon-topic */
-[id^='document-icon-topic'] {
-  cursor: pointer;
-}
-
-.mat-grid-tile-footer {
-  background: inherit !important;
-}
-
-.topic-wordcloud-image-footer-button {
-  width: 100%;
-  height: 100%;
-  /* TODO: Modify font size and button height to adjust to the screen size */
-}
-
-#configuration-section {
-  text-align: center;
 }

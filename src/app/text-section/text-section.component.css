@@ -16,7 +16,7 @@ mat-slider {
 
 /* TODO: Remove when table style of Angular Material or Bootstrap is used */
 table {
-  width: 50%;
+  width: 100%;
   text-align: center;
 }
 

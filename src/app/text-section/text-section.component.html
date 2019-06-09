@@ -1,135 +1,160 @@
 <h2>{{sectionName}}</h2>
 
-<div class="container-fluid">
-  <div class="row">
-    <!-- Textarea at the left in medium screen size or above, and up in small and extra small screen size  -->
-    <div class="col-md">
-      <form>
-        <mat-form-field appearance="outline" id="text-textarea-form-field">
-          <!-- TODO: Update the rows of the textarea dinamically based on the screen size -->
-          <textarea #textArea matInput placeholder="Introduce un texto" rows="{{textAreaNumRows}}"></textarea>
-          <!-- TODO: <mat-error *ngIf="textEmpty">Debes introducir un texto</mat-error> -->
-        </mat-form-field>
-      </form>
-    </div>
-    <!-- Options at the right in medium screen size or above, and down in small and extra small screen size  -->
-    <div class="col-md">
-      <mat-accordion>
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title>Topics relacionados</mat-panel-title>
-          </mat-expansion-panel-header>
-          <!-- Related topics options -->
-          <div class="text-option" id="related-topics-options">
-            <mat-slider #sliderMaxNumTopics [max]="maxNumTopics" [value]="initialMaxNumTopics"
-                        color="primary" min="1" thumbLabel></mat-slider>
-            <p class="slider-footer">Número máx. de topics devueltos</p>
+<div class="row">
+  <!-- Textarea at the left in medium screen size or above, and up in small and extra small screen size  -->
+  <div class="col-md">
+    <form>
+      <mat-form-field appearance="outline" id="text-textarea-form-field">
+        <!-- TODO: Update the rows of the textarea dinamically based on the screen size -->
+        <textarea #textArea matInput placeholder="Introduce un texto" rows="{{textAreaNumRows}}"></textarea>
+        <!-- TODO: <mat-error *ngIf="textEmpty">Debes introducir un texto</mat-error> -->
+      </mat-form-field>
+    </form>
+  </div>
+  <!-- Options at the right in medium screen size or above, and down in small and extra small screen size  -->
+  <div class="col-md">
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Topics relacionados</mat-panel-title>
+        </mat-expansion-panel-header>
+        <!-- Related topics options -->
+        <div class="text-option" id="related-topics-options">
+          <mat-slider #sliderMaxNumTopics [max]="maxNumTopics" [value]="initialMaxNumTopics"
+                      color="primary" min="1" thumbLabel></mat-slider>
+          <p class="slider-footer">Número máx. de topics devueltos</p>
 
-            <!-- TODO: Add checkbox "Show visualization" and implement that behaviour -->
+          <!-- TODO: Add checkbox "Show visualization" and implement that behaviour -->
 
-            <button (click)="getRelatedTopics(textArea.value, sliderMaxNumTopics.value)" color="primary"
-                    mat-raised-button>
-              Obtener
-            </button>
+          <button (click)="getRelatedTopics(textArea.value, sliderMaxNumTopics.value)" color="primary"
+                  mat-raised-button>
+            Obtener
+          </button>
+        </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Documentos similares</mat-panel-title>
+        </mat-expansion-panel-header>
+        <!-- Related documents options -->
+        <div class="text-option" id="related-documents-options">
+          <mat-slider #sliderNumDocuments [max]="maxNumDocuments" [value]="initialNumDocuments"
+                      color="primary" min="1" thumbLabel></mat-slider>
+          <p class="slider-footer">Número de documentos devueltos</p>
+
+          <button (click)="getRelatedDocuments(textArea.value, sliderNumDocuments.value)" color="primary"
+                  mat-raised-button>
+            Obtener
+          </button>
+        </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Resumir texto</mat-panel-title>
+        </mat-expansion-panel-header>
+        <!-- Text summary options -->
+        <div class="text-option" id="text-summary-options">
+          <!-- TODO: Content here -->
+          <div>
+            <mat-form-field appearance="fill">
+              <mat-label>Número de frases</mat-label>
+              <input #inputNumSummarySentences [formControl]="numSummarySentencesFormControl"
+                     matInput min="1" step="1" type="number">
+              <mat-error
+                *ngIf="numSummarySentencesFormControl.invalid">{{getNumSummarySentencesErrorMessage()}}</mat-error>
+              <mat-icon matSuffix>notes</mat-icon>
+            </mat-form-field>
           </div>
-        </mat-expansion-panel>
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title>Documentos similares</mat-panel-title>
-          </mat-expansion-panel-header>
-          <!-- Related documents options -->
-          <div class="text-option" id="related-documents-options">
-            <mat-slider #sliderNumDocuments [max]="maxNumDocuments" [value]="initialNumDocuments"
-                        color="primary" min="1" thumbLabel></mat-slider>
-            <p class="slider-footer">Número de documentos devueltos</p>
 
-            <button (click)="getRelatedDocuments(textArea.value, sliderNumDocuments.value)" color="primary"
-                    mat-raised-button>
-              Obtener
-            </button>
-          </div>
-        </mat-expansion-panel>
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title>Resumir texto</mat-panel-title>
-          </mat-expansion-panel-header>
-          <!-- Text summary options -->
-          <div class="text-option" id="text-summary-options">
-            <!-- TODO: Content here -->
-            <div>
-              <mat-form-field appearance="fill">
-                <mat-label>Número de frases</mat-label>
-                <input #inputNumSummarySentences [formControl]="numSummarySentencesFormControl"
-                       matInput min="1" step="1" type="number">
-                <mat-error
-                  *ngIf="numSummarySentencesFormControl.invalid">{{getNumSummarySentencesErrorMessage()}}</mat-error>
-                <mat-icon matSuffix>notes</mat-icon>
-              </mat-form-field>
-            </div>
-
-            <!-- TODO: Disable the button while the text summary is loading.
-                  This way, the user can't ask for another summary while other is being generated. -->
-            <!-- Only get the text summary if the numSummarySentences value is valid and the text is not empty -->
-            <button (click)="numSummarySentencesFormControl.valid
+          <!-- TODO: Disable the button while the text summary is loading.
+                This way, the user can't ask for another summary while other is being generated. -->
+          <!-- Only get the text summary if the numSummarySentences value is valid and the text is not empty -->
+          <button (click)="numSummarySentencesFormControl.valid
                            && textArea.value.length > 0
                            && getTextSummary(textArea.value, +inputNumSummarySentences.value)"
-                    color="primary" mat-raised-button>
-              Obtener
-            </button>
-          </div>
-        </mat-expansion-panel>
-      </mat-accordion>
-    </div>
+                  color="primary" mat-raised-button>
+            Obtener
+          </button>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
   </div>
 </div>
 
-<!-- TODO: If the X button is pressed, relatedTopics = null -->
 <!-- TODO: Show a mat-progress-spinner when loading the related topics -->
-<div *ngIf="relatedTopics">
-  <table>
-    <tr>
-      <th>Núm. topic</th>
-      <th>Probabilidad</th>
-    </tr>
-    <tr *ngFor="let textTopicProb of relatedTopics">
-      <td>{{textTopicProb.topic}}</td>
-      <td>{{textTopicProb.text_topic_prob | percent:'1.6'}}</td>
-    </tr>
-  </table>
+<div *ngIf="relatedTopics" class="card">
+
+  <h3 class="card-header">
+    Probabilidad texto-topics
+    <!-- Button to close the card -->
+    <button (click)="relatedTopics=null" aria-label="Close" class="close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </h3>
+
+  <div class="card-body">
+    <div class="row justify-content-center">
+      <!--
+        * In medium, large and extra large screens, the table and the histogram are in the same row, with the table being smaller.
+        * In extra small and small screens, the table and the histogram are in different rows, with the table being smaller.
+      -->
+      <div class="col-md-4 col-8">
+        <table>
+          <tr>
+            <th>Núm. topic</th>
+            <th>Probabilidad</th>
+          </tr>
+          <tr *ngFor="let textTopicProb of relatedTopics">
+            <td>{{textTopicProb.topic}}</td>
+            <td>{{textTopicProb.text_topic_prob | percent:'1.6'}}</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="col-md-8 col-12">
+        <!-- TODO: Histograma con las probabilidades -->
+        TODO: Histograma con las probabilidades
+      </div>
+
+    </div>
+
+  </div>
 </div>
 
-<!-- TODO: If the X button is pressed, topicDocuments = null -->
+
 <!-- TODO: Show a mat-progress-spinner when loading the documents -->
-<div *ngIf="relatedDocuments">
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>Documentos más similares al texto</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <!-- With multi, more than one panel can be opened at the same time -->
-      <mat-accordion multi>
-        <mat-expansion-panel *ngFor="let relatedDoc of relatedDocuments">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              {{relatedDoc.doc_content_summary | slice:0:relatedDocumentSummaryMaxLength}}
-              {{relatedDoc.doc_content_summary.length > relatedDocumentSummaryMaxLength ? '...' : ''}}
-            </mat-panel-title>
-            <mat-panel-description>
-              Topic: {{relatedDoc.doc_topic}}
-              &nbsp;&nbsp;&nbsp;
-              Probabilidad: {{relatedDoc.doc_text_prob | percent:'1.2'}}
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <pre>
+<div *ngIf="relatedDocuments" class="card">
+  <h3 class="card-header">
+    Documentos más similares al texto
+    <!-- Button to close the card -->
+    <button (click)="relatedDocuments=null" aria-label="Close" class="close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </h3>
+
+  <div class="card-body">
+    <!-- With multi, more than one panel can be opened at the same time -->
+    <mat-accordion multi>
+      <mat-expansion-panel *ngFor="let relatedDoc of relatedDocuments">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{relatedDoc.doc_content_summary | slice:0:relatedDocumentSummaryMaxLength}}
+            {{relatedDoc.doc_content_summary.length > relatedDocumentSummaryMaxLength ? '...' : ''}}
+          </mat-panel-title>
+          <mat-panel-description>
+            Topic: {{relatedDoc.doc_topic}}
+            &nbsp;&nbsp;&nbsp;
+            Probabilidad: {{relatedDoc.doc_text_prob | percent:'1.2'}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <pre>
             {{relatedDoc.doc_content}}
           </pre>
-        </mat-expansion-panel>
-      </mat-accordion>
-    </mat-card-content>
-  </mat-card>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
 </div>
 
-<!-- TODO: If the X button is pressed, textSummary = null -->
 <!-- TODO: Show a mat-progress-spinner when loading the summary -->
 <div *ngIf="textSummary">
   <ngb-alert (close)="summaryAlertClosed=true" *ngIf="!summaryAlertClosed" type="warning">
@@ -138,12 +163,16 @@
     En su lugar, el resumen devuelto está compuesto por las {{summaryAlertNumSentences}} primeras frases del texto.
   </ngb-alert>
 
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>Texto resumido</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <pre>{{textSummary.text_summary}}</pre>
-    </mat-card-content>
-  </mat-card>
+  <div class="card">
+    <h3 class="card-header">
+      Texto resumido
+      <!-- Button to close the card -->
+      <button (click)="textSummary=null" aria-label="Close" class="close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </h3>
+    <div class="card-body">
+      <pre class="card-text">{{textSummary.text_summary}}</pre>
+    </div>
+  </div>
 </div>
