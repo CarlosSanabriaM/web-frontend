@@ -14,19 +14,22 @@
     <!-- Mat tab content -->
     <!-- TODO: Move this div to the HTML of another Component -->
     <div id="topics-text-format">
-      <table>
+      <table class="table table-striped table-hover table-sm">
+        <thead class="thead-light">
         <tr>
-          <th>Núm. topic</th>
-          <th>Keywords</th>
-          <th></th>
+          <th scope="col">Núm. topic</th>
+          <th scope="col">Keywords</th>
+          <th scope="col"></th>
         </tr>
+        </thead>
+
         <tr *ngFor="let topic of topics">
-          <td>{{topic.topic}}</td>
+          <th scope="row">{{topic.topic}}</th>
           <td>
             <!-- TODO: keyword.name should have a different style, for example, bold -->
             <span *ngFor="let keyword of topic.keywords">
-          {{keyword.name}}: {{keyword.probability | percent:'1.2'}}
-        </span>
+              {{keyword.name}}: {{keyword.probability | percent:'1.2'}}
+            </span>
           </td>
           <td>
             <!-- TODO: Wrapp the icon in a button tag -->

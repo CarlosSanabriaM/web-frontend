@@ -99,13 +99,16 @@
         * In extra small and small screens, the table and the histogram are in different rows, with the table being smaller.
       -->
       <div class="col-md-4 col-8">
-        <table>
+        <table class="table table-striped table-hover table-sm">
+          <thead class="thead-light">
           <tr>
-            <th>Núm. topic</th>
-            <th>Probabilidad</th>
+            <th scope="col">Núm. topic</th>
+            <th scope="col">Probabilidad</th>
           </tr>
+          </thead>
+
           <tr *ngFor="let textTopicProb of relatedTopics">
-            <td>{{textTopicProb.topic}}</td>
+            <th scope="row">{{textTopicProb.topic}}</th>
             <td>{{textTopicProb.text_topic_prob | percent:'1.6'}}</td>
           </tr>
         </table>
