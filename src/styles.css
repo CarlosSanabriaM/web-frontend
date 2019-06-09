@@ -10,14 +10,12 @@
 /* Application-wide Styles */
 h1 {
   color: #369;
-  font-family: Georgia, serif;
-  font-size: 250%;
   text-align: center;
 }
 
 h2 {
   color: #444;
-  font-size: 200%;
+  font-size: 250%;
   margin: 20px 0px;
 }
 
