@@ -17,6 +17,8 @@ export class TextSectionComponent implements OnInit {
   relatedDocuments: TextRelatedDoc[];
   textSummary: TextSummary;
   numSummarySentencesFormControl: FormControl;
+  summaryAlertClosed = true; // If true, the alert showed when the summary isn't generated with the model is closed
+  summaryAlertNumSentences: number; // Number of sentences specified by the user to generate the returned summary
   // TODO: This values shouldn't be hardcoded here
   textAreaNumRows = 30;
   initialMaxNumTopics = 6; // initial value for the max num topics slider
@@ -63,7 +65,12 @@ export class TextSectionComponent implements OnInit {
     }
 
     this.textService.getTextSummary(text, numSentences)
-      .subscribe(textSummary => this.textSummary = textSummary);
+      .subscribe(textSummary => {
+        this.textSummary = textSummary;
+        // Update the value of the alert
+        this.summaryAlertClosed = textSummary.summary_generated_with_the_model;
+        this.summaryAlertNumSentences = numSentences;
+      });
   }
 
   getNumSummarySentencesErrorMessage() {

@@ -131,12 +131,17 @@
 <!-- TODO: If the X button is pressed, textSummary = null -->
 <!-- TODO: Show a mat-progress-spinner when loading the summary -->
 <div *ngIf="textSummary">
+  <ngb-alert (close)="summaryAlertClosed=true" *ngIf="!summaryAlertClosed" type="warning">
+    El algoritmo PageRank utilizado para generar el resumen no ha convergido con el texto dado,
+    por lo que no se ha podido generar el resumen utilizando dicho algoritmo.<br>
+    En su lugar, el resumen devuelto está compuesto por las {{summaryAlertNumSentences}} primeras frases del texto.
+  </ngb-alert>
+
   <mat-card>
     <mat-card-header>
       <mat-card-title>Texto resumido</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <!-- TODO: Show a warning if the summary wasn't generated with the model. Maybe with Bootstrap alerts -->
       <pre>{{textSummary.text_summary}}</pre>
     </mat-card-content>
   </mat-card>
