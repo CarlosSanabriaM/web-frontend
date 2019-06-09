@@ -145,8 +145,8 @@
       <mat-card-title>Documentos más representativos del topic {{selectedTopicId}}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <!-- TODO: Modify to allow open more than one panel at the same time -->
-      <mat-accordion>
+      <!-- With multi, more than one panel can be opened at the same time -->
+      <mat-accordion multi>
         <mat-expansion-panel *ngFor="let topicDocument of topicDocuments">
           <mat-expansion-panel-header>
             <mat-panel-title>
