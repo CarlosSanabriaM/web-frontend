@@ -1,8 +1,10 @@
 /* Import Angular Material CSS */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-/* Import NG Bootstrap CSS */
+/* Import Bootstrap CSS */
 /* TODO: This line shouldn't be needed if bootstrap.min.css is specified in the styles array of angular.json file */
 @import "~bootstrap/dist/css/bootstrap.min.css";
+/* Import Bootstrap grid */
+@import "~bootstrap/dist/css/bootstrap-grid.min.css";
 
 /* You can add global styles to this file, and also import other style files */
 /* Application-wide Styles */

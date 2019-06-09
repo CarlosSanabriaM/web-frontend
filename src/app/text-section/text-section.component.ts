@@ -20,7 +20,7 @@ export class TextSectionComponent implements OnInit {
   summaryAlertClosed = true; // If true, the alert showed when the summary isn't generated with the model is closed
   summaryAlertNumSentences: number; // Number of sentences specified by the user to generate the returned summary
   // TODO: This values shouldn't be hardcoded here
-  textAreaNumRows = 30;
+  textAreaNumRows = 20;
   initialMaxNumTopics = 6; // initial value for the max num topics slider
   maxNumTopics = 17;  // max num topics for the max num topics slider
   initialNumDocuments = 2;

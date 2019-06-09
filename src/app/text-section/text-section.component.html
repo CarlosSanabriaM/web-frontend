@@ -1,86 +1,87 @@
 <h2>{{sectionName}}</h2>
 
-<!-- TODO: This grid isn't adaptable! In a mobile phone, the textarea should be displayed above the options -->
-<mat-grid-list cols="2" rowHeight="85%">
-  <!-- Textarea at the left -->
-  <mat-grid-tile>
-    <form>
-      <mat-form-field appearance="outline" id="text-textarea-form-field">
-        <textarea #textArea matInput placeholder="Introduce un texto" rows="{{textAreaNumRows}}"></textarea>
-        <!-- TODO: <mat-error *ngIf="textEmpty">Debes introducir un texto</mat-error> -->
-        <mat-hint>Texto que será utilizado por las opciones a su derecha</mat-hint>
-      </mat-form-field>
-    </form>
-  </mat-grid-tile>
-  <!-- Options at the right -->
-  <mat-grid-tile>
-    <mat-accordion>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>Topics relacionados</mat-panel-title>
-        </mat-expansion-panel-header>
-        <!-- Related topics options -->
-        <div class="text-option" id="related-topics-options">
-          <mat-slider #sliderMaxNumTopics [value]="initialMaxNumTopics" color="primary"
-                      [max]="maxNumTopics" min="1" thumbLabel></mat-slider>
-          <p class="slider-footer">Número máx. de topics devueltos</p>
+<div class="container-fluid">
+  <div class="row">
+    <!-- Textarea at the left in medium screen size or above, and up in small and extra small screen size  -->
+    <div class="col-md">
+      <form>
+        <mat-form-field appearance="outline" id="text-textarea-form-field">
+          <!-- TODO: Update the rows of the textarea dinamically based on the screen size -->
+          <textarea #textArea matInput placeholder="Introduce un texto" rows="{{textAreaNumRows}}"></textarea>
+          <!-- TODO: <mat-error *ngIf="textEmpty">Debes introducir un texto</mat-error> -->
+        </mat-form-field>
+      </form>
+    </div>
+    <!-- Options at the right in medium screen size or above, and down in small and extra small screen size  -->
+    <div class="col-md">
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Topics relacionados</mat-panel-title>
+          </mat-expansion-panel-header>
+          <!-- Related topics options -->
+          <div class="text-option" id="related-topics-options">
+            <mat-slider #sliderMaxNumTopics [max]="maxNumTopics" [value]="initialMaxNumTopics"
+                        color="primary" min="1" thumbLabel></mat-slider>
+            <p class="slider-footer">Número máx. de topics devueltos</p>
 
-          <!-- TODO: Add checkbox "Show visualization" and implement that behaviour -->
+            <!-- TODO: Add checkbox "Show visualization" and implement that behaviour -->
 
-          <button (click)="getRelatedTopics(textArea.value, sliderMaxNumTopics.value)" color="primary"
-                  mat-raised-button>
-            Obtener
-          </button>
-        </div>
-      </mat-expansion-panel>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>Documentos similares</mat-panel-title>
-        </mat-expansion-panel-header>
-        <!-- Related documents options -->
-        <div class="text-option" id="related-documents-options">
-          <mat-slider #sliderNumDocuments [max]="maxNumDocuments" [value]="initialNumDocuments"
-                      color="primary" min="1" thumbLabel></mat-slider>
-          <p class="slider-footer">Número de documentos devueltos</p>
-
-          <button (click)="getRelatedDocuments(textArea.value, sliderNumDocuments.value)" color="primary"
-                  mat-raised-button>
-            Obtener
-          </button>
-        </div>
-      </mat-expansion-panel>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>Resumir texto</mat-panel-title>
-        </mat-expansion-panel-header>
-        <!-- Text summary options -->
-        <div class="text-option" id="text-summary-options">
-          <!-- TODO: Content here -->
-          <div>
-            <mat-form-field appearance="fill">
-              <mat-label>Número de frases</mat-label>
-              <input #inputNumSummarySentences [formControl]="numSummarySentencesFormControl"
-                     matInput min="1" step="1" type="number">
-              <mat-error
-                *ngIf="numSummarySentencesFormControl.invalid">{{getNumSummarySentencesErrorMessage()}}</mat-error>
-              <mat-icon matSuffix>notes</mat-icon>
-            </mat-form-field>
+            <button (click)="getRelatedTopics(textArea.value, sliderMaxNumTopics.value)" color="primary"
+                    mat-raised-button>
+              Obtener
+            </button>
           </div>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Documentos similares</mat-panel-title>
+          </mat-expansion-panel-header>
+          <!-- Related documents options -->
+          <div class="text-option" id="related-documents-options">
+            <mat-slider #sliderNumDocuments [max]="maxNumDocuments" [value]="initialNumDocuments"
+                        color="primary" min="1" thumbLabel></mat-slider>
+            <p class="slider-footer">Número de documentos devueltos</p>
 
-          <!-- TODO: Disable the button while the text summary is loading.
-                This way, the user can't ask for another summary while other is being generated. -->
-          <!-- Only get the text summary if the numSummarySentences value is valid and the text is not empty -->
-          <button (click)="numSummarySentencesFormControl.valid
+            <button (click)="getRelatedDocuments(textArea.value, sliderNumDocuments.value)" color="primary"
+                    mat-raised-button>
+              Obtener
+            </button>
+          </div>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Resumir texto</mat-panel-title>
+          </mat-expansion-panel-header>
+          <!-- Text summary options -->
+          <div class="text-option" id="text-summary-options">
+            <!-- TODO: Content here -->
+            <div>
+              <mat-form-field appearance="fill">
+                <mat-label>Número de frases</mat-label>
+                <input #inputNumSummarySentences [formControl]="numSummarySentencesFormControl"
+                       matInput min="1" step="1" type="number">
+                <mat-error
+                  *ngIf="numSummarySentencesFormControl.invalid">{{getNumSummarySentencesErrorMessage()}}</mat-error>
+                <mat-icon matSuffix>notes</mat-icon>
+              </mat-form-field>
+            </div>
+
+            <!-- TODO: Disable the button while the text summary is loading.
+                  This way, the user can't ask for another summary while other is being generated. -->
+            <!-- Only get the text summary if the numSummarySentences value is valid and the text is not empty -->
+            <button (click)="numSummarySentencesFormControl.valid
                            && textArea.value.length > 0
                            && getTextSummary(textArea.value, +inputNumSummarySentences.value)"
-                  color="primary" mat-raised-button>
-            Obtener
-          </button>
-        </div>
-      </mat-expansion-panel>
-    </mat-accordion>
-  </mat-grid-tile>
-</mat-grid-list>
+                    color="primary" mat-raised-button>
+              Obtener
+            </button>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+</div>
 
 <!-- TODO: If the X button is pressed, relatedTopics = null -->
 <!-- TODO: Show a mat-progress-spinner when loading the related topics -->
