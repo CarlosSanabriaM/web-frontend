@@ -29,7 +29,7 @@ export class TextSectionComponent implements OnInit {
   constructor(private textService: TextService) { }
 
   ngOnInit() {
-    this.numSummarySentencesFormControl = new FormControl('', [
+    this.numSummarySentencesFormControl = new FormControl(this.initialNumSummarySentences, [
       Validators.required,
       Validators.pattern(/^[+]?\d+$/),
       Validators.min(1)

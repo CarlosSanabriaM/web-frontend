@@ -60,13 +60,15 @@
             <mat-form-field appearance="fill">
               <mat-label>Número de frases</mat-label>
               <input #inputNumSummarySentences [formControl]="numSummarySentencesFormControl"
-                     [value]="initialNumSummarySentences" matInput min="1" step="1" type="number">
+                     matInput min="1" step="1" type="number">
               <mat-error
                 *ngIf="numSummarySentencesFormControl.invalid">{{getNumSummarySentencesErrorMessage()}}</mat-error>
               <mat-icon matSuffix>notes</mat-icon>
             </mat-form-field>
           </div>
 
+          <!-- TODO: Disable the button while the text summary is loading.
+                This way, the user can't ask for another summary while other is being generated. -->
           <!-- Only get the text summary if the numSummarySentences value is valid and the text is not empty -->
           <button (click)="numSummarySentencesFormControl.valid
                            && textArea.value.length > 0
