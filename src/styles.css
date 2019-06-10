@@ -101,3 +101,8 @@ pre {
   white-space: -o-pre-wrap;
   word-wrap: break-word;
 }
+
+/* Add a margin at the top of Bootstrap cards to avoid collisions with other components */
+.card {
+  margin-top: 1%;
+}
