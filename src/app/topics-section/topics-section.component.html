@@ -102,30 +102,41 @@
       <div class="m-2" id="configuration-section">
         <div id="configuration-section-text">
           <h4>Formato Texto</h4>
+
+          <!-- Slider with min and max values at it sides -->
+          <span class="text-small text-secondary slider-min-value">{{numKeywordsTextFormatMinValue}}</span>
           <mat-slider #sliderNumKeywordsTextFormat [value]="numKeywordsTextFormat" color="primary"
-                      max="30" min="1" thumbLabel></mat-slider>
+                      [max]="numKeywordsTextFormatMaxValue" [min]="numKeywordsTextFormatMinValue"
+                      thumbLabel></mat-slider>
+          <span class="text-small text-secondary slider-max-value">{{numKeywordsTextFormatMaxValue}}</span>
           <p class="slider-footer">Número de keywords</p>
-          <!-- TODO: Show min and max values at both sides of the slider -->
         </div>
 
         <mat-divider></mat-divider>
 
         <div id="configuration-section-wordcloud">
           <h4>Formato Nube de palabras</h4>
+
+          <!-- Slider with min and max values at it sides -->
+          <span class="text-small text-secondary slider-min-value">{{numKeywordsWordcloudFormatMinValue}}</span>
           <mat-slider #sliderNumKeywordsWordcloudFormat [value]="numKeywordsWordcloudFormat" color="primary"
-                      max="100" min="1" thumbLabel></mat-slider>
+                      [max]="numKeywordsWordcloudFormatMaxValue" [min]="numKeywordsWordcloudFormatMinValue"
+                      thumbLabel></mat-slider>
+          <span class="text-small text-secondary slider-max-value">{{numKeywordsWordcloudFormatMaxValue}}</span>
           <p class="slider-footer">Número de keywords</p>
-          <!-- TODO: Show min and max values at both sides of the slider -->
         </div>
 
         <mat-divider></mat-divider>
 
         <div id="configuration-section-topic-documents">
           <h4>Documentos más representativos</h4>
+
+          <!-- Slider with min and max values at it sides -->
+          <span class="text-small text-secondary slider-min-value">{{numTopicDocumentsMinValue}}</span>
           <mat-slider #sliderNumTopicDocuments [value]="numTopicDocuments" color="primary"
-                      max="30" min="1" thumbLabel></mat-slider>
+                      [max]="numTopicDocumentsMaxValue" [min]="numTopicDocumentsMinValue" thumbLabel></mat-slider>
+          <span class="text-small text-secondary slider-max-value">{{numTopicDocumentsMaxValue}}</span>
           <p class="slider-footer">Número de documentos</p>
-          <!-- TODO: Show min and max values at both sides of the slider -->
         </div>
 
         <mat-divider></mat-divider>

@@ -21,18 +21,26 @@ export class TextSectionComponent implements OnInit {
   summaryAlertNumSentences: number; // Number of sentences specified by the user to generate the returned summary
   // TODO: This values shouldn't be hardcoded here
   textAreaNumRows = 20;
-  initialMaxNumTopics = 6; // initial value for the max num topics slider
-  maxNumTopics = 17;  // max num topics for the max num topics slider
-  initialNumDocuments = 2;
-  maxNumDocuments = 10;
-  relatedDocumentSummaryMaxLength = 150;
-  initialNumSummarySentences = 2;
+
+  readonly maxNumTopicsMinValue = 1; // min value for the max num topics slider
+  maxNumTopics = 6; // initial value for the max num topics slider
+  readonly maxNumTopicsMaxValue = 17; // max value for the max num topics slider
+
+  readonly numDocumentsMinValue = 1; // min value for the num documents slider
+  numDocuments = 2; // initial value for the num documents slider
+  readonly numDocumentsMaxValue = 10; // max value for the num documents slider
+
+  initialNumSummarySentences = 2; // initial value for the num summary sentences input
+
+  readonly relatedDocumentSummaryMaxLength = 150; // max number of characters of a document summary displayed in the card header
+
 
   constructor(private textService: TextService) { }
 
   ngOnInit() {
     this.numSummarySentencesFormControl = new FormControl(this.initialNumSummarySentences, [
       Validators.required,
+      // Only integer values are admitted
       Validators.pattern(/^[+]?\d+$/),
       Validators.min(1)
     ]);

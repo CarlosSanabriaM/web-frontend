@@ -106,3 +106,12 @@ pre {
 .card {
   margin-top: 1%;
 }
+
+/* The min and max values at both sides of a slider are separated of it by 5px */
+.slider-min-value {
+  margin-right: 5px;
+}
+
+.slider-max-value {
+  margin-left: 5px;
+}

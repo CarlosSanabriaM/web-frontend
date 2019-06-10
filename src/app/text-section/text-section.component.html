@@ -20,8 +20,11 @@
         </mat-expansion-panel-header>
         <!-- Related topics options -->
         <div class="text-option" id="related-topics-options">
-          <mat-slider #sliderMaxNumTopics [max]="maxNumTopics" [value]="initialMaxNumTopics"
-                      color="primary" min="1" thumbLabel></mat-slider>
+          <!-- Slider with min and max values at it sides -->
+          <span class="text-small text-secondary slider-min-value">{{maxNumTopicsMinValue}}</span>
+          <mat-slider #sliderMaxNumTopics [max]="maxNumTopicsMaxValue" [min]="maxNumTopicsMinValue"
+                      [value]="maxNumTopics" color="primary" thumbLabel></mat-slider>
+          <span class="text-small text-secondary slider-max-value">{{maxNumTopicsMaxValue}}</span>
           <p class="slider-footer">Número máx. de topics devueltos</p>
 
           <!-- TODO: Add checkbox "Show visualization" and implement that behaviour -->
@@ -38,8 +41,11 @@
         </mat-expansion-panel-header>
         <!-- Related documents options -->
         <div class="text-option" id="related-documents-options">
-          <mat-slider #sliderNumDocuments [max]="maxNumDocuments" [value]="initialNumDocuments"
-                      color="primary" min="1" thumbLabel></mat-slider>
+          <!-- Slider with min and max values at it sides -->
+          <span class="text-small text-secondary slider-min-value">{{numDocumentsMinValue}}</span>
+          <mat-slider #sliderNumDocuments [max]="numDocumentsMaxValue" [min]="numDocumentsMinValue"
+                      [value]="numDocuments" color="primary" thumbLabel></mat-slider>
+          <span class="text-small text-secondary slider-max-value">{{numDocumentsMaxValue}}</span>
           <p class="slider-footer">Número de documentos devueltos</p>
 
           <button (click)="getRelatedDocuments(textArea.value, sliderNumDocuments.value)" color="primary"

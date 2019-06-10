@@ -16,11 +16,21 @@ export class TopicsSectionComponent implements OnInit {
   topicImageUrls: TopicImageUrl[];
   topicDocuments: ReprDocOfTopic[];
   selectedTopicId: number;  // selected topic id to obtain the topics documents
+
   // TODO: This values shouldn't be hardcoded here
-  numKeywordsTextFormat = 5;
-  numKeywordsWordcloudFormat = 20;
-  numTopicDocuments = 2;
-  topicDocumentSummaryMaxLength = 150;
+  readonly numKeywordsTextFormatMinValue = 1; // min value for the num keywords text format slider
+  numKeywordsTextFormat = 5; // initial value for the num keywords text format slider
+  readonly numKeywordsTextFormatMaxValue = 30; // max value for the num keywords text format slider
+
+  readonly numKeywordsWordcloudFormatMinValue = 1; // min value for the num keywords wordcloud format slider
+  numKeywordsWordcloudFormat = 20; // initial value for the num keywords wordcloud format slider
+  readonly numKeywordsWordcloudFormatMaxValue = 100; // max value for the num keywords wordcloud format slider
+
+  readonly numTopicDocumentsMinValue = 1; // min value for the num topic documents slider
+  numTopicDocuments = 2; // initial value for the num topic documents slider
+  readonly numTopicDocumentsMaxValue = 10; // max value for the num topic documents slider
+
+  readonly topicDocumentSummaryMaxLength = 150; // max number of characters of a document summary displayed in the card header
 
   constructor(private topicsService: TopicsService) { }
 
