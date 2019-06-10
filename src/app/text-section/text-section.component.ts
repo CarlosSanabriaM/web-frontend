@@ -17,6 +17,7 @@ export class TextSectionComponent implements OnInit {
   relatedDocuments: TextRelatedDoc[];
   textSummary: TextSummary;
   numSummarySentencesFormControl: FormControl;
+  textAreaFormControl: FormControl;
   summaryAlertClosed = true; // If true, the alert showed when the summary isn't generated with the model is closed
   summaryAlertNumSentences: number; // Number of sentences specified by the user to generate the returned summary
   // TODO: This values shouldn't be hardcoded here
@@ -44,6 +45,8 @@ export class TextSectionComponent implements OnInit {
       Validators.pattern(/^[+]?\d+$/),
       Validators.min(1)
     ]);
+
+    this.textAreaFormControl = new FormControl('', [ Validators.required ]);
   }
 
   /**
@@ -54,7 +57,10 @@ export class TextSectionComponent implements OnInit {
    */
   getRelatedTopics(text: string, maxNumTopics: number) {
     if (text.length === 0) {
-      console.log('Text is empty');
+      // If the text of the textarea is empty, mark it as touched to allow
+      // the FormControl Validators show an error message, and return
+      this.textAreaFormControl.markAsTouched();
+
       return;
     }
 
@@ -70,7 +76,10 @@ export class TextSectionComponent implements OnInit {
    */
   getRelatedDocuments(text: string, numDocuments: number) {
     if (text.length === 0) {
-      console.log('Text is empty');
+      // If the text of the textarea is empty, mark it as touched to allow
+      // the FormControl Validators show an error message, and return
+      this.textAreaFormControl.markAsTouched();
+
       return;
     }
 
@@ -86,7 +95,10 @@ export class TextSectionComponent implements OnInit {
    */
   getTextSummary(text: string, numSentences: number) {
     if (text.length === 0) {
-      console.log('Text is empty');
+      // If the text of the textarea is empty, mark it as touched to allow
+      // the FormControl Validators show an error message, and return
+      this.textAreaFormControl.markAsTouched();
+
       return;
     }
 

@@ -5,9 +5,9 @@
   <div class="col-md">
     <form>
       <mat-form-field appearance="outline" id="text-textarea-form-field">
-        <!-- TODO: Update the rows of the textarea dinamically based on the screen size -->
-        <textarea #textArea matInput placeholder="Introduce un texto" rows="{{textAreaNumRows}}"></textarea>
-        <!-- TODO: <mat-error *ngIf="textEmpty">Debes introducir un texto</mat-error> -->
+        <textarea #textArea [formControl]="textAreaFormControl" matInput placeholder="Introduce un texto"
+                  rows="{{textAreaNumRows}}"></textarea>
+        <mat-error *ngIf="textAreaFormControl.invalid">Debes introducir un texto</mat-error>
       </mat-form-field>
     </form>
   </div>
@@ -76,7 +76,6 @@
                 This way, the user can't ask for another summary while other is being generated. -->
           <!-- Only get the text summary if the numSummarySentences value is valid and the text is not empty -->
           <button (click)="numSummarySentencesFormControl.valid
-                           && textArea.value.length > 0
                            && getTextSummary(textArea.value, +inputNumSummarySentences.value)"
                   color="primary" mat-raised-button>
             Obtener
