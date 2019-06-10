@@ -46,6 +46,12 @@ export class TextSectionComponent implements OnInit {
     ]);
   }
 
+  /**
+   * Calls the TopicsService to obtain the text-topic probabilities
+   * and stores the result in a variable.
+   * @param text: Text used to obtain the related topics.
+   * @param maxNumTopics: Max number of topics to retrieve.
+   */
   getRelatedTopics(text: string, maxNumTopics: number) {
     if (text.length === 0) {
       console.log('Text is empty');
@@ -56,6 +62,12 @@ export class TextSectionComponent implements OnInit {
       .subscribe(relatedTopics => this.relatedTopics = relatedTopics);
   }
 
+  /**
+   * Calls the TopicsService to obtain the documents more related
+   * to the given text and stores the result in a variable.
+   * @param text: Text used to obtain the related documents.
+   * @param numDocuments: Number of documents to retrieve.
+   */
   getRelatedDocuments(text: string, numDocuments: number) {
     if (text.length === 0) {
       console.log('Text is empty');
@@ -66,6 +78,12 @@ export class TextSectionComponent implements OnInit {
       .subscribe(relatedDocuments => this.relatedDocuments = relatedDocuments);
   }
 
+  /**
+   * Calls the TopicsService to obtain a summary of the given text
+   * and stores the result in a variable.
+   * @param text: Text used to obtain it's summary.
+   * @param numSentences: Number of sentences of the summary.
+   */
   getTextSummary(text: string, numSentences: number) {
     if (text.length === 0) {
       console.log('Text is empty');
@@ -81,6 +99,10 @@ export class TextSectionComponent implements OnInit {
       });
   }
 
+  /**
+   * Returns the message error for the num summary sentences input
+   * that corresponds to the error in it's current value.
+   */
   getNumSummarySentencesErrorMessage() {
     return this.numSummarySentencesFormControl.hasError('required') ? 'Valor requerido' :
       this.numSummarySentencesFormControl.hasError('pattern') ? 'Debe ser un entero' :
