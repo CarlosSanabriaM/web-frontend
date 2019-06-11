@@ -1,0 +1,12 @@
+footer {
+  background-color: rgba(0, 0, 0, .05);
+  text-align: center;
+  padding: 20px 0px;
+  margin-top: 3%;
+  width: 100%;
+}
+
+a {
+  font-weight: bold;
+  color: #505050;
+}

@@ -1,9 +1,10 @@
-<!--
-  Wrap everything inside a Bootstrap container fluid to use the Bootstrap grid system
-  Fluid is a full width container, using all the screen width.
--->
-<div class="container-fluid">
-  <h1 class="display-4">{{ title }}</h1>
+<app-header [title]="title"></app-header>
+
+<!-- Wrap the main content of the page inside a Bootstrap container fluid to use the Bootstrap grid system.
+     Fluid is a full width container, using all the screen width. -->
+<div class="container-fluid" id="main-container">
   <app-topics-section></app-topics-section>
   <app-text-section></app-text-section>
 </div>
+
+<app-footer></app-footer>

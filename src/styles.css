@@ -1,12 +1,11 @@
+/* You can add global styles to this file, and also import other style files */
+
 /* Import Angular Material CSS */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 /* Import Bootstrap CSS */
 /* TODO: This line shouldn't be needed if bootstrap.min.css is specified in the styles array of angular.json file */
 @import "~bootstrap/dist/css/bootstrap.min.css";
-/* Import Bootstrap grid */
-@import "~bootstrap/dist/css/bootstrap-grid.min.css";
 
-/* You can add global styles to this file, and also import other style files */
 /* Application-wide Styles */
 h1 {
   color: #3f51b4;
@@ -16,7 +15,7 @@ h1 {
 h2 {
   color: #444;
   font-size: 250%;
-  margin: 20px 0px;
+  margin: 20px 0;
 }
 
 h3 {
@@ -30,9 +29,7 @@ html, body {
 
 body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  margin: 2em;
 }
-
 
 /** Styles for Angular Material Icons **/
 /* Rules for sizing the icon. */
