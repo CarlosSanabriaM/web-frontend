@@ -7,7 +7,7 @@
       <!-- Mat tab header content -->
       <ng-template mat-tab-label>
         <!-- TODO: In small screen sizes, remove the text of the tab and show only the icon -->
-        <h3>Texto</h3>
+        <h3 class="tab-label-text">Texto</h3>
         <mat-icon class="tab-icon">text_format</mat-icon>
       </ng-template>
       <!-- Mat tab content -->
@@ -54,7 +54,7 @@
     <mat-tab>
       <!-- Mat tab header content -->
       <ng-template mat-tab-label>
-        <h3>Nube de palabras</h3>
+        <h3 class="tab-label-text">Nube de palabras</h3>
         <mat-icon class="tab-icon">cloud</mat-icon>
       </ng-template>
       <!-- Mat tab content -->
@@ -86,13 +86,16 @@
       </div>
     </mat-tab>
 
-    <!-- TODO: Implement this with Bootstrap modal: https://getbootstrap.com/docs/4.3/components/modal/ -->
+    <!--
+      TODO: Implement this with modals: https://ng-bootstrap.github.io/#/components/modal/examples
+       or https://ng.ant.design/components/modal/en
+    -->
     <!-- Tab 3 -->
     <mat-tab>
       <!-- TODO: Try to decrease this tab header width -->
       <!-- Mat tab header content -->
       <ng-template mat-tab-label>
-        <h3>Configuración</h3>
+        <h3 class="tab-label-text">Configuración</h3>
         <mat-icon class="tab-icon">settings</mat-icon>
       </ng-template>
       <!-- Mat tab content -->

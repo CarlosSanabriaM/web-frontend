@@ -27,3 +27,7 @@ table {
 table td, table th {
   vertical-align: middle;
 }
+
+.tab-label-text {
+  margin-bottom: 0;
+}
