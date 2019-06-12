@@ -3,6 +3,7 @@ import { TopicsService } from '../topics.service';
 import { Topic } from '../dtos/topic';
 import { TopicImageUrl } from '../dtos/topic-image-url';
 import { ReprDocOfTopic } from '../dtos/repr-doc-of-topic';
+import { UtilsService } from '../utils.service';
 
 @Component({
   selector: 'app-topics-section',
@@ -32,7 +33,8 @@ export class TopicsSectionComponent implements OnInit {
 
   readonly topicDocumentSummaryMaxLength = 150; // max number of characters of a document summary displayed in the card header
 
-  constructor(private topicsService: TopicsService) { }
+  constructor(private topicsService: TopicsService,
+              private utilsService: UtilsService) { }
 
   ngOnInit() {
     this.getTopicsText();

@@ -4,6 +4,7 @@ import { TextTopicProb } from '../dtos/text-topic-prob';
 import { TextRelatedDoc } from '../dtos/text-related-doc';
 import { TextSummary } from '../dtos/text-summary';
 import { FormControl, Validators } from '@angular/forms';
+import { UtilsService } from '../utils.service';
 
 @Component({
   selector: 'app-text-section',
@@ -36,7 +37,8 @@ export class TextSectionComponent implements OnInit {
   readonly relatedDocumentSummaryMaxLength = 150; // max number of characters of a document summary displayed in the card header
 
 
-  constructor(private textService: TextService) { }
+  constructor(private textService: TextService,
+              private utilsService: UtilsService) { }
 
   ngOnInit() {
     this.numSummarySentencesFormControl = new FormControl(this.initialNumSummarySentences, [
