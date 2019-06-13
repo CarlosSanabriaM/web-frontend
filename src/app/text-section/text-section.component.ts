@@ -21,6 +21,9 @@ export class TextSectionComponent implements OnInit {
   relatedTopicsSubscription: Subscription; // disposable resource to cancel the execution of the related topics Observable
 
   relatedDocuments: TextRelatedDoc[];
+  relatedDocumentsLoading = false; // if true, the related documents have been asked and are loading
+  relatedDocumentsSubscription: Subscription; // disposable resource to cancel the execution of the related documents Observable
+
   textSummary: TextSummary;
   numSummarySentencesFormControl: FormControl;
   textAreaFormControl: FormControl;
@@ -98,8 +101,16 @@ export class TextSectionComponent implements OnInit {
       return;
     }
 
-    this.textService.getRelatedDocuments(text, numDocuments)
-      .subscribe(relatedDocuments => this.relatedDocuments = relatedDocuments);
+    // Remove previous data, mark as loading, and scroll to the card
+    this.relatedDocuments = null;
+    this.relatedDocumentsLoading = true;
+    this.utilsService.scrollToElement(document.getElementById('relatedDocumentsCard'));
+
+    this.relatedDocumentsSubscription = this.textService.getRelatedDocuments(text, numDocuments)
+      .subscribe(relatedDocuments => {
+        this.relatedDocuments = relatedDocuments;
+        this.relatedDocumentsLoading = false;
+      });
   }
 
   /**
@@ -151,4 +162,20 @@ export class TextSectionComponent implements OnInit {
       this.relatedTopics = null;
     }
   }
+
+  /**
+   * Closes the related documents card.
+   * If the related documents where loading, unsubscribes from the Observable.
+   */
+  closeRelatedDocumentsCard() {
+    if (this.relatedDocumentsLoading) {
+      // If related documents are loading, cancel the subscription and mark as not loading
+      this.relatedDocumentsSubscription.unsubscribe();
+      this.relatedDocumentsLoading = false;
+    } else {
+      // If related documents have been loaded, remove them
+      this.relatedDocuments = null;
+    }
+  }
+
 }
