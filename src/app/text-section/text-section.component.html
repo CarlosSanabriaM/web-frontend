@@ -86,8 +86,8 @@
   </div>
 </div>
 
-<!-- This div wraps the card to allow the getElementById('textSummaryCard') find it and scroll to it when the card is not rendered-->
-<div id="textSummaryCard">
+<!-- This div wraps the card to allow the getElementById('relatedTopicsCard') find it and scroll to it when the card is not rendered-->
+<div id="relatedTopicsCard">
   <!-- If the related topics are loading or have been loaded, show a card -->
   <div *ngIf="relatedTopicsLoading || relatedTopics" class="card">
 
@@ -143,6 +143,7 @@
 <!-- This div wraps the card to allow the getElementById('relatedDocumentsCard') find it and scroll to it when the card is not rendered-->
 <div id="relatedDocumentsCard">
   <div *ngIf="relatedDocumentsLoading || relatedDocuments" class="card">
+
     <h3 class="card-header">
       Documentos más similares al texto
       <!-- Button to close the card -->
@@ -184,24 +185,39 @@
   </div>
 </div>
 
-<!-- TODO: Show a mat-progress-spinner when loading the summary -->
-<div *ngIf="textSummary">
-  <ngb-alert (close)="summaryAlertClosed=true" *ngIf="!summaryAlertClosed" type="warning">
-    El algoritmo PageRank utilizado para generar el resumen no ha convergido con el texto dado,
-    por lo que no se ha podido generar el resumen utilizando dicho algoritmo.<br>
-    En su lugar, el resumen devuelto está compuesto por las {{summaryAlertNumSentences}} primeras frases del texto.
-  </ngb-alert>
 
-  <div class="card">
-    <h3 class="card-header">
-      Texto resumido
-      <!-- Button to close the card -->
-      <button (click)="textSummary=null" aria-label="Close" class="close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </h3>
-    <div class="card-body">
-      <pre class="card-text">{{textSummary.text_summary}}</pre>
+<!-- This div wraps the card to allow the getElementById('textSummaryCard') find it and scroll to it when the card is not rendered-->
+<div id="textSummaryCard">
+
+  <div *ngIf="textSummaryLoading || textSummary">
+    <ngb-alert (close)="summaryAlertClosed=true" *ngIf="!summaryAlertClosed" type="warning">
+      El algoritmo PageRank utilizado para generar el resumen no ha convergido con el texto dado,
+      por lo que no se ha podido generar el resumen utilizando dicho algoritmo.<br>
+      En su lugar, el resumen devuelto está compuesto por las {{summaryAlertNumSentences}} primeras frases del texto.
+    </ngb-alert>
+
+    <div class="card">
+
+      <h3 class="card-header">
+        Texto resumido
+        <!-- Button to close the card -->
+        <button (click)="closeTextSummaryCard()" aria-label="Close" class="close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </h3>
+
+      <div class="card-body">
+        <!-- If the text summary is loading, show a progress spinner -->
+        <div *ngIf="textSummaryLoading; else textSummaryLoaded">
+          <mat-spinner color="primary"></mat-spinner>
+        </div>
+
+        <!-- If the text summary has been loaded, show them -->
+        <ng-template #textSummaryLoaded>
+          <pre class="card-text">{{textSummary.text_summary}}</pre>
+        </ng-template>
+      </div>
+
     </div>
   </div>
 </div>

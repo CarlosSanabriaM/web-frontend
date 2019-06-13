@@ -25,6 +25,9 @@ export class TextSectionComponent implements OnInit {
   relatedDocumentsSubscription: Subscription; // disposable resource to cancel the execution of the related documents Observable
 
   textSummary: TextSummary;
+  textSummaryLoading = false; // if true, the text summary has been asked and are loading
+  textSummarySubscription: Subscription; // disposable resource to cancel the execution of the text summary Observable
+
   numSummarySentencesFormControl: FormControl;
   textAreaFormControl: FormControl;
   summaryAlertClosed = true; // If true, the alert showed when the summary isn't generated with the model is closed
@@ -77,7 +80,7 @@ export class TextSectionComponent implements OnInit {
     // Remove previous data, mark as loading, and scroll to the card
     this.relatedTopics = null;
     this.relatedTopicsLoading = true;
-    this.utilsService.scrollToElement(document.getElementById('textSummaryCard'));
+    this.utilsService.scrollToElement(document.getElementById('relatedTopicsCard'));
 
     this.relatedTopicsSubscription = this.textService.getRelatedTopics(text, maxNumTopics)
       .subscribe(relatedTopics => {
@@ -128,9 +131,16 @@ export class TextSectionComponent implements OnInit {
       return;
     }
 
-    this.textService.getTextSummary(text, numSentences)
+
+    // Remove previous data, mark as loading, and scroll to the card
+    this.textSummary = null;
+    this.textSummaryLoading = true;
+    this.utilsService.scrollToElement(document.getElementById('textSummaryCard'));
+
+    this.textSummarySubscription = this.textService.getTextSummary(text, numSentences)
       .subscribe(textSummary => {
         this.textSummary = textSummary;
+        this.textSummaryLoading = false;
         // Update the value of the alert
         this.summaryAlertClosed = textSummary.summary_generated_with_the_model;
         this.summaryAlertNumSentences = numSentences;
@@ -175,6 +185,21 @@ export class TextSectionComponent implements OnInit {
     } else {
       // If related documents have been loaded, remove them
       this.relatedDocuments = null;
+    }
+  }
+
+  /**
+   * Closes the text summary card.
+   * If text summary is loading, unsubscribes from the Observable.
+   */
+  closeTextSummaryCard() {
+    if (this.textSummaryLoading) {
+      // If text summary is loading, cancel the subscription and mark as not loading
+      this.textSummarySubscription.unsubscribe();
+      this.textSummaryLoading = false;
+    } else {
+      // If related documents have been loaded, remove them
+      this.textSummary = null;
     }
   }
 
