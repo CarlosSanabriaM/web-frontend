@@ -101,37 +101,39 @@
 
     <div class="card-body">
       <!-- If the related topics are loading, show a progress spinner -->
-      <div *ngIf="relatedTopicsLoading">
+      <div *ngIf="relatedTopicsLoading; else relatedTopicsLoaded">
         <mat-spinner color="primary"></mat-spinner>
       </div>
 
       <!-- If the related topics have been loaded, show them -->
-      <div *ngIf="relatedTopics" class="row justify-content-center">
-        <!--
-          * In medium, large and extra large screens, the table and the histogram are in the same row, with the table being smaller.
-          * In extra small and small screens, the table and the histogram are in different rows, with the table being smaller.
-        -->
-        <div class="col-md-4 col-8">
-          <table class="table table-striped table-hover table-sm">
-            <thead class="thead-light">
-            <tr>
-              <th scope="col">Núm. topic</th>
-              <th scope="col">Probabilidad</th>
-            </tr>
-            </thead>
+      <ng-template #relatedTopicsLoaded>
+        <div class="row justify-content-center">
+          <!--
+            * In medium, large and extra large screens, the table and the histogram are in the same row, with the table being smaller.
+            * In extra small and small screens, the table and the histogram are in different rows, with the table being smaller.
+          -->
+          <div class="col-md-4 col-8">
+            <table class="table table-striped table-hover table-sm">
+              <thead class="thead-light">
+              <tr>
+                <th scope="col">Núm. topic</th>
+                <th scope="col">Probabilidad</th>
+              </tr>
+              </thead>
 
-            <tr *ngFor="let textTopicProb of relatedTopics">
-              <th scope="row">{{textTopicProb.topic}}</th>
-              <td>{{textTopicProb.text_topic_prob | percent:'1.6'}}</td>
-            </tr>
-          </table>
-        </div>
+              <tr *ngFor="let textTopicProb of relatedTopics">
+                <th scope="row">{{textTopicProb.topic}}</th>
+                <td>{{textTopicProb.text_topic_prob | percent:'1.6'}}</td>
+              </tr>
+            </table>
+          </div>
 
-        <div class="col-md-8 col-12">
-          <!-- TODO: Histogram with the probabilities -->
-          TODO: Histograma con las probabilidades
+          <div class="col-md-8 col-12">
+            <!-- TODO: Histogram with the probabilities -->
+            TODO: Histograma con las probabilidades
+          </div>
         </div>
-      </div>
+      </ng-template>
 
     </div>
   </div>
