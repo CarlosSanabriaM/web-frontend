@@ -5,6 +5,7 @@ import { TextRelatedDoc } from '../dtos/text-related-doc';
 import { TextSummary } from '../dtos/text-summary';
 import { FormControl, Validators } from '@angular/forms';
 import { UtilsService } from '../utils.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-text-section',
@@ -14,7 +15,11 @@ import { UtilsService } from '../utils.service';
 export class TextSectionComponent implements OnInit {
 
   sectionName = 'Texto';
+
   relatedTopics: TextTopicProb[];
+  relatedTopicsLoading = false; // if true, the related topics have been asked and are loading
+  relatedTopicsSubscription: Subscription; // disposable resource to cancel the execution of the related topics Observable
+
   relatedDocuments: TextRelatedDoc[];
   textSummary: TextSummary;
   numSummarySentencesFormControl: FormControl;
@@ -66,8 +71,16 @@ export class TextSectionComponent implements OnInit {
       return;
     }
 
-    this.textService.getRelatedTopics(text, maxNumTopics)
-      .subscribe(relatedTopics => this.relatedTopics = relatedTopics);
+    // Remove previous data, mark as loading, and scroll to the card
+    this.relatedTopics = null;
+    this.relatedTopicsLoading = true;
+    this.utilsService.scrollToElement(document.getElementById('textSummaryCard'));
+
+    this.relatedTopicsSubscription = this.textService.getRelatedTopics(text, maxNumTopics)
+      .subscribe(relatedTopics => {
+        this.relatedTopics = relatedTopics;
+        this.relatedTopicsLoading = false;
+      });
   }
 
   /**
@@ -124,4 +137,18 @@ export class TextSectionComponent implements OnInit {
           '';
   }
 
+  /**
+   * Closes the related topics card.
+   * If the related topics where loading, unsubscribes from the Observable.
+   */
+  closeRelatedTopicsCard() {
+    if (this.relatedTopicsLoading) {
+      // If related topics are loading, cancel the subscription and mark as not loading
+      this.relatedTopicsSubscription.unsubscribe();
+      this.relatedTopicsLoading = false;
+    } else {
+      // If related topics have been loaded, remove them
+      this.relatedTopics = null;
+    }
+  }
 }

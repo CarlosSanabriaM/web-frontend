@@ -86,46 +86,54 @@
   </div>
 </div>
 
-<!-- TODO: Show a mat-progress-spinner when loading the related topics -->
-<div *ngIf="relatedTopics" class="card">
+<!-- This div wraps the card to allow the getElementById('textSummaryCard') find it and scroll to it when the card is not rendered-->
+<div id="textSummaryCard">
+  <!-- If the related topics are loading or have been loaded, show a card -->
+  <div *ngIf="relatedTopicsLoading || relatedTopics" class="card">
 
-  <h3 class="card-header">
-    Probabilidad texto-topics
-    <!-- Button to close the card -->
-    <button (click)="relatedTopics=null" aria-label="Close" class="close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </h3>
+    <h3 class="card-header">
+      Probabilidad texto-topics
+      <!-- Button to close the card -->
+      <button (click)="closeRelatedTopicsCard()" aria-label="Close" class="close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </h3>
 
-  <div class="card-body">
-    <div class="row justify-content-center">
-      <!--
-        * In medium, large and extra large screens, the table and the histogram are in the same row, with the table being smaller.
-        * In extra small and small screens, the table and the histogram are in different rows, with the table being smaller.
-      -->
-      <div class="col-md-4 col-8">
-        <table class="table table-striped table-hover table-sm">
-          <thead class="thead-light">
-          <tr>
-            <th scope="col">Núm. topic</th>
-            <th scope="col">Probabilidad</th>
-          </tr>
-          </thead>
-
-          <tr *ngFor="let textTopicProb of relatedTopics">
-            <th scope="row">{{textTopicProb.topic}}</th>
-            <td>{{textTopicProb.text_topic_prob | percent:'1.6'}}</td>
-          </tr>
-        </table>
+    <div class="card-body">
+      <!-- If the related topics are loading, show a progress spinner -->
+      <div *ngIf="relatedTopicsLoading">
+        <mat-spinner color="primary"></mat-spinner>
       </div>
 
-      <div class="col-md-8 col-12">
-        <!-- TODO: Histogram with the probabilities -->
-        TODO: Histograma con las probabilidades
+      <!-- If the related topics have been loaded, show them -->
+      <div *ngIf="relatedTopics" class="row justify-content-center">
+        <!--
+          * In medium, large and extra large screens, the table and the histogram are in the same row, with the table being smaller.
+          * In extra small and small screens, the table and the histogram are in different rows, with the table being smaller.
+        -->
+        <div class="col-md-4 col-8">
+          <table class="table table-striped table-hover table-sm">
+            <thead class="thead-light">
+            <tr>
+              <th scope="col">Núm. topic</th>
+              <th scope="col">Probabilidad</th>
+            </tr>
+            </thead>
+
+            <tr *ngFor="let textTopicProb of relatedTopics">
+              <th scope="row">{{textTopicProb.topic}}</th>
+              <td>{{textTopicProb.text_topic_prob | percent:'1.6'}}</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="col-md-8 col-12">
+          <!-- TODO: Histogram with the probabilities -->
+          TODO: Histograma con las probabilidades
+        </div>
       </div>
 
     </div>
-
   </div>
 </div>
 

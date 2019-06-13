@@ -108,3 +108,8 @@ pre {
 .slider-max-value {
   margin-left: 5px;
 }
+
+/* Horizontal center Angular Material Progress Spinner */
+mat-spinner {
+  margin: 0 auto;
+}
