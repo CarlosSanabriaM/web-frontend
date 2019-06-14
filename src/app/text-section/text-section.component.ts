@@ -24,7 +24,7 @@ export class TextSectionComponent implements OnInit {
   relatedDocumentsSubscription: Subscription; // disposable resource to cancel the execution of the related documents Observable
 
   textSummary: TextSummary;
-  textSummaryLoading = false; // if true, the text summary has been asked and are loading
+  textSummaryLoading = false; // if true, the text summary has been asked and is loading
   textSummarySubscription: Subscription; // disposable resource to cancel the execution of the text summary Observable
 
   numSummarySentencesFormControl: FormControl;

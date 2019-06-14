@@ -4,6 +4,7 @@ import { Topic } from '../dtos/topic';
 import { TopicImageUrl } from '../dtos/topic-image-url';
 import { ReprDocOfTopic } from '../dtos/repr-doc-of-topic';
 import { UtilsService } from '../utils.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-topics-section',
@@ -16,6 +17,8 @@ export class TopicsSectionComponent implements OnInit {
   topics: Topic[];
   topicImageUrls: TopicImageUrl[];
   topicDocuments: ReprDocOfTopic[];
+  topicDocumentsLoading = false; // if true, the topic document have been asked and are loading
+  topicDocumentsSubscription: Subscription; // disposable resource to cancel the execution of the topic documents Observable
   selectedTopicId: number;  // selected topic id to obtain the topics documents
 
   // TODO: This values shouldn't be hardcoded here
@@ -65,10 +68,15 @@ export class TopicsSectionComponent implements OnInit {
    * @param topicId: Id of the topic which documents want to be retrieved
    */
   getTopicDocuments(topicId: number): void {
-    this.topicsService.getTopicDocuments(topicId, this.numTopicDocuments)
+    // Remove previous data and mark as loading
+    this.topicDocuments = null;
+    this.topicDocumentsLoading = true;
+    this.selectedTopicId = topicId;
+
+    this.topicDocumentsSubscription = this.topicsService.getTopicDocuments(topicId, this.numTopicDocuments)
       .subscribe(topicDocuments => {
-        this.selectedTopicId = topicId;
         this.topicDocuments = topicDocuments;
+        this.topicDocumentsLoading = false;
       });
   }
 
@@ -88,4 +96,20 @@ export class TopicsSectionComponent implements OnInit {
     this.getTopicsText();
     this.getTopicsWordcloudImagesUrls();
   }
+
+  /**
+   * Closes the topic documents card.
+   * If the topic documents are loading, unsubscribes from the Observable.
+   */
+  closeTopicDocumentsCard() {
+    if (this.topicDocumentsLoading) {
+      // If topic documents are loading, cancel the subscription and mark as not loading
+      this.topicDocumentsSubscription.unsubscribe();
+      this.topicDocumentsLoading = false;
+    } else {
+      // If topic documents have been loaded, remove them
+      this.topicDocuments = null;
+    }
+  }
+
 }

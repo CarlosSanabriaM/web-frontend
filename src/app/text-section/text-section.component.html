@@ -138,6 +138,7 @@
 </div>
 
 
+<!-- If the related documents are loading or have been loaded, show a card -->
 <div *ngIf="relatedDocumentsLoading || relatedDocuments" class="card">
 
   <h3 class="card-header">
@@ -180,6 +181,7 @@
 
 </div>
 
+<!-- If the text summary is loading or has been loaded, show a card -->
 <div *ngIf="textSummaryLoading || textSummary">
   <ngb-alert (close)="summaryAlertClosed=true" *ngIf="!summaryAlertClosed" type="warning">
     El algoritmo PageRank utilizado para generar el resumen no ha convergido con el texto dado,

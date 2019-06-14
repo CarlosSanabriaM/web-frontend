@@ -153,35 +153,45 @@
   </mat-tab-group>
 </div>
 
-<!-- TODO: Show a mat-progress-spinner when loading the documents -->
-<div *ngIf="topicDocuments" class="card">
+<!-- If the topics documents are loading or have been loaded, show a card -->
+<div *ngIf="topicDocumentsLoading || topicDocuments" class="card">
+
   <h3 class="card-header">
     Documentos más representativos del topic {{selectedTopicId}}
     <!-- Button to close the card -->
-    <button (click)="topicDocuments=null" aria-label="Close" class="close">
+    <button (click)="closeTopicDocumentsCard()" aria-label="Close" class="close">
       <span aria-hidden="true">&times;</span>
     </button>
   </h3>
 
   <div class="card-body">
-    <!-- With multi, more than one panel can be opened at the same time -->
-    <mat-accordion multi>
-      <mat-expansion-panel *ngFor="let topicDocument of topicDocuments">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            {{topicDocument.doc_content_summary | slice:0:topicDocumentSummaryMaxLength}}
-            {{topicDocument.doc_content_summary.length > topicDocumentSummaryMaxLength ? '...' : ''}}
-          </mat-panel-title>
-          <mat-panel-description>
-            Probabilidad: {{topicDocument.doc_topic_prob | percent:'1.2'}}
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <pre>
+    <!-- If the topic documents are loading, show a progress spinner and scroll the page to it -->
+    <div *ngIf="topicDocumentsLoading; else topicDocumentsLoaded" appScroll>
+      <mat-spinner color="primary"></mat-spinner>
+    </div>
+
+    <!-- If the topic documents have been loaded, show them -->
+    <ng-template #topicDocumentsLoaded>
+      <!-- With multi, more than one panel can be opened at the same time -->
+      <mat-accordion multi>
+        <mat-expansion-panel *ngFor="let topicDocument of topicDocuments">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{topicDocument.doc_content_summary | slice:0:topicDocumentSummaryMaxLength}}
+              {{topicDocument.doc_content_summary.length > topicDocumentSummaryMaxLength ? '...' : ''}}
+            </mat-panel-title>
+            <mat-panel-description>
+              Probabilidad: {{topicDocument.doc_topic_prob | percent:'1.2'}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <pre>
             {{topicDocument.doc_content}}
           </pre>
-      </mat-expansion-panel>
-    </mat-accordion>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </ng-template>
   </div>
+
 </div>
 
 <!-- TODO: Implement error messages with Boostrap alerts: https://getbootstrap.com/docs/4.3/components/alerts/ -->
