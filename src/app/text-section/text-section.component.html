@@ -29,8 +29,8 @@
 
           <!-- TODO: Add checkbox "Show visualization" and implement that behaviour -->
 
-          <button (click)="getRelatedTopics(textArea.value, sliderMaxNumTopics.value)" color="primary"
-                  mat-raised-button>
+          <button (click)="getRelatedTopics(textArea.value, sliderMaxNumTopics.value)" [disabled]="relatedTopicsLoading"
+                  color="primary" mat-raised-button>
             Obtener
           </button>
         </div>
@@ -48,7 +48,8 @@
           <span class="text-small text-secondary slider-max-value">{{numDocumentsMaxValue}}</span>
           <p class="slider-footer">Número de documentos devueltos</p>
 
-          <button (click)="getRelatedDocuments(textArea.value, sliderNumDocuments.value)" color="primary"
+          <button (click)="getRelatedDocuments(textArea.value, sliderNumDocuments.value)"
+                  [disabled]="relatedDocumentsLoading" color="primary"
                   mat-raised-button>
             Obtener
           </button>
@@ -77,6 +78,7 @@
           <!-- Only get the text summary if the numSummarySentences value is valid and the text is not empty -->
           <button (click)="numSummarySentencesFormControl.valid
                            && getTextSummary(textArea.value, +inputNumSummarySentences.value)"
+                  [disabled]="textSummaryLoading"
                   color="primary" mat-raised-button>
             Obtener
           </button>
