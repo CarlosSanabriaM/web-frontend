@@ -13,6 +13,7 @@ import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { ScrollDirective } from './scroll.directive';
 import { ChartistModule } from 'ng-chartist';
+import { HistogramComponent } from './histogram/histogram.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ChartistModule } from 'ng-chartist';
     TextSectionComponent,
     FooterComponent,
     HeaderComponent,
-    ScrollDirective
+    ScrollDirective,
+    HistogramComponent
   ],
   imports: [
     BrowserModule,

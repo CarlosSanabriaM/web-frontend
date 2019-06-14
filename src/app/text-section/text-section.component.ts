@@ -5,6 +5,7 @@ import { TextRelatedDoc } from '../dtos/text-related-doc';
 import { TextSummary } from '../dtos/text-summary';
 import { FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { IChartistData } from 'chartist';
 
 @Component({
   selector: 'app-text-section',
@@ -18,6 +19,7 @@ export class TextSectionComponent implements OnInit {
   relatedTopics: TextTopicProb[];
   relatedTopicsLoading = false; // if true, the related topics have been asked and are loading
   relatedTopicsSubscription: Subscription; // disposable resource to cancel the execution of the related topics Observable
+  relatedTopicsHistogramData: IChartistData; // data to be displayed in the histogram
 
   relatedDocuments: TextRelatedDoc[];
   relatedDocumentsLoading = false; // if true, the related documents have been asked and are loading
@@ -77,11 +79,19 @@ export class TextSectionComponent implements OnInit {
 
     // Remove previous data and mark as loading
     this.relatedTopics = null;
+    this.relatedTopicsHistogramData = null;
     this.relatedTopicsLoading = true;
 
     this.relatedTopicsSubscription = this.textService.getRelatedTopics(text, maxNumTopics)
       .subscribe(relatedTopics => {
         this.relatedTopics = relatedTopics;
+
+        // Sort the related topics by the topic id and create a histogram data object
+        const sortedRelatedTopics = relatedTopics.slice().sort((a, b) => a.topic - b.topic);
+        this.relatedTopicsHistogramData = {
+          labels: sortedRelatedTopics.map(topic => topic.topic.toString()),
+          series: [ sortedRelatedTopics.map(topic => topic.text_topic_prob * 100) ]
+        };
         this.relatedTopicsLoading = false;
       });
   }
@@ -165,6 +175,7 @@ export class TextSectionComponent implements OnInit {
     } else {
       // If related topics have been loaded, remove them
       this.relatedTopics = null;
+      this.relatedTopicsHistogramData = null;
     }
   }
 

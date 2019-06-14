@@ -5,6 +5,8 @@
 /* Import Bootstrap CSS */
 /* TODO: This line shouldn't be needed if bootstrap.min.css is specified in the styles array of angular.json file */
 @import "~bootstrap/dist/css/bootstrap.min.css";
+/* Import Chartist CSS */
+@import "~chartist/dist/chartist.css";
 
 /* Application-wide Styles */
 h2 {
@@ -112,4 +114,13 @@ pre {
 /* Horizontal center Angular Material Progress Spinner */
 mat-spinner {
   margin: 0 auto;
+}
+
+/* TODO: This should be included in histogram.component.css, but it doesn't work! */
+/* Override bar styles on bar charts. */
+.ct-series-a .ct-bar {
+  /* Colour of  bars */
+  stroke: #0502d7;
+  /* Width of bars */
+  stroke-width: 6%;
 }
