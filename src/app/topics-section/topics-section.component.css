@@ -7,11 +7,6 @@ mat-slider {
   width: 100%;
 }
 
-/* Elements whose id begins with document-icon-topic */
-[id^='document-icon-topic'] {
-  cursor: pointer;
-}
-
 .topic-wordcloud-image-footer-button {
   width: 100%;
 }

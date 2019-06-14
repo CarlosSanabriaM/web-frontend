@@ -31,20 +31,18 @@
               </span>
             </td>
             <td>
-              <!-- TODO: Wrap the icon in a button tag -->
-              <!-- TODO: Change the i by <mat-icon> and remove the class attribute. The tooltip must be moved to the button. -->
-              <!-- Document icon -->
-              <!-- When the mouse hovers the document icon, a tooltip explains how to use it -->
-              <i #documentTooltip="matTooltip" (click)="getTopicDocuments(topic.topic)"
-                 (mouseenter)="documentTooltip.show()"
-                 (mouseleave)="documentTooltip.hide()"
-                 class="material-icons"
-                 id="document-icon-topic{{topic.topic}}"
-                 matTooltip="Click to show the most representative documents of topic {{topic.topic}}"
-                 matTooltipPosition="left">description
-              </i>
+              <!-- When the mouse hovers the document icon button, a tooltip explains how to use it -->
+              <!-- If the topic documents are loading, the button is disabled -->
+              <button #documentTooltip="matTooltip" (click)="getTopicDocuments(topic.topic)"
+                      (mouseenter)="documentTooltip.show()"
+                      (mouseleave)="documentTooltip.hide()"
+                      [disabled]="topicDocumentsLoading" class="btn p-0"
+                      matTooltip="Click to show the most representative documents of topic {{topic.topic}}"
+                      matTooltipPosition="left">
+                <!-- Document icon -->
+                <mat-icon>description</mat-icon>
+              </button>
             </td>
-            <!-- TODO: When clicked, the page should move the user to the place where the documents will appear -->
           </tr>
         </table>
       </div>
