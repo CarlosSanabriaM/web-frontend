@@ -4,7 +4,6 @@ import { TextTopicProb } from '../dtos/text-topic-prob';
 import { TextRelatedDoc } from '../dtos/text-related-doc';
 import { TextSummary } from '../dtos/text-summary';
 import { FormControl, Validators } from '@angular/forms';
-import { UtilsService } from '../utils.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -48,8 +47,7 @@ export class TextSectionComponent implements OnInit {
   readonly relatedDocumentSummaryMaxLength = 150; // max number of characters of a document summary displayed in the card header
 
 
-  constructor(private textService: TextService,
-              private utilsService: UtilsService) { }
+  constructor(private textService: TextService) { }
 
   ngOnInit() {
     this.numSummarySentencesFormControl = new FormControl(this.initialNumSummarySentences, [
@@ -77,10 +75,9 @@ export class TextSectionComponent implements OnInit {
       return;
     }
 
-    // Remove previous data, mark as loading, and scroll to the card
+    // Remove previous data and mark as loading
     this.relatedTopics = null;
     this.relatedTopicsLoading = true;
-    this.utilsService.scrollToElement(document.getElementById('relatedTopicsCard'));
 
     this.relatedTopicsSubscription = this.textService.getRelatedTopics(text, maxNumTopics)
       .subscribe(relatedTopics => {
@@ -104,10 +101,9 @@ export class TextSectionComponent implements OnInit {
       return;
     }
 
-    // Remove previous data, mark as loading, and scroll to the card
+    // Remove previous data and mark as loading
     this.relatedDocuments = null;
     this.relatedDocumentsLoading = true;
-    this.utilsService.scrollToElement(document.getElementById('relatedDocumentsCard'));
 
     this.relatedDocumentsSubscription = this.textService.getRelatedDocuments(text, numDocuments)
       .subscribe(relatedDocuments => {
@@ -132,10 +128,9 @@ export class TextSectionComponent implements OnInit {
     }
 
 
-    // Remove previous data, mark as loading, and scroll to the card
+    // Remove previous data and mark as loading
     this.textSummary = null;
     this.textSummaryLoading = true;
-    this.utilsService.scrollToElement(document.getElementById('textSummaryCard'));
 
     this.textSummarySubscription = this.textService.getTextSummary(text, numSentences)
       .subscribe(textSummary => {

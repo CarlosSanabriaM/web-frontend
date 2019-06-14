@@ -11,6 +11,7 @@ import { TopicsSectionComponent } from './topics-section/topics-section.componen
 import { TextSectionComponent } from './text-section/text-section.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
+import { ScrollDirective } from './scroll.directive';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HeaderComponent } from './header/header.component';
     TopicsSectionComponent,
     TextSectionComponent,
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+    ScrollDirective
   ],
   imports: [
     BrowserModule,

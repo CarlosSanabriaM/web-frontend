@@ -86,138 +86,128 @@
   </div>
 </div>
 
-<!-- This div wraps the card to allow the getElementById('relatedTopicsCard') find it and scroll to it when the card is not rendered-->
-<div id="relatedTopicsCard">
-  <!-- If the related topics are loading or have been loaded, show a card -->
-  <div *ngIf="relatedTopicsLoading || relatedTopics" class="card">
 
-    <h3 class="card-header">
-      Probabilidad texto-topics
-      <!-- Button to close the card -->
-      <button (click)="closeRelatedTopicsCard()" aria-label="Close" class="close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </h3>
+<!-- If the related topics are loading or have been loaded, show a card -->
+<div *ngIf="relatedTopicsLoading || relatedTopics" class="card">
 
-    <div class="card-body">
-      <!-- If the related topics are loading, show a progress spinner -->
-      <div *ngIf="relatedTopicsLoading; else relatedTopicsLoaded">
-        <mat-spinner color="primary"></mat-spinner>
-      </div>
+  <h3 class="card-header">
+    Probabilidad texto-topics
+    <!-- Button to close the card -->
+    <button (click)="closeRelatedTopicsCard()" aria-label="Close" class="close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </h3>
 
-      <!-- If the related topics have been loaded, show them -->
-      <ng-template #relatedTopicsLoaded>
-        <div class="row justify-content-center">
-          <!--
-            * In medium, large and extra large screens, the table and the histogram are in the same row, with the table being smaller.
-            * In extra small and small screens, the table and the histogram are in different rows, with the table being smaller.
-          -->
-          <div class="col-md-4 col-8">
-            <table class="table table-striped table-hover table-sm">
-              <thead class="thead-light">
-              <tr>
-                <th scope="col">Núm. topic</th>
-                <th scope="col">Probabilidad</th>
-              </tr>
-              </thead>
-
-              <tr *ngFor="let textTopicProb of relatedTopics">
-                <th scope="row">{{textTopicProb.topic}}</th>
-                <td>{{textTopicProb.text_topic_prob | percent:'1.6'}}</td>
-              </tr>
-            </table>
-          </div>
-
-          <div class="col-md-8 col-12">
-            <!-- TODO: Histogram with the probabilities -->
-            TODO: Histograma con las probabilidades
-          </div>
-        </div>
-      </ng-template>
+  <div class="card-body">
+    <!-- If the related topics are loading, show a progress spinner and scroll the page to it -->
+    <div *ngIf="relatedTopicsLoading; else relatedTopicsLoaded" appScroll>
+      <mat-spinner color="primary"></mat-spinner>
     </div>
 
+    <!-- If the related topics have been loaded, show them -->
+    <ng-template #relatedTopicsLoaded>
+      <div class="row justify-content-center">
+        <!--
+          * In medium, large and extra large screens, the table and the histogram are in the same row, with the table being smaller.
+          * In extra small and small screens, the table and the histogram are in different rows, with the table being smaller.
+        -->
+        <div class="col-md-4 col-8">
+          <table class="table table-striped table-hover table-sm">
+            <thead class="thead-light">
+            <tr>
+              <th scope="col">Núm. topic</th>
+              <th scope="col">Probabilidad</th>
+            </tr>
+            </thead>
+
+            <tr *ngFor="let textTopicProb of relatedTopics">
+              <th scope="row">{{textTopicProb.topic}}</th>
+              <td>{{textTopicProb.text_topic_prob | percent:'1.6'}}</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="col-md-8 col-12">
+          <!-- TODO: Histogram with the probabilities -->
+          TODO: Histograma con las probabilidades
+        </div>
+      </div>
+    </ng-template>
   </div>
+
 </div>
 
 
-<!-- This div wraps the card to allow the getElementById('relatedDocumentsCard') find it and scroll to it when the card is not rendered-->
-<div id="relatedDocumentsCard">
-  <div *ngIf="relatedDocumentsLoading || relatedDocuments" class="card">
+<div *ngIf="relatedDocumentsLoading || relatedDocuments" class="card">
 
-    <h3 class="card-header">
-      Documentos más similares al texto
-      <!-- Button to close the card -->
-      <button (click)="closeRelatedDocumentsCard()" aria-label="Close" class="close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </h3>
+  <h3 class="card-header">
+    Documentos más similares al texto
+    <!-- Button to close the card -->
+    <button (click)="closeRelatedDocumentsCard()" aria-label="Close" class="close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </h3>
 
-    <div class="card-body">
-      <!-- If the related documents are loading, show a progress spinner -->
-      <div *ngIf="relatedDocumentsLoading; else relatedDocumentsLoaded">
-        <mat-spinner color="primary"></mat-spinner>
-      </div>
+  <div class="card-body">
+    <!-- If the related documents are loading, show a progress spinner and scroll the page to it -->
+    <div *ngIf="relatedDocumentsLoading; else relatedDocumentsLoaded" appScroll>
+      <mat-spinner color="primary"></mat-spinner>
+    </div>
 
-      <!-- If the related documents have been loaded, show them -->
-      <ng-template #relatedDocumentsLoaded>
-        <!-- With multi, more than one panel can be opened at the same time -->
-        <mat-accordion multi>
-          <mat-expansion-panel *ngFor="let relatedDoc of relatedDocuments">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                {{relatedDoc.doc_content_summary | slice:0:relatedDocumentSummaryMaxLength}}
-                {{relatedDoc.doc_content_summary.length > relatedDocumentSummaryMaxLength ? '...' : ''}}
-              </mat-panel-title>
-              <mat-panel-description>
-                Topic: {{relatedDoc.doc_topic}}
-                &nbsp;&nbsp;&nbsp;
-                Probabilidad: {{relatedDoc.doc_text_prob | percent:'1.2'}}
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-            <pre>
+    <!-- If the related documents have been loaded, show them -->
+    <ng-template #relatedDocumentsLoaded>
+      <!-- With multi, more than one panel can be opened at the same time -->
+      <mat-accordion multi>
+        <mat-expansion-panel *ngFor="let relatedDoc of relatedDocuments">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{relatedDoc.doc_content_summary | slice:0:relatedDocumentSummaryMaxLength}}
+              {{relatedDoc.doc_content_summary.length > relatedDocumentSummaryMaxLength ? '...' : ''}}
+            </mat-panel-title>
+            <mat-panel-description>
+              Topic: {{relatedDoc.doc_topic}}
+              &nbsp;&nbsp;&nbsp;
+              Probabilidad: {{relatedDoc.doc_text_prob | percent:'1.2'}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <pre>
             {{relatedDoc.doc_content}}
           </pre>
-          </mat-expansion-panel>
-        </mat-accordion>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </ng-template>
+  </div>
+
+</div>
+
+<div *ngIf="textSummaryLoading || textSummary">
+  <ngb-alert (close)="summaryAlertClosed=true" *ngIf="!summaryAlertClosed" type="warning">
+    El algoritmo PageRank utilizado para generar el resumen no ha convergido con el texto dado,
+    por lo que no se ha podido generar el resumen utilizando dicho algoritmo.<br>
+    En su lugar, el resumen devuelto está compuesto por las {{summaryAlertNumSentences}} primeras frases del texto.
+  </ngb-alert>
+
+  <div class="card">
+
+    <h3 class="card-header">
+      Texto resumido
+      <!-- Button to close the card -->
+      <button (click)="closeTextSummaryCard()" aria-label="Close" class="close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </h3>
+
+    <div class="card-body">
+      <!-- If the text summary is loading, show a progress spinner and scroll the page to it -->
+      <div *ngIf="textSummaryLoading; else textSummaryLoaded" appScroll>
+        <mat-spinner color="primary"></mat-spinner>
+      </div>
+
+      <!-- If the text summary has been loaded, show them -->
+      <ng-template #textSummaryLoaded>
+        <pre class="card-text">{{textSummary.text_summary}}</pre>
       </ng-template>
     </div>
 
-  </div>
-</div>
-
-
-<!-- This div wraps the card to allow the getElementById('textSummaryCard') find it and scroll to it when the card is not rendered-->
-<div id="textSummaryCard">
-
-  <div *ngIf="textSummaryLoading || textSummary">
-    <ngb-alert (close)="summaryAlertClosed=true" *ngIf="!summaryAlertClosed" type="warning">
-      El algoritmo PageRank utilizado para generar el resumen no ha convergido con el texto dado,
-      por lo que no se ha podido generar el resumen utilizando dicho algoritmo.<br>
-      En su lugar, el resumen devuelto está compuesto por las {{summaryAlertNumSentences}} primeras frases del texto.
-    </ngb-alert>
-
-    <div class="card">
-
-      <h3 class="card-header">
-        Texto resumido
-        <!-- Button to close the card -->
-        <button (click)="closeTextSummaryCard()" aria-label="Close" class="close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </h3>
-
-      <div class="card-body">
-        <!-- If the text summary is loading, show a progress spinner -->
-        <div *ngIf="textSummaryLoading; else textSummaryLoaded">
-          <mat-spinner color="primary"></mat-spinner>
-        </div>
-
-        <!-- If the text summary has been loaded, show them -->
-        <ng-template #textSummaryLoaded>
-          <pre class="card-text">{{textSummary.text_summary}}</pre>
-        </ng-template>
-      </div>
-
-    </div>
   </div>
 </div>
