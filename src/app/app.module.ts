@@ -12,6 +12,7 @@ import { TextSectionComponent } from './text-section/text-section.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { ScrollDirective } from './scroll.directive';
+import { ChartistModule } from 'ng-chartist';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ScrollDirective } from './scroll.directive';
     HttpClientModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
-    AngularBootstrapModule
+    AngularBootstrapModule,
+    ChartistModule
   ],
   providers: [],
   bootstrap: [ AppComponent ]
