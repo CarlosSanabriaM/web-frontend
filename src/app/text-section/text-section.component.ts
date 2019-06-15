@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TextService } from '../text.service';
-import { TextRelatedDoc } from '../dtos/text-related-doc';
 import { TextSummary } from '../dtos/text-summary';
 import { FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { TextareaComponent } from './textarea/textarea.component';
 import { RelatedTopicsCardComponent } from './related-topics-card/related-topics-card.component';
+import { RelatedDocumentsCardComponent } from './related-documents-card/related-documents-card.component';
 
 @Component({
   selector: 'app-text-section',
@@ -24,14 +24,14 @@ export class TextSectionComponent implements OnInit {
   @ViewChild(RelatedTopicsCardComponent)
   relatedTopicsCardComponent: RelatedTopicsCardComponent;
 
+  // Inject the child related-documents-card component into the parent
+  @ViewChild(RelatedDocumentsCardComponent)
+  relatedDocumentsCardComponent: RelatedDocumentsCardComponent;
+
   // TODO: Uncomment when TextOptionsComponent is created
   // Inject the child text-options component into the parent
   // @ViewChild(TextOptionsComponent)
   // textOptionsComponent: TextOptionsComponent;
-
-  relatedDocuments: TextRelatedDoc[];
-  relatedDocumentsLoading = false; // if true, the related documents have been asked and are loading
-  relatedDocumentsSubscription: Subscription; // disposable resource to cancel the execution of the related documents Observable
 
   textSummary: TextSummary;
   textSummaryLoading = false; // if true, the text summary has been asked and is loading
@@ -51,9 +51,6 @@ export class TextSectionComponent implements OnInit {
   readonly numDocumentsMaxValue = 10; // max value for the num documents slider
 
   initialNumSummarySentences = 2; // initial value for the num summary sentences input
-
-  /** Max number of characters of a document summary displayed in the card header */
-  private readonly RELATED_DOCUMENT_SUMMARY_MAX_LENGTH = 150;
 
 
   // TODO: Uncomment when TextOptionsComponent is created
@@ -120,13 +117,14 @@ export class TextSectionComponent implements OnInit {
     }
 
     // Remove previous data and mark as loading
-    this.relatedDocuments = null;
-    this.relatedDocumentsLoading = true;
+    this.relatedDocumentsCardComponent.relatedDocuments = null;
+    this.relatedDocumentsCardComponent.relatedDocumentsLoading = true;
 
-    this.relatedDocumentsSubscription = this.textService.getRelatedDocuments(text, numDocuments)
+    // Get related documents subscribing to an Observable, and store the subscription to have the possibility to cancel it
+    this.relatedDocumentsCardComponent.relatedDocumentsSubscription = this.textService.getRelatedDocuments(text, numDocuments)
       .subscribe(relatedDocuments => {
-        this.relatedDocuments = relatedDocuments;
-        this.relatedDocumentsLoading = false;
+        this.relatedDocumentsCardComponent.relatedDocuments = relatedDocuments;
+        this.relatedDocumentsCardComponent.relatedDocumentsLoading = false;
       });
   }
 
@@ -168,21 +166,6 @@ export class TextSectionComponent implements OnInit {
       this.numSummarySentencesFormControl.hasError('pattern') ? 'Debe ser un entero' :
         this.numSummarySentencesFormControl.hasError('min') ? 'Min 1' :
           '';
-  }
-
-  /**
-   * Closes the related documents card.
-   * If the related documents where loading, unsubscribes from the Observable.
-   */
-  closeRelatedDocumentsCard() {
-    if (this.relatedDocumentsLoading) {
-      // If related documents are loading, cancel the subscription and mark as not loading
-      this.relatedDocumentsSubscription.unsubscribe();
-      this.relatedDocumentsLoading = false;
-    } else {
-      // If related documents have been loaded, remove them
-      this.relatedDocuments = null;
-    }
   }
 
   /**

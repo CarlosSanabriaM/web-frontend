@@ -1,0 +1,42 @@
+<!-- If the related documents are loading or have been loaded, show a card -->
+<div *ngIf="relatedDocumentsLoading || relatedDocuments" class="card">
+
+  <h3 class="card-header">
+    Documentos más similares al texto
+    <!-- Button to close the card -->
+    <button (click)="closeCard()" aria-label="Close" class="close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </h3>
+
+  <div class="card-body">
+    <!-- If the related documents are loading, show a progress spinner and scroll the page to it -->
+    <div *ngIf="relatedDocumentsLoading; else relatedDocumentsLoaded" appScroll>
+      <mat-spinner color="primary"></mat-spinner>
+    </div>
+
+    <!-- If the related documents have been loaded, show them -->
+    <ng-template #relatedDocumentsLoaded>
+      <!-- With multi, more than one panel can be opened at the same time -->
+      <mat-accordion multi>
+        <mat-expansion-panel *ngFor="let relatedDoc of relatedDocuments">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{relatedDoc.doc_content_summary | slice:0:RELATED_DOCUMENT_SUMMARY_MAX_LENGTH}}
+              {{relatedDoc.doc_content_summary.length > RELATED_DOCUMENT_SUMMARY_MAX_LENGTH ? '...' : ''}}
+            </mat-panel-title>
+            <mat-panel-description>
+              <span>Topic: {{relatedDoc.doc_topic}}</span>
+              &nbsp;&nbsp;
+              <span>Probabilidad: {{relatedDoc.doc_text_prob | percent:'1.2'}}</span>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <pre>
+            {{relatedDoc.doc_content}}
+          </pre>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </ng-template>
+  </div>
+
+</div>
