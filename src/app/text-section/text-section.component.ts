@@ -31,6 +31,8 @@ export class TextSectionComponent implements OnInit {
 
   numSummarySentencesFormControl: FormControl;
   textAreaFormControl: FormControl;
+  textAreaIsDragOver = false; // It is true when the textArea receives a dragover event
+
   summaryAlertClosed = true; // If true, the alert showed when the summary isn't generated with the model is closed
   summaryAlertNumSentences: number; // Number of sentences specified by the user to generate the returned summary
   // TODO: This values shouldn't be hardcoded here
@@ -46,7 +48,8 @@ export class TextSectionComponent implements OnInit {
 
   initialNumSummarySentences = 2; // initial value for the num summary sentences input
 
-  readonly relatedDocumentSummaryMaxLength = 150; // max number of characters of a document summary displayed in the card header
+  /** Max number of characters of a document summary displayed in the card header */
+  readonly relatedDocumentSummaryMaxLength = 150;
 
 
   constructor(private textService: TextService) { }
@@ -217,6 +220,9 @@ export class TextSectionComponent implements OnInit {
     // By default, an element doesn't allow to drop another element on it
     // To allow this, we need to avoid the default handler of the element
     $event.preventDefault();
+
+    // Set to true that the text area has received a dragover event
+    this.textAreaIsDragOver = true;
   }
 
   /**
@@ -224,6 +230,8 @@ export class TextSectionComponent implements OnInit {
    */
   drop($event: DragEvent) {
     console.log('drop event on textarea');
+    // The text area isn't dragovered
+    this.textAreaIsDragOver = false;
 
     $event.preventDefault();
 

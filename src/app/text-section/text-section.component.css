@@ -22,3 +22,8 @@ table {
 #text-options {
   margin-bottom: 3%;
 }
+
+.is-dragover {
+  outline: 2px dashed black;
+  /*outline-offset: -10px;*/
+}
