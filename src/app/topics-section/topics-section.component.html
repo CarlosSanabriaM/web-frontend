@@ -100,53 +100,56 @@
       <!-- Mat tab content -->
       <!-- m-2 sets margin on 4 sides to $spacer * .5 -->
       <div class="m-2" id="configuration-section">
-        <div id="configuration-section-text">
-          <h4>Formato Texto</h4>
 
-          <!-- Slider with min and max values at it sides -->
-          <span class="text-small text-secondary slider-min-value">{{numKeywordsTextFormatMinValue}}</span>
-          <mat-slider #sliderNumKeywordsTextFormat [value]="numKeywordsTextFormat" color="primary"
-                      [max]="numKeywordsTextFormatMaxValue" [min]="numKeywordsTextFormatMinValue"
-                      thumbLabel></mat-slider>
-          <span class="text-small text-secondary slider-max-value">{{numKeywordsTextFormatMaxValue}}</span>
-          <p class="slider-footer">Número de keywords</p>
-        </div>
+        <!-- Wrap the configurations in a bootstrap card -->
+        <div class="card">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" id="configuration-section-text">
+              <h4>Formato Texto</h4>
 
-        <mat-divider></mat-divider>
+              <!-- Slider with min and max values at it sides -->
+              <span class="text-small text-secondary slider-min-value">{{numKeywordsTextFormatMinValue}}</span>
+              <mat-slider #sliderNumKeywordsTextFormat [max]="numKeywordsTextFormatMaxValue"
+                          [min]="numKeywordsTextFormatMinValue"
+                          [value]="numKeywordsTextFormat" color="primary"
+                          thumbLabel></mat-slider>
+              <span class="text-small text-secondary slider-max-value">{{numKeywordsTextFormatMaxValue}}</span>
+              <p class="slider-footer">Número de keywords</p>
+            </li>
+            <li class="list-group-item" id="configuration-section-wordcloud">
+              <h4>Formato Nube de palabras</h4>
 
-        <div id="configuration-section-wordcloud">
-          <h4>Formato Nube de palabras</h4>
+              <!-- Slider with min and max values at it sides -->
+              <span class="text-small text-secondary slider-min-value">{{numKeywordsWordcloudFormatMinValue}}</span>
+              <mat-slider #sliderNumKeywordsWordcloudFormat [max]="numKeywordsWordcloudFormatMaxValue"
+                          [min]="numKeywordsWordcloudFormatMinValue"
+                          [value]="numKeywordsWordcloudFormat" color="primary"
+                          thumbLabel></mat-slider>
+              <span class="text-small text-secondary slider-max-value">{{numKeywordsWordcloudFormatMaxValue}}</span>
+              <p class="slider-footer">Número de keywords</p>
+            </li>
+            <li class="list-group-item" id="configuration-section-topic-documents">
+              <h4>Documentos más representativos</h4>
 
-          <!-- Slider with min and max values at it sides -->
-          <span class="text-small text-secondary slider-min-value">{{numKeywordsWordcloudFormatMinValue}}</span>
-          <mat-slider #sliderNumKeywordsWordcloudFormat [value]="numKeywordsWordcloudFormat" color="primary"
-                      [max]="numKeywordsWordcloudFormatMaxValue" [min]="numKeywordsWordcloudFormatMinValue"
-                      thumbLabel></mat-slider>
-          <span class="text-small text-secondary slider-max-value">{{numKeywordsWordcloudFormatMaxValue}}</span>
-          <p class="slider-footer">Número de keywords</p>
-        </div>
-
-        <mat-divider></mat-divider>
-
-        <div id="configuration-section-topic-documents">
-          <h4>Documentos más representativos</h4>
-
-          <!-- Slider with min and max values at it sides -->
-          <span class="text-small text-secondary slider-min-value">{{numTopicDocumentsMinValue}}</span>
-          <mat-slider #sliderNumTopicDocuments [value]="numTopicDocuments" color="primary"
-                      [max]="numTopicDocumentsMaxValue" [min]="numTopicDocumentsMinValue" thumbLabel></mat-slider>
-          <span class="text-small text-secondary slider-max-value">{{numTopicDocumentsMaxValue}}</span>
-          <p class="slider-footer">Número de documentos</p>
-        </div>
-
-        <mat-divider></mat-divider>
-
-        <button (click)="updateVariablesAndRefreshTopics(sliderNumKeywordsTextFormat.value,
+              <!-- Slider with min and max values at it sides -->
+              <span class="text-small text-secondary slider-min-value">{{numTopicDocumentsMinValue}}</span>
+              <mat-slider #sliderNumTopicDocuments [max]="numTopicDocumentsMaxValue" [min]="numTopicDocumentsMinValue"
+                          [value]="numTopicDocuments" color="primary" thumbLabel></mat-slider>
+              <span class="text-small text-secondary slider-max-value">{{numTopicDocumentsMaxValue}}</span>
+              <p class="slider-footer">Número de documentos</p>
+            </li>
+            <li class="list-group-item">
+              <!-- Button to confirm all changes -->
+              <button (click)="updateVariablesAndRefreshTopics(sliderNumKeywordsTextFormat.value,
                                                        sliderNumKeywordsWordcloudFormat.value,
                                                        sliderNumTopicDocuments.value)" color="primary"
-                mat-raised-button>
-          Actualizar
-        </button>
+                      mat-raised-button>
+                Actualizar
+              </button>
+            </li>
+          </ul>
+        </div>
+
       </div>
     </mat-tab>
   </mat-tab-group>
