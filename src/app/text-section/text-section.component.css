@@ -23,7 +23,13 @@ table {
   margin-bottom: 3%;
 }
 
-.is-dragover {
-  outline: 2px dashed black;
-  /*outline-offset: -10px;*/
+textarea.is-dragover {
+  /* Dashed outline */
+  outline: 3px dashed #6c757d;
+  outline-offset: 3px;
+
+  /* Drop down arrow image */
+  background-image: url("~src/assets/drop-down-arrow-image.png");
+  background-repeat: no-repeat;
+  background-position: center;
 }
