@@ -3,16 +3,7 @@
 <div class="row">
   <!-- Textarea at the left in medium screen size or above, and up in small and extra small screen size  -->
   <div class="col-md">
-    <form>
-      <mat-form-field appearance="outline" id="text-textarea-form-field">
-        <textarea #textarea (dragend)="textAreaIsDragOver = false" (dragleave)="textAreaIsDragOver = false"
-                  (dragover)="allowDrop($event)" (drop)="drop($event)" [class.is-dragover]="textAreaIsDragOver"
-                  [formControl]="textAreaFormControl" id="textarea" matInput
-                  placeholder="Introduce un texto o arrastra aquí un fichero de texto" rows="{{textAreaNumRows}}">
-        </textarea>
-        <mat-error *ngIf="textAreaFormControl.invalid">{{getTextareaErrorMessage()}}</mat-error>
-      </mat-form-field>
-    </form>
+    <app-textarea></app-textarea>
   </div>
   <!-- Options at the right in medium screen size or above, and down in small and extra small screen size  -->
   <div class="col-md" id="text-options">
@@ -32,7 +23,8 @@
 
           <!-- TODO: Add checkbox "Show visualization" and implement that behaviour -->
 
-          <button (click)="getRelatedTopics(textarea.value, sliderMaxNumTopics.value)" [disabled]="relatedTopicsLoading"
+          <button (click)="getRelatedTopics(textareaComponent.getValue(), sliderMaxNumTopics.value)"
+                  [disabled]="relatedTopicsLoading"
                   color="primary" mat-raised-button>
             Obtener
           </button>
@@ -51,7 +43,7 @@
           <span class="text-small text-secondary slider-max-value">{{numDocumentsMaxValue}}</span>
           <p class="slider-footer">Número de documentos devueltos</p>
 
-          <button (click)="getRelatedDocuments(textarea.value, sliderNumDocuments.value)"
+          <button (click)="getRelatedDocuments(textareaComponent.getValue(), sliderNumDocuments.value)"
                   [disabled]="relatedDocumentsLoading" color="primary"
                   mat-raised-button>
             Obtener
@@ -78,7 +70,7 @@
 
           <!-- Only get the text summary if the numSummarySentences value is valid and the text is not empty -->
           <button (click)="numSummarySentencesFormControl.valid
-                           && getTextSummary(textarea.value, +inputNumSummarySentences.value)"
+                           && getTextSummary(textareaComponent.getValue(), +inputNumSummarySentences.value)"
                   [disabled]="textSummaryLoading"
                   color="primary" mat-raised-button>
             Obtener

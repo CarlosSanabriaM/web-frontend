@@ -1,0 +1,10 @@
+<form>
+  <mat-form-field appearance="outline">
+        <textarea (dragend)="textAreaIsDragOver = false" (dragleave)="textAreaIsDragOver = false"
+                  (dragover)="allowDrop($event)" (drop)="drop($event)" [class.is-dragover]="textAreaIsDragOver"
+                  [formControl]="textAreaFormControl" id="textarea" matInput
+                  placeholder="Introduce un texto o arrastra aquí un fichero de texto" rows="{{TEXTAREA_NUM_ROWS}}">
+        </textarea>
+    <mat-error *ngIf="textAreaFormControl.invalid">{{getTextareaErrorMessage()}}</mat-error>
+  </mat-form-field>
+</form>

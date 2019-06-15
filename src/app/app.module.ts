@@ -14,6 +14,7 @@ import { HeaderComponent } from './header/header.component';
 import { ScrollDirective } from './scroll.directive';
 import { ChartistModule } from 'ng-chartist';
 import { HistogramComponent } from './histogram/histogram.component';
+import { TextareaComponent } from './textarea/textarea.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { HistogramComponent } from './histogram/histogram.component';
     FooterComponent,
     HeaderComponent,
     ScrollDirective,
-    HistogramComponent
+    HistogramComponent,
+    TextareaComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TextService } from '../text.service';
 import { TextTopicProb } from '../dtos/text-topic-prob';
 import { TextRelatedDoc } from '../dtos/text-related-doc';
@@ -6,6 +6,7 @@ import { TextSummary } from '../dtos/text-summary';
 import { FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { IChartistData } from 'chartist';
+import { TextareaComponent } from '../textarea/textarea.component';
 
 @Component({
   selector: 'app-text-section',
@@ -15,6 +16,10 @@ import { IChartistData } from 'chartist';
 export class TextSectionComponent implements OnInit {
 
   sectionName = 'Texto';
+
+  // Inject the child textarea component into the parent
+  @ViewChild(TextareaComponent)
+  textareaComponent: TextareaComponent;
 
   relatedTopics: TextTopicProb[];
   relatedTopicsLoading = false; // if true, the related topics have been asked and are loading
@@ -30,14 +35,10 @@ export class TextSectionComponent implements OnInit {
   textSummarySubscription: Subscription; // disposable resource to cancel the execution of the text summary Observable
 
   numSummarySentencesFormControl: FormControl;
-  textAreaFormControl: FormControl;
-  textAreaIsDragOver = false; // It is true when the textArea receives a dragover event
 
   summaryAlertClosed = true; // If true, the alert showed when the summary isn't generated with the model is closed
   summaryAlertNumSentences: number; // Number of sentences specified by the user to generate the returned summary
   // TODO: This values shouldn't be hardcoded here
-  textAreaNumRows = 20;
-
   readonly maxNumTopicsMinValue = 1; // min value for the max num topics slider
   maxNumTopics = 6; // initial value for the max num topics slider
   readonly maxNumTopicsMaxValue = 17; // max value for the max num topics slider
@@ -61,8 +62,6 @@ export class TextSectionComponent implements OnInit {
       Validators.pattern(/^[+]?\d+$/),
       Validators.min(1)
     ]);
-
-    this.textAreaFormControl = new FormControl('', [ Validators.required ]);
   }
 
   /**
@@ -75,7 +74,7 @@ export class TextSectionComponent implements OnInit {
     if (text.length === 0) {
       // If the text of the textarea is empty, mark it as touched to allow
       // the FormControl Validators show an error message, and return
-      this.textAreaFormControl.markAsTouched();
+      this.textareaComponent.markFormControlAsTouched();
 
       return;
     }
@@ -109,7 +108,7 @@ export class TextSectionComponent implements OnInit {
     if (text.length === 0) {
       // If the text of the textarea is empty, mark it as touched to allow
       // the FormControl Validators show an error message, and return
-      this.textAreaFormControl.markAsTouched();
+      this.textareaComponent.markFormControlAsTouched();
 
       return;
     }
@@ -135,7 +134,7 @@ export class TextSectionComponent implements OnInit {
     if (text.length === 0) {
       // If the text of the textarea is empty, mark it as touched to allow
       // the FormControl Validators show an error message, and return
-      this.textAreaFormControl.markAsTouched();
+      this.textareaComponent.markFormControlAsTouched();
 
       return;
     }
@@ -209,81 +208,6 @@ export class TextSectionComponent implements OnInit {
     } else {
       // If related documents have been loaded, remove them
       this.textSummary = null;
-    }
-  }
-
-  /**
-   * Avoids the default drop handler of the element.
-   */
-  allowDrop($event: DragEvent) {
-    console.log('dragOver event on textarea');
-    // By default, an element doesn't allow to drop another element on it
-    // To allow this, we need to avoid the default handler of the element
-    $event.preventDefault();
-
-    // Set to true that the text area has received a dragover event
-    this.textAreaIsDragOver = true;
-  }
-
-  /**
-   * Obtains the file from the drop event, reads it's content and stores it in the textarea.
-   */
-  drop($event: DragEvent) {
-    console.log('drop event on textarea');
-    // The text area isn't dragovered
-    this.textAreaIsDragOver = false;
-
-    $event.preventDefault();
-
-    // Obtain the text of the file
-    const dt = $event.dataTransfer;
-    this.readFile(dt.files[ 0 ]);
-  }
-
-  /**
-   * Returns the message error for the textarea that corresponds to the error in it's current value.
-   */
-  getTextareaErrorMessage() {
-    return this.textAreaFormControl.hasError('fileType') ? 'El fichero debe ser de tipo texto' :
-      this.textAreaFormControl.hasError('required') ? 'Debes introducir un texto' :
-        '';
-  }
-
-  /**
-   * Reads the content of the file and stores it in the textarea, using the HTML5 File API.
-   */
-  private readFile(file: File) {
-    // If the user cancels the operation of dropping a file
-    if (file == null) {
-      return;
-    }
-
-    // Obtain a reference to the HTML textarea element
-    const textarea: HTMLTextAreaElement = document.getElementById('textarea') as HTMLTextAreaElement;
-
-    // Clean the textarea content
-    textarea.value = '';
-    // Remove error message of previous file dropped
-    this.textAreaFormControl.setErrors(null);
-
-    // Only admits text files
-    if (file.type.match('text/plain')) {
-      // Read the file content
-      const fileReader = new FileReader();
-      // The FileReader "onload" event is called when the read operation over the file finishes
-      // The file content is stored in the "result" property of the FileReader
-      fileReader.onload = () => {
-        // Set the file content in the text area value
-        textarea.value = fileReader.result.toString();
-      };
-      fileReader.readAsText(file);
-    } else {
-      // Mark the textarea as touched to allow the FormControl Validators show an error
-      this.textAreaFormControl.markAsTouched();
-      // Manually set an error about the file type in the textarea
-      this.textAreaFormControl.setErrors({ fileType: true });
-
-      console.log('File type not valid! Only text files are admitted.');
     }
   }
 

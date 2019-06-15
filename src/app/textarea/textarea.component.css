@@ -1,0 +1,19 @@
+mat-form-field {
+  width: 100%;
+}
+
+textarea {
+  resize: none !important;
+}
+
+/* Styles when the text area receives the dragover event */
+textarea.is-dragover {
+  /* Dashed outline */
+  outline: 3px dashed #6c757d;
+  outline-offset: 3px;
+
+  /* Drop down arrow image */
+  background-image: url("~src/assets/drop-down-arrow-image.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
