@@ -1,11 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TextService } from '../text.service';
-import { TextSummary } from '../dtos/text-summary';
 import { FormControl, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
 import { TextareaComponent } from './textarea/textarea.component';
 import { RelatedTopicsCardComponent } from './related-topics-card/related-topics-card.component';
 import { RelatedDocumentsCardComponent } from './related-documents-card/related-documents-card.component';
+import { TextSummaryCardComponent } from './text-summary-card/text-summary-card.component';
 
 @Component({
   selector: 'app-text-section',
@@ -16,31 +15,19 @@ export class TextSectionComponent implements OnInit {
 
   sectionName = 'Texto';
 
-  // Inject the child textarea component into the parent
-  @ViewChild(TextareaComponent)
-  textareaComponent: TextareaComponent;
-
-  // Inject the child related-topics-card component into the parent
-  @ViewChild(RelatedTopicsCardComponent)
-  relatedTopicsCardComponent: RelatedTopicsCardComponent;
-
-  // Inject the child related-documents-card component into the parent
-  @ViewChild(RelatedDocumentsCardComponent)
-  relatedDocumentsCardComponent: RelatedDocumentsCardComponent;
+  /* Inject child components into the parent */
+  @ViewChild(TextareaComponent) textareaComponent: TextareaComponent;
+  @ViewChild(RelatedTopicsCardComponent) relatedTopicsCardComponent: RelatedTopicsCardComponent;
+  @ViewChild(RelatedDocumentsCardComponent) relatedDocumentsCardComponent: RelatedDocumentsCardComponent;
+  @ViewChild(TextSummaryCardComponent) textSummaryCardComponent: TextSummaryCardComponent;
 
   // TODO: Uncomment when TextOptionsComponent is created
   // Inject the child text-options component into the parent
   // @ViewChild(TextOptionsComponent)
   // textOptionsComponent: TextOptionsComponent;
 
-  textSummary: TextSummary;
-  textSummaryLoading = false; // if true, the text summary has been asked and is loading
-  textSummarySubscription: Subscription; // disposable resource to cancel the execution of the text summary Observable
-
   numSummarySentencesFormControl: FormControl;
 
-  summaryAlertClosed = true; // If true, the alert showed when the summary isn't generated with the model is closed
-  summaryAlertNumSentences: number; // Number of sentences specified by the user to generate the returned summary
   // TODO: This values shouldn't be hardcoded here
   readonly maxNumTopicsMinValue = 1; // min value for the max num topics slider
   maxNumTopics = 6; // initial value for the max num topics slider
@@ -144,16 +131,16 @@ export class TextSectionComponent implements OnInit {
     }
 
     // Remove previous data and mark as loading
-    this.textSummary = null;
-    this.textSummaryLoading = true;
+    this.textSummaryCardComponent.textSummary = null;
+    this.textSummaryCardComponent.textSummaryLoading = true;
 
-    this.textSummarySubscription = this.textService.getTextSummary(text, numSentences)
+    this.textSummaryCardComponent.textSummarySubscription = this.textService.getTextSummary(text, numSentences)
       .subscribe(textSummary => {
-        this.textSummary = textSummary;
-        this.textSummaryLoading = false;
+        this.textSummaryCardComponent.textSummary = textSummary;
+        this.textSummaryCardComponent.textSummaryLoading = false;
         // Update the value of the alert
-        this.summaryAlertClosed = textSummary.summary_generated_with_the_model;
-        this.summaryAlertNumSentences = numSentences;
+        this.textSummaryCardComponent.summaryAlertClosed = textSummary.summary_generated_with_the_model;
+        this.textSummaryCardComponent.summaryAlertNumSentences = numSentences;
       });
   }
 
@@ -166,21 +153,6 @@ export class TextSectionComponent implements OnInit {
       this.numSummarySentencesFormControl.hasError('pattern') ? 'Debe ser un entero' :
         this.numSummarySentencesFormControl.hasError('min') ? 'Min 1' :
           '';
-  }
-
-  /**
-   * Closes the text summary card.
-   * If text summary is loading, unsubscribes from the Observable.
-   */
-  closeTextSummaryCard() {
-    if (this.textSummaryLoading) {
-      // If text summary is loading, cancel the subscription and mark as not loading
-      this.textSummarySubscription.unsubscribe();
-      this.textSummaryLoading = false;
-    } else {
-      // If related documents have been loaded, remove them
-      this.textSummary = null;
-    }
   }
 
 }

@@ -17,6 +17,7 @@ import { HistogramComponent } from './text-section/histogram/histogram.component
 import { TextareaComponent } from './text-section/textarea/textarea.component';
 import { RelatedTopicsCardComponent } from './text-section/related-topics-card/related-topics-card.component';
 import { RelatedDocumentsCardComponent } from './text-section/related-documents-card/related-documents-card.component';
+import { TextSummaryCardComponent } from './text-section/text-summary-card/text-summary-card.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { RelatedDocumentsCardComponent } from './text-section/related-documents-
     HistogramComponent,
     TextareaComponent,
     RelatedTopicsCardComponent,
-    RelatedDocumentsCardComponent
+    RelatedDocumentsCardComponent,
+    TextSummaryCardComponent
   ],
   imports: [
     BrowserModule,
