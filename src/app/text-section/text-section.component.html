@@ -76,8 +76,6 @@
             </mat-form-field>
           </div>
 
-          <!-- TODO: Disable the button while the text summary is loading.
-                This way, the user can't ask for another summary while other is being generated. -->
           <!-- Only get the text summary if the numSummarySentences value is valid and the text is not empty -->
           <button (click)="numSummarySentencesFormControl.valid
                            && getTextSummary(textarea.value, +inputNumSummarySentences.value)"

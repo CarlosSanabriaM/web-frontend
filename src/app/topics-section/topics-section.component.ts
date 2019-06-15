@@ -16,6 +16,7 @@ export class TopicsSectionComponent implements OnInit {
   sectionName = 'Topics';
   topics: Topic[];
   topicImageUrls: TopicImageUrl[];
+  wordcloudImagesLoading = false; // if true, the wordcloud images have been asked and are loading
   topicDocuments: ReprDocOfTopic[];
   topicDocumentsLoading = false; // if true, the topic document have been asked and are loading
   topicDocumentsSubscription: Subscription; // disposable resource to cancel the execution of the topic documents Observable
@@ -34,7 +35,9 @@ export class TopicsSectionComponent implements OnInit {
   numTopicDocuments = 2; // initial value for the num topic documents slider
   readonly numTopicDocumentsMaxValue = 10; // max value for the num topic documents slider
 
-  readonly topicDocumentSummaryMaxLength = 150; // max number of characters of a document summary displayed in the card header
+  /** max number of characters of a document summary displayed in the card header */
+  readonly topicDocumentSummaryMaxLength = 150;
+
 
   constructor(private topicsService: TopicsService,
               private utilsService: UtilsService) { }
@@ -58,8 +61,15 @@ export class TopicsSectionComponent implements OnInit {
    * stores the result in a variable.
    */
   getTopicsWordcloudImagesUrls(): void {
+    // Remove previous data and mark as loading
+    this.topicImageUrls = null;
+    this.wordcloudImagesLoading = true;
+
     this.topicsService.getTopicsWordcloudImagesUrls(this.numKeywordsWordcloudFormat)
-      .subscribe(topicImageUrls => this.topicImageUrls = topicImageUrls);
+      .subscribe(topicImageUrls => {
+        this.topicImageUrls = topicImageUrls;
+        this.wordcloudImagesLoading = false;
+      });
   }
 
   /**

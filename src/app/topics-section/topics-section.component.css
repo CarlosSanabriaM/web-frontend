@@ -26,3 +26,8 @@ table td, table th {
 .tab-label-text {
   margin-bottom: 0;
 }
+
+#wordcloud-images-progress-spinner {
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
