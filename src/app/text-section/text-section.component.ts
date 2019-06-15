@@ -233,6 +233,15 @@ export class TextSectionComponent implements OnInit {
   }
 
   /**
+   * Returns the message error for the textarea that corresponds to the error in it's current value.
+   */
+  getTextareaErrorMessage() {
+    return this.textAreaFormControl.hasError('fileType') ? 'El fichero debe ser de tipo texto' :
+      this.textAreaFormControl.hasError('required') ? 'Debes introducir un texto' :
+        '';
+  }
+
+  /**
    * Reads the content of the file and stores it in the textarea, using the HTML5 File API.
    */
   private readFile(file: File) {
@@ -246,7 +255,8 @@ export class TextSectionComponent implements OnInit {
 
     // Clean the textarea content
     textarea.value = '';
-    // TODO: Remove error message of previous file dropped
+    // Remove error message of previous file dropped
+    this.textAreaFormControl.setErrors(null);
 
     // Only admits text files
     if (file.type.match('text/plain')) {
@@ -260,7 +270,11 @@ export class TextSectionComponent implements OnInit {
       };
       fileReader.readAsText(file);
     } else {
-      // TODO: Show the user a message error in the mat-error element of the text area
+      // Mark the textarea as touched to allow the FormControl Validators show an error
+      this.textAreaFormControl.markAsTouched();
+      // Manually set an error about the file type in the textarea
+      this.textAreaFormControl.setErrors({ fileType: true });
+
       console.log('File type not valid! Only text files are admitted.');
     }
   }

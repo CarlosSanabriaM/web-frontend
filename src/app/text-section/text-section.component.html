@@ -6,9 +6,8 @@
     <form>
       <mat-form-field appearance="outline" id="text-textarea-form-field">
         <textarea #textarea (dragover)="allowDrop($event)" (drop)="drop($event)" [formControl]="textAreaFormControl"
-                  id="textarea"
-                  matInput placeholder="Introduce un texto" rows="{{textAreaNumRows}}"></textarea>
-        <mat-error *ngIf="textAreaFormControl.invalid">Debes introducir un texto</mat-error>
+                  id="textarea" matInput placeholder="Introduce un texto" rows="{{textAreaNumRows}}"></textarea>
+        <mat-error *ngIf="textAreaFormControl.invalid">{{getTextareaErrorMessage()}}</mat-error>
       </mat-form-field>
     </form>
   </div>
