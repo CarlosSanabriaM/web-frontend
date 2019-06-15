@@ -13,8 +13,8 @@ import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { ScrollDirective } from './scroll.directive';
 import { ChartistModule } from 'ng-chartist';
-import { HistogramComponent } from './histogram/histogram.component';
-import { TextareaComponent } from './textarea/textarea.component';
+import { HistogramComponent } from './text-section/histogram/histogram.component';
+import { TextareaComponent } from './text-section/textarea/textarea.component';
 
 @NgModule({
   declarations: [

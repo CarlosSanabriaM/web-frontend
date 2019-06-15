@@ -6,7 +6,7 @@ import { TextSummary } from '../dtos/text-summary';
 import { FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { IChartistData } from 'chartist';
-import { TextareaComponent } from '../textarea/textarea.component';
+import { TextareaComponent } from './textarea/textarea.component';
 
 @Component({
   selector: 'app-text-section',
