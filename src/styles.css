@@ -95,6 +95,9 @@ pre {
   white-space: -moz-pre-wrap;
   white-space: -o-pre-wrap;
   word-wrap: break-word;
+
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 100%;
 }
 
 /* Add a margin at the top of Bootstrap cards to avoid collisions with other components */
