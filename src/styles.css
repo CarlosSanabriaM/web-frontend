@@ -127,3 +127,16 @@ mat-spinner {
   /* Width of bars */
   stroke-width: 5%;
 }
+
+/* Expansion panel header has a different color when it's expanded */
+mat-expansion-panel-header.mat-expanded, mat-expansion-panel-header.mat-expanded:focus {
+  background-color: rgba(0, 0, 0, .05) !important;
+}
+
+mat-expansion-panel-header.mat-expanded:hover {
+  background-color: white !important;
+}
+
+.mat-expansion-panel-body {
+  margin-top: 10px;
+}
