@@ -1,48 +1,18 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { TextService } from '../text.service';
-import { TextTopicProb } from '../dtos/text-topic-prob';
-import { TextRelatedDoc } from '../dtos/text-related-doc';
-import { TextSummary } from '../dtos/text-summary';
+/*
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { IChartistData } from 'chartist';
-import { TextareaComponent } from './textarea/textarea.component';
+import { TextService } from '../../text.service';
+import { TextareaComponent } from '../textarea/textarea.component';
 
 @Component({
-  selector: 'app-text-section',
-  templateUrl: './text-section.component.html',
-  styleUrls: [ './text-section.component.css' ]
+  selector: 'app-text-options',
+  templateUrl: './text-options.component.html',
+  styleUrls: ['./text-options.component.css']
 })
-export class TextSectionComponent implements OnInit {
+export class TextOptionsComponent implements OnInit {
 
-  sectionName = 'Texto';
+  @Input() textareaComponent: TextareaComponent;
 
-  // Inject the child textarea component into the parent
-  @ViewChild(TextareaComponent)
-  textareaComponent: TextareaComponent;
-
-  // TODO: Uncomment when TextOptionsComponent is created
-  // Inject the child text-options component into the parent
-  // @ViewChild(TextOptionsComponent)
-  // textOptionsComponent: TextOptionsComponent;
-
-  relatedTopics: TextTopicProb[];
-  relatedTopicsLoading = false; // if true, the related topics have been asked and are loading
-  relatedTopicsSubscription: Subscription; // disposable resource to cancel the execution of the related topics Observable
-  relatedTopicsHistogramData: IChartistData; // data to be displayed in the histogram
-
-  relatedDocuments: TextRelatedDoc[];
-  relatedDocumentsLoading = false; // if true, the related documents have been asked and are loading
-  relatedDocumentsSubscription: Subscription; // disposable resource to cancel the execution of the related documents Observable
-
-  textSummary: TextSummary;
-  textSummaryLoading = false; // if true, the text summary has been asked and is loading
-  textSummarySubscription: Subscription; // disposable resource to cancel the execution of the text summary Observable
-
-  numSummarySentencesFormControl: FormControl;
-
-  summaryAlertClosed = true; // If true, the alert showed when the summary isn't generated with the model is closed
-  summaryAlertNumSentences: number; // Number of sentences specified by the user to generate the returned summary
   // TODO: This values shouldn't be hardcoded here
   readonly maxNumTopicsMinValue = 1; // min value for the max num topics slider
   maxNumTopics = 6; // initial value for the max num topics slider
@@ -52,18 +22,15 @@ export class TextSectionComponent implements OnInit {
   numDocuments = 2; // initial value for the num documents slider
   readonly numDocumentsMaxValue = 10; // max value for the num documents slider
 
-  initialNumSummarySentences = 2; // initial value for the num summary sentences input
+  numSummarySentencesFormControl: FormControl;
 
-  /** Max number of characters of a document summary displayed in the card header */
-  private readonly RELATED_DOCUMENT_SUMMARY_MAX_LENGTH = 150;
+  // TODO: SNAKE_CASE
+  private readonly INITIAL_NUM_SUMMARY_SENTENCES = 2; // initial value for the num summary sentences input
 
-
-  // TODO: Uncomment when TextOptionsComponent is created
-  // constructor() { }
   constructor(private textService: TextService) { }
 
   ngOnInit() {
-    this.numSummarySentencesFormControl = new FormControl(this.initialNumSummarySentences, [
+    this.numSummarySentencesFormControl = new FormControl(this.INITIAL_NUM_SUMMARY_SENTENCES, [
       Validators.required,
       // Only integer values are admitted
       Validators.pattern(/^[+]?\d+$/),
@@ -71,12 +38,12 @@ export class TextSectionComponent implements OnInit {
     ]);
   }
 
-  /**
+  /!**
    * Calls the TopicsService to obtain the text-topic probabilities
    * and stores the result in a variable.
    * @param text: Text used to obtain the related topics.
    * @param maxNumTopics: Max number of topics to retrieve.
-   */
+   *!/
   getRelatedTopics(text: string, maxNumTopics: number) {
     if (text.length === 0) {
       // If the text of the textarea is empty, mark it as touched to allow
@@ -105,12 +72,12 @@ export class TextSectionComponent implements OnInit {
       });
   }
 
-  /**
+  /!**
    * Calls the TopicsService to obtain the documents more related
    * to the given text and stores the result in a variable.
    * @param text: Text used to obtain the related documents.
    * @param numDocuments: Number of documents to retrieve.
-   */
+   *!/
   getRelatedDocuments(text: string, numDocuments: number) {
     if (text.length === 0) {
       // If the text of the textarea is empty, mark it as touched to allow
@@ -131,12 +98,12 @@ export class TextSectionComponent implements OnInit {
       });
   }
 
-  /**
+  /!**
    * Calls the TopicsService to obtain a summary of the given text
    * and stores the result in a variable.
    * @param text: Text used to obtain it's summary.
    * @param numSentences: Number of sentences of the summary.
-   */
+   *!/
   getTextSummary(text: string, numSentences: number) {
     if (text.length === 0) {
       // If the text of the textarea is empty, mark it as touched to allow
@@ -161,10 +128,10 @@ export class TextSectionComponent implements OnInit {
       });
   }
 
-  /**
+  /!**
    * Returns the message error for the num summary sentences input
    * that corresponds to the error in it's current value.
-   */
+   *!/
   getNumSummarySentencesErrorMessage() {
     return this.numSummarySentencesFormControl.hasError('required') ? 'Valor requerido' :
       this.numSummarySentencesFormControl.hasError('pattern') ? 'Debe ser un entero' :
@@ -172,50 +139,5 @@ export class TextSectionComponent implements OnInit {
           '';
   }
 
-  /**
-   * Closes the related topics card.
-   * If the related topics where loading, unsubscribes from the Observable.
-   */
-  closeRelatedTopicsCard() {
-    if (this.relatedTopicsLoading) {
-      // If related topics are loading, cancel the subscription and mark as not loading
-      this.relatedTopicsSubscription.unsubscribe();
-      this.relatedTopicsLoading = false;
-    } else {
-      // If related topics have been loaded, remove them
-      this.relatedTopics = null;
-      this.relatedTopicsHistogramData = null;
-    }
-  }
-
-  /**
-   * Closes the related documents card.
-   * If the related documents where loading, unsubscribes from the Observable.
-   */
-  closeRelatedDocumentsCard() {
-    if (this.relatedDocumentsLoading) {
-      // If related documents are loading, cancel the subscription and mark as not loading
-      this.relatedDocumentsSubscription.unsubscribe();
-      this.relatedDocumentsLoading = false;
-    } else {
-      // If related documents have been loaded, remove them
-      this.relatedDocuments = null;
-    }
-  }
-
-  /**
-   * Closes the text summary card.
-   * If text summary is loading, unsubscribes from the Observable.
-   */
-  closeTextSummaryCard() {
-    if (this.textSummaryLoading) {
-      // If text summary is loading, cancel the subscription and mark as not loading
-      this.textSummarySubscription.unsubscribe();
-      this.textSummaryLoading = false;
-    } else {
-      // If related documents have been loaded, remove them
-      this.textSummary = null;
-    }
-  }
-
 }
+*/

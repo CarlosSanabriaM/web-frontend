@@ -3,10 +3,12 @@
 <div class="row">
   <!-- Textarea at the left in medium screen size or above, and up in small and extra small screen size  -->
   <div class="col-md">
-    <app-textarea></app-textarea>
+    <app-textarea #textareaComponent></app-textarea>
   </div>
   <!-- Options at the right in medium screen size or above, and down in small and extra small screen size  -->
   <div class="col-md" id="text-options">
+    <!-- TODO: Uncomment when TextOptionsComponent is created:
+          <app-text-options [textareaComponent]="textareaComponent"></app-text-options> -->
     <mat-accordion>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -156,13 +158,13 @@
         <mat-expansion-panel *ngFor="let relatedDoc of relatedDocuments">
           <mat-expansion-panel-header>
             <mat-panel-title>
-              {{relatedDoc.doc_content_summary | slice:0:relatedDocumentSummaryMaxLength}}
-              {{relatedDoc.doc_content_summary.length > relatedDocumentSummaryMaxLength ? '...' : ''}}
+              {{relatedDoc.doc_content_summary | slice:0:RELATED_DOCUMENT_SUMMARY_MAX_LENGTH}}
+              {{relatedDoc.doc_content_summary.length > RELATED_DOCUMENT_SUMMARY_MAX_LENGTH ? '...' : ''}}
             </mat-panel-title>
             <mat-panel-description>
-              Topic: {{relatedDoc.doc_topic}}
-              &nbsp;&nbsp;&nbsp;
-              Probabilidad: {{relatedDoc.doc_text_prob | percent:'1.2'}}
+              <span>Topic: {{relatedDoc.doc_topic}}</span>
+              &nbsp;&nbsp;
+              <span>Probabilidad: {{relatedDoc.doc_text_prob | percent:'1.2'}}</span>
             </mat-panel-description>
           </mat-expansion-panel-header>
           <pre>
