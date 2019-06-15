@@ -15,6 +15,7 @@ import { ScrollDirective } from './scroll.directive';
 import { ChartistModule } from 'ng-chartist';
 import { HistogramComponent } from './text-section/histogram/histogram.component';
 import { TextareaComponent } from './text-section/textarea/textarea.component';
+import { RelatedTopicsCardComponent } from './text-section/related-topics-card/related-topics-card.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { TextareaComponent } from './text-section/textarea/textarea.component';
     HeaderComponent,
     ScrollDirective,
     HistogramComponent,
-    TextareaComponent
+    TextareaComponent,
+    RelatedTopicsCardComponent
   ],
   imports: [
     BrowserModule,

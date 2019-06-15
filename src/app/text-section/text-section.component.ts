@@ -1,12 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TextService } from '../text.service';
-import { TextTopicProb } from '../dtos/text-topic-prob';
 import { TextRelatedDoc } from '../dtos/text-related-doc';
 import { TextSummary } from '../dtos/text-summary';
 import { FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { IChartistData } from 'chartist';
 import { TextareaComponent } from './textarea/textarea.component';
+import { RelatedTopicsCardComponent } from './related-topics-card/related-topics-card.component';
 
 @Component({
   selector: 'app-text-section',
@@ -21,15 +20,14 @@ export class TextSectionComponent implements OnInit {
   @ViewChild(TextareaComponent)
   textareaComponent: TextareaComponent;
 
+  // Inject the child related-topics-card component into the parent
+  @ViewChild(RelatedTopicsCardComponent)
+  relatedTopicsCardComponent: RelatedTopicsCardComponent;
+
   // TODO: Uncomment when TextOptionsComponent is created
   // Inject the child text-options component into the parent
   // @ViewChild(TextOptionsComponent)
   // textOptionsComponent: TextOptionsComponent;
-
-  relatedTopics: TextTopicProb[];
-  relatedTopicsLoading = false; // if true, the related topics have been asked and are loading
-  relatedTopicsSubscription: Subscription; // disposable resource to cancel the execution of the related topics Observable
-  relatedTopicsHistogramData: IChartistData; // data to be displayed in the histogram
 
   relatedDocuments: TextRelatedDoc[];
   relatedDocumentsLoading = false; // if true, the related documents have been asked and are loading
@@ -87,21 +85,22 @@ export class TextSectionComponent implements OnInit {
     }
 
     // Remove previous data and mark as loading
-    this.relatedTopics = null;
-    this.relatedTopicsHistogramData = null;
-    this.relatedTopicsLoading = true;
+    this.relatedTopicsCardComponent.relatedTopics = null;
+    this.relatedTopicsCardComponent.relatedTopicsHistogramData = null;
+    this.relatedTopicsCardComponent.relatedTopicsLoading = true;
 
-    this.relatedTopicsSubscription = this.textService.getRelatedTopics(text, maxNumTopics)
+    // Get related topics subscribing to an Observable, and store the subscription to have the possibility to cancel it
+    this.relatedTopicsCardComponent.relatedTopicsSubscription = this.textService.getRelatedTopics(text, maxNumTopics)
       .subscribe(relatedTopics => {
-        this.relatedTopics = relatedTopics;
+        this.relatedTopicsCardComponent.relatedTopics = relatedTopics;
 
         // Sort the related topics by the topic id and create a histogram data object
         const sortedRelatedTopics = relatedTopics.slice().sort((a, b) => a.topic - b.topic);
-        this.relatedTopicsHistogramData = {
+        this.relatedTopicsCardComponent.relatedTopicsHistogramData = {
           labels: sortedRelatedTopics.map(topic => topic.topic.toString()),
           series: [ sortedRelatedTopics.map(topic => topic.text_topic_prob * 100) ]
         };
-        this.relatedTopicsLoading = false;
+        this.relatedTopicsCardComponent.relatedTopicsLoading = false;
       });
   }
 
@@ -146,7 +145,6 @@ export class TextSectionComponent implements OnInit {
       return;
     }
 
-
     // Remove previous data and mark as loading
     this.textSummary = null;
     this.textSummaryLoading = true;
@@ -170,22 +168,6 @@ export class TextSectionComponent implements OnInit {
       this.numSummarySentencesFormControl.hasError('pattern') ? 'Debe ser un entero' :
         this.numSummarySentencesFormControl.hasError('min') ? 'Min 1' :
           '';
-  }
-
-  /**
-   * Closes the related topics card.
-   * If the related topics where loading, unsubscribes from the Observable.
-   */
-  closeRelatedTopicsCard() {
-    if (this.relatedTopicsLoading) {
-      // If related topics are loading, cancel the subscription and mark as not loading
-      this.relatedTopicsSubscription.unsubscribe();
-      this.relatedTopicsLoading = false;
-    } else {
-      // If related topics have been loaded, remove them
-      this.relatedTopics = null;
-      this.relatedTopicsHistogramData = null;
-    }
   }
 
   /**

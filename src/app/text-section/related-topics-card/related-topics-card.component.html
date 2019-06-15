@@ -1,0 +1,48 @@
+<!-- If the related topics are loading or have been loaded, show a card -->
+<div *ngIf="relatedTopicsLoading || relatedTopics" class="card">
+
+  <h3 class="card-header">
+    Probabilidad texto-topics
+    <!-- Button to close the card -->
+    <button (click)="closeCard()" aria-label="Close" class="close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </h3>
+
+  <div class="card-body">
+    <!-- If the related topics are loading, show a progress spinner and scroll the page to it -->
+    <div *ngIf="relatedTopicsLoading; else relatedTopicsLoaded" appScroll>
+      <mat-spinner color="primary"></mat-spinner>
+    </div>
+
+    <!-- If the related topics have been loaded, show them -->
+    <ng-template #relatedTopicsLoaded>
+      <div class="row justify-content-center">
+        <!--
+          * In medium, large and extra large screens, the table and the histogram are in the same row, with the table being smaller.
+          * In extra small and small screens, the table and the histogram are in different rows, with the table being smaller.
+        -->
+        <div class="col-md-4 col-8">
+          <table class="table table-striped table-hover table-sm">
+            <thead class="thead-light">
+            <tr>
+              <th scope="col">Núm. topic</th>
+              <th scope="col">Probabilidad</th>
+            </tr>
+            </thead>
+
+            <tr *ngFor="let textTopicProb of relatedTopics">
+              <th scope="row">{{textTopicProb.topic}}</th>
+              <td>{{textTopicProb.text_topic_prob | percent:'1.6'}}</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="col-md-8 col-12">
+          <app-histogram [data]="relatedTopicsHistogramData"></app-histogram>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+
+</div>
