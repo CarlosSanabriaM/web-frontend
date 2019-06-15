@@ -5,8 +5,9 @@
   <div class="col-md">
     <form>
       <mat-form-field appearance="outline" id="text-textarea-form-field">
-        <textarea #textArea [formControl]="textAreaFormControl" matInput placeholder="Introduce un texto"
-                  rows="{{textAreaNumRows}}"></textarea>
+        <textarea #textarea (dragover)="allowDrop($event)" (drop)="drop($event)" [formControl]="textAreaFormControl"
+                  id="textarea"
+                  matInput placeholder="Introduce un texto" rows="{{textAreaNumRows}}"></textarea>
         <mat-error *ngIf="textAreaFormControl.invalid">Debes introducir un texto</mat-error>
       </mat-form-field>
     </form>
@@ -29,7 +30,7 @@
 
           <!-- TODO: Add checkbox "Show visualization" and implement that behaviour -->
 
-          <button (click)="getRelatedTopics(textArea.value, sliderMaxNumTopics.value)" [disabled]="relatedTopicsLoading"
+          <button (click)="getRelatedTopics(textarea.value, sliderMaxNumTopics.value)" [disabled]="relatedTopicsLoading"
                   color="primary" mat-raised-button>
             Obtener
           </button>
@@ -48,7 +49,7 @@
           <span class="text-small text-secondary slider-max-value">{{numDocumentsMaxValue}}</span>
           <p class="slider-footer">Número de documentos devueltos</p>
 
-          <button (click)="getRelatedDocuments(textArea.value, sliderNumDocuments.value)"
+          <button (click)="getRelatedDocuments(textarea.value, sliderNumDocuments.value)"
                   [disabled]="relatedDocumentsLoading" color="primary"
                   mat-raised-button>
             Obtener
@@ -77,7 +78,7 @@
                 This way, the user can't ask for another summary while other is being generated. -->
           <!-- Only get the text summary if the numSummarySentences value is valid and the text is not empty -->
           <button (click)="numSummarySentencesFormControl.valid
-                           && getTextSummary(textArea.value, +inputNumSummarySentences.value)"
+                           && getTextSummary(textarea.value, +inputNumSummarySentences.value)"
                   [disabled]="textSummaryLoading"
                   color="primary" mat-raised-button>
             Obtener

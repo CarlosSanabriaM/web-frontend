@@ -1,5 +1,5 @@
 mat-slider {
-  /* TODO: Modify this to don't use absolute width */
+  /* TODO: Modify this to don't use absolute width when modal is used */
   width: 300px;
 }
 

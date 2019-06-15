@@ -209,4 +209,60 @@ export class TextSectionComponent implements OnInit {
     }
   }
 
+  /**
+   * Avoids the default drop handler of the element.
+   */
+  allowDrop($event: DragEvent) {
+    console.log('dragOver event on textarea');
+    // By default, an element doesn't allow to drop another element on it
+    // To allow this, we need to avoid the default handler of the element
+    $event.preventDefault();
+  }
+
+  /**
+   * Obtains the file from the drop event, reads it's content and stores it in the textarea.
+   */
+  drop($event: DragEvent) {
+    console.log('drop event on textarea');
+
+    $event.preventDefault();
+
+    // Obtain the text of the file
+    const dt = $event.dataTransfer;
+    this.readFile(dt.files[ 0 ]);
+  }
+
+  /**
+   * Reads the content of the file and stores it in the textarea, using the HTML5 File API.
+   */
+  private readFile(file: File) {
+    // If the user cancels the operation of dropping a file
+    if (file == null) {
+      return;
+    }
+
+    // Obtain a reference to the HTML textarea element
+    const textarea: HTMLTextAreaElement = document.getElementById('textarea') as HTMLTextAreaElement;
+
+    // Clean the textarea content
+    textarea.value = '';
+    // TODO: Remove error message of previous file dropped
+
+    // Only admits text files
+    if (file.type.match('text/plain')) {
+      // Read the file content
+      const fileReader = new FileReader();
+      // The FileReader "onload" event is called when the read operation over the file finishes
+      // The file content is stored in the "result" property of the FileReader
+      fileReader.onload = () => {
+        // Set the file content in the text area value
+        textarea.value = fileReader.result.toString();
+      };
+      fileReader.readAsText(file);
+    } else {
+      // TODO: Show the user a message error in the mat-error element of the text area
+      console.log('File type not valid! Only text files are admitted.');
+    }
+  }
+
 }
