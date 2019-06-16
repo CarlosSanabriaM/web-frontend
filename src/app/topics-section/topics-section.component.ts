@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TopicsService } from './topics.service';
-import { Topic } from '../dtos/topic';
 import { TopicImageUrl } from '../dtos/topic-image-url';
 import { TopicDocumentsCardComponent } from './topic-documents-card/topic-documents-card.component';
+import { TopicsTextComponent } from './topics-text/topics-text.component';
 
 @Component({
   selector: 'app-topics-section',
@@ -13,11 +13,11 @@ export class TopicsSectionComponent implements OnInit {
 
   /* Inject the child components */
   @ViewChild(TopicDocumentsCardComponent) topicDocumentsCardComponent: TopicDocumentsCardComponent;
+  @ViewChild(TopicsTextComponent) topicsTextComponent: TopicsTextComponent;
 
   /** Name of the topics section */
   sectionName = 'Topics';
-  /** Stores the topic documents returned by the REST API */
-  topics: Topic[];
+
   topicImageUrls: TopicImageUrl[];
   wordcloudImagesLoading = false; // if true, the wordcloud images have been asked and are loading
 
@@ -38,18 +38,7 @@ export class TopicsSectionComponent implements OnInit {
   constructor(private topicsService: TopicsService) { }
 
   ngOnInit() {
-    this.getTopicsText(); // TODO: Remove line when the TopicsTextComponent is created
     this.getTopicsWordcloudImagesUrls();
-  }
-
-  // TODO: Remove method when the TopicsTextComponent is created
-  /**
-   * Calls the TopicsService to obtain the topics in text format and
-   * stores the result in a variable.
-   */
-  getTopicsText(): void {
-    this.topicsService.getTopicsText(this.numKeywordsTextFormat)
-      .subscribe(topics => this.topics = topics);
   }
 
   /**
@@ -99,7 +88,7 @@ export class TopicsSectionComponent implements OnInit {
     this.numKeywordsWordcloudFormat = numKeywordsWordcloudFormat;
     this.numTopicDocuments = numTopicDocuments;
     // Call the API with the new values to obtain the topics in text and wordcloud formats
-    this.getTopicsText();
+    this.topicsTextComponent.getTopicsText(); // TODO: This doesn't work the first time, because the @Input isn't updated yet
     this.getTopicsWordcloudImagesUrls();
   }
 

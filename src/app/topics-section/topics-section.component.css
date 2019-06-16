@@ -15,17 +15,6 @@ mat-slider {
   text-align: center;
 }
 
-/* TODO: Remove down when the TopicsTextComponent is created */
-table {
-  text-align: center;
-}
-
-table td, table th {
-  vertical-align: middle;
-}
-
-/* TODO: Remove up when the TopicsTextComponent is created */
-
 .tab-label-text {
   margin-bottom: 0;
 }

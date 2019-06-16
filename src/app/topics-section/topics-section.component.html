@@ -4,48 +4,22 @@
   <mat-tab-group color="primary" dynamicHeight mat-stretch-tabs>
     <!-- Tab 1 -->
     <mat-tab>
+
       <!-- Mat tab header content -->
       <ng-template mat-tab-label>
         <!-- TODO: In small screen sizes, remove the text of the tab and show only the icon -->
         <h3 class="tab-label-text">Texto</h3>
         <mat-icon class="tab-icon">text_format</mat-icon>
       </ng-template>
-      <!-- Mat tab content -->
-      <!-- TODO: Uncomment when the TopicsTextComponent is created: <app-topics-text></app-topics-text> -->
-      <!-- m-2 sets margin on 4 sides to $spacer * .5 -->
-      <div class="m-2" id="topics-text-format">
-        <table class="table table-striped table-hover table-sm">
-          <thead class="thead-light">
-          <tr>
-            <th scope="col">Núm. topic</th>
-            <th scope="col">Keywords</th>
-            <th scope="col"></th>
-          </tr>
-          </thead>
 
-          <tr *ngFor="let topic of topics">
-            <th scope="row">{{topic.topic}}</th>
-            <td>
-              <span *ngFor="let keyword of topic.keywords">
-                <span class="font-weight-bold">{{keyword.name}}</span>: {{keyword.probability | percent:'1.2'}}
-              </span>
-            </td>
-            <td>
-              <!-- When the mouse hovers the document icon button, a tooltip explains how to use it -->
-              <!-- If the topic documents are loading, the button is disabled -->
-              <button #documentTooltip="matTooltip" (click)="getTopicDocuments(topic.topic)"
-                      (mouseenter)="documentTooltip.show()"
-                      (mouseleave)="documentTooltip.hide()"
-                      [disabled]="topicDocumentsCardComponent.topicDocumentsLoading" class="btn p-0"
-                      matTooltip="Click to show the most representative documents of topic {{topic.topic}}"
-                      matTooltipPosition="left">
-                <!-- Document icon -->
-                <mat-icon>description</mat-icon>
-              </button>
-            </td>
-          </tr>
-        </table>
-      </div>
+      <!-- Mat tab content -->
+      <!-- Topics in text format -->
+      <!-- TODO: Don't pass numKeywordsTextFormat when the topics-options component is created -->
+      <app-topics-text (topicdocuments)="getTopicDocuments($event)"
+                       [numKeywordsTextFormat]="numKeywordsTextFormat"
+                       [topicDocumentsCardComponent]="topicDocumentsCardComponent">
+      </app-topics-text>
+
     </mat-tab>
 
     <!-- Tab 2 -->
