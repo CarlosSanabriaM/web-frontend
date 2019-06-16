@@ -1,7 +1,42 @@
-mat-slider {
-  width: 300px;
-}
-
 #configuration-section {
   text-align: center;
+}
+
+/*
+  Slider width for different screen sizes
+  (based on Bootstrap media query ranges https://getbootstrap.com/docs/4.3/layout/overview/#responsive-breakpoints)
+*/
+
+/* Extra small devices (portrait phones, less than 576px) */
+/* No media query for `xs` since this is the default in Bootstrap */
+mat-slider {
+  width: 80%;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  mat-slider {
+    width: 50%;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  mat-slider {
+    width: 40%;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  mat-slider {
+    width: 35%;
+  }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  mat-slider {
+    width: 30%;
+  }
 }
