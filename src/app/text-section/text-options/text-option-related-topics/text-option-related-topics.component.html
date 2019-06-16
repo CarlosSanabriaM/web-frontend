@@ -1,0 +1,14 @@
+<div class="text-option">
+  <!-- Slider with min and max values at it sides -->
+  <span class="text-small text-secondary slider-min-value">{{maxNumTopicsMinValue}}</span>
+  <mat-slider #sliderMaxNumTopics [max]="maxNumTopicsMaxValue" [min]="maxNumTopicsMinValue"
+              [value]="maxNumTopics" color="primary" thumbLabel></mat-slider>
+  <span class="text-small text-secondary slider-max-value">{{maxNumTopicsMaxValue}}</span>
+  <p class="slider-footer">Número máx. de topics devueltos</p>
+
+  <button (click)="getRelatedTopics(textareaComponent.getValue(), sliderMaxNumTopics.value)"
+          [disabled]="relatedTopicsCardComponent.relatedTopicsLoading"
+          color="primary" mat-raised-button>
+    Obtener
+  </button>
+</div>

@@ -4,22 +4,10 @@
       <mat-panel-title>Topics relacionados</mat-panel-title>
     </mat-expansion-panel-header>
     <!-- Related topics options -->
-    <div class="text-option" id="related-topics-options">
-      <!-- Slider with min and max values at it sides -->
-      <span class="text-small text-secondary slider-min-value">{{maxNumTopicsMinValue}}</span>
-      <mat-slider #sliderMaxNumTopics [max]="maxNumTopicsMaxValue" [min]="maxNumTopicsMinValue"
-                  [value]="maxNumTopics" color="primary" thumbLabel></mat-slider>
-      <span class="text-small text-secondary slider-max-value">{{maxNumTopicsMaxValue}}</span>
-      <p class="slider-footer">Número máx. de topics devueltos</p>
-
-      <!-- TODO: Add checkbox "Show visualization" and implement that behaviour -->
-
-      <button (click)="getRelatedTopics(textareaComponent.getValue(), sliderMaxNumTopics.value)"
-              [disabled]="relatedTopicsCardComponent.relatedTopicsLoading"
-              color="primary" mat-raised-button>
-        Obtener
-      </button>
-    </div>
+    <!-- Forward the sibling components of TextOptionsComponent to this child component using @Input() -->
+    <app-text-option-related-topics [relatedTopicsCardComponent]="relatedTopicsCardComponent"
+                                    [textareaComponent]="textareaComponent">
+    </app-text-option-related-topics>
   </mat-expansion-panel>
   <mat-expansion-panel>
     <mat-expansion-panel-header>
