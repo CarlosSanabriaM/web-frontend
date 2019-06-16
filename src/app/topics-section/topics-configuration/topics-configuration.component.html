@@ -1,0 +1,58 @@
+<!-- m-2 sets margin on 4 sides to $spacer * .5 -->
+<div class="m-2" id="configuration-section">
+
+  <!-- Wrap the configurations in a bootstrap card -->
+  <div class="card">
+    <ul class="list-group list-group-flush">
+
+      <li class="list-group-item" id="configuration-section-text">
+        <h4>Formato Texto</h4>
+
+        <!-- Slider with min and max values at it sides -->
+        <span class="text-small text-secondary slider-min-value">{{NUM_KEYWORDS_TEXT_FORMAT_MIN_VALUE}}</span>
+        <mat-slider #sliderNumKeywordsTextFormat [max]="NUM_KEYWORDS_TEXT_FORMAT_MAX_VALUE"
+                    [min]="NUM_KEYWORDS_TEXT_FORMAT_MIN_VALUE" [value]="numKeywordsTextFormat"
+                    color="primary" thumbLabel>
+        </mat-slider>
+        <span class="text-small text-secondary slider-max-value">{{NUM_KEYWORDS_TEXT_FORMAT_MAX_VALUE}}</span>
+        <p class="slider-footer">Número de keywords</p>
+      </li>
+
+      <li class="list-group-item" id="configuration-section-wordcloud">
+        <h4>Formato Nube de palabras</h4>
+
+        <!-- Slider with min and max values at it sides -->
+        <span class="text-small text-secondary slider-min-value">{{NUM_KEYWORDS_WORDCLOUD_FORMAT_MIN_VALUE}}</span>
+        <mat-slider #sliderNumKeywordsWordcloudFormat [max]="NUM_KEYWORDS_WORDCLOUD_FORMAT_MAX_VALUE"
+                    [min]="NUM_KEYWORDS_WORDCLOUD_FORMAT_MIN_VALUE"
+                    [value]="numKeywordsWordcloudFormat" color="primary"
+                    thumbLabel></mat-slider>
+        <span class="text-small text-secondary slider-max-value">{{NUM_KEYWORDS_WORDCLOUD_FORMAT_MAX_VALUE}}</span>
+        <p class="slider-footer">Número de keywords</p>
+      </li>
+
+      <li class="list-group-item" id="configuration-section-topic-documents">
+        <h4>Documentos más representativos</h4>
+
+        <!-- Slider with min and max values at it sides -->
+        <span class="text-small text-secondary slider-min-value">{{NUM_TOPIC_DOCUMENTS_MIN_VALUE}}</span>
+        <mat-slider #sliderNumTopicDocuments [max]="NUM_TOPIC_DOCUMENTS_MAX_VALUE" [min]="NUM_TOPIC_DOCUMENTS_MIN_VALUE"
+                    [value]="numTopicDocuments" color="primary" thumbLabel></mat-slider>
+        <span class="text-small text-secondary slider-max-value">{{NUM_TOPIC_DOCUMENTS_MAX_VALUE}}</span>
+        <p class="slider-footer">Número de documentos</p>
+      </li>
+
+      <li class="list-group-item">
+        <!-- Button to confirm all changes -->
+        <button (click)="updateVariablesAndRefreshTopics(sliderNumKeywordsTextFormat.value,
+                                                         sliderNumKeywordsWordcloudFormat.value,
+                                                         sliderNumTopicDocuments.value)" color="primary"
+                mat-raised-button>
+          Actualizar
+        </button>
+      </li>
+
+    </ul>
+  </div>
+
+</div>

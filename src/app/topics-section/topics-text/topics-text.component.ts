@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Topic } from '../../dtos/topic';
 import { TopicsService } from '../topics.service';
 import { TopicDocumentsCardComponent } from '../topic-documents-card/topic-documents-card.component';
+import { TopicsConfigurationComponent } from '../topics-configuration/topics-configuration.component';
 
 @Component({
   selector: 'app-topics-text',
@@ -10,11 +11,9 @@ import { TopicDocumentsCardComponent } from '../topic-documents-card/topic-docum
 })
 export class TopicsTextComponent implements OnInit {
 
-  /** Num keywords to retrieve in text format, injected by the parent */
-  @Input() numKeywordsTextFormat: number; // TODO: Remove when the topics-options component is created
-
   /* Inject the sibling components */
   @Input() topicDocumentsCardComponent: TopicDocumentsCardComponent;
+  @Input() topicsConfigurationComponent: TopicsConfigurationComponent;
 
   /**
    * Output event that notifies the parent component when the user asked for topic documents,
@@ -36,7 +35,7 @@ export class TopicsTextComponent implements OnInit {
    * stores the result in a variable.
    */
   getTopicsText(): void {
-    this.topicsService.getTopicsText(this.numKeywordsTextFormat)
+    this.topicsService.getTopicsText(this.topicsConfigurationComponent.numKeywordsTextFormat)
       .subscribe(topics => this.topics = topics);
   }
 

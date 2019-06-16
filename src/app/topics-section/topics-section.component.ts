@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { TopicsService } from './topics.service';
 import { TopicImageUrl } from '../dtos/topic-image-url';
 import { TopicDocumentsCardComponent } from './topic-documents-card/topic-documents-card.component';
-import { TopicsTextComponent } from './topics-text/topics-text.component';
+import { TopicsConfigurationComponent } from './topics-configuration/topics-configuration.component';
 
 @Component({
   selector: 'app-topics-section',
@@ -13,26 +13,13 @@ export class TopicsSectionComponent implements OnInit {
 
   /* Inject the child components */
   @ViewChild(TopicDocumentsCardComponent) topicDocumentsCardComponent: TopicDocumentsCardComponent;
-  @ViewChild(TopicsTextComponent) topicsTextComponent: TopicsTextComponent;
+  @ViewChild(TopicsConfigurationComponent) topicsConfigurationComponent: TopicsConfigurationComponent;
 
   /** Name of the topics section */
   sectionName = 'Topics';
 
   topicImageUrls: TopicImageUrl[];
   wordcloudImagesLoading = false; // if true, the wordcloud images have been asked and are loading
-
-  // TODO: This values shouldn't be hardcoded here
-  readonly numKeywordsTextFormatMinValue = 1; // min value for the num keywords text format slider
-  numKeywordsTextFormat = 5; // initial value for the num keywords text format slider
-  readonly numKeywordsTextFormatMaxValue = 30; // max value for the num keywords text format slider
-
-  readonly numKeywordsWordcloudFormatMinValue = 1; // min value for the num keywords wordcloud format slider
-  numKeywordsWordcloudFormat = 20; // initial value for the num keywords wordcloud format slider
-  readonly numKeywordsWordcloudFormatMaxValue = 100; // max value for the num keywords wordcloud format slider
-
-  readonly numTopicDocumentsMinValue = 1; // min value for the num topic documents slider
-  numTopicDocuments = 2; // initial value for the num topic documents slider
-  readonly numTopicDocumentsMaxValue = 10; // max value for the num topic documents slider
 
 
   constructor(private topicsService: TopicsService) { }
@@ -50,7 +37,7 @@ export class TopicsSectionComponent implements OnInit {
     this.topicImageUrls = null;
     this.wordcloudImagesLoading = true;
 
-    this.topicsService.getTopicsWordcloudImagesUrls(this.numKeywordsWordcloudFormat)
+    this.topicsService.getTopicsWordcloudImagesUrls(this.topicsConfigurationComponent.numKeywordsWordcloudFormat)
       .subscribe(topicImageUrls => {
         this.topicImageUrls = topicImageUrls;
         this.wordcloudImagesLoading = false;
@@ -68,28 +55,12 @@ export class TopicsSectionComponent implements OnInit {
     this.topicDocumentsCardComponent.topicDocumentsLoading = true;
     this.topicDocumentsCardComponent.selectedTopicId = topicId;
 
-    this.topicDocumentsCardComponent.topicDocumentsSubscription = this.topicsService.getTopicDocuments(topicId, this.numTopicDocuments)
-      .subscribe(topicDocuments => {
-        this.topicDocumentsCardComponent.topicDocuments = topicDocuments;
-        this.topicDocumentsCardComponent.topicDocumentsLoading = false;
-      });
-  }
-
-  /**
-   * Updates the values of the variables passed to the rest API,
-   * and calls the API to obtain the topics in text and wordcloud formats
-   * with the new values of the parameters.
-   */
-  updateVariablesAndRefreshTopics(numKeywordsTextFormat: number,
-                                  numKeywordsWordcloudFormat: number,
-                                  numTopicDocuments: number) {
-    // Update variables values
-    this.numKeywordsTextFormat = numKeywordsTextFormat;
-    this.numKeywordsWordcloudFormat = numKeywordsWordcloudFormat;
-    this.numTopicDocuments = numTopicDocuments;
-    // Call the API with the new values to obtain the topics in text and wordcloud formats
-    this.topicsTextComponent.getTopicsText(); // TODO: This doesn't work the first time, because the @Input isn't updated yet
-    this.getTopicsWordcloudImagesUrls();
+    this.topicDocumentsCardComponent.topicDocumentsSubscription =
+      this.topicsService.getTopicDocuments(topicId, this.topicsConfigurationComponent.numTopicDocuments)
+        .subscribe(topicDocuments => {
+          this.topicDocumentsCardComponent.topicDocuments = topicDocuments;
+          this.topicDocumentsCardComponent.topicDocumentsLoading = false;
+        });
   }
 
 }

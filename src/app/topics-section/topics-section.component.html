@@ -2,6 +2,7 @@
 
 <div class="card">
   <mat-tab-group color="primary" dynamicHeight mat-stretch-tabs>
+
     <!-- Tab 1 -->
     <mat-tab>
 
@@ -14,10 +15,10 @@
 
       <!-- Mat tab content -->
       <!-- Topics in text format -->
-      <!-- TODO: Don't pass numKeywordsTextFormat when the topics-options component is created -->
-      <app-topics-text (topicdocuments)="getTopicDocuments($event)"
-                       [numKeywordsTextFormat]="numKeywordsTextFormat"
-                       [topicDocumentsCardComponent]="topicDocumentsCardComponent">
+      <app-topics-text #topicsTextComponent
+                       (topicdocuments)="getTopicDocuments($event)"
+                       [topicDocumentsCardComponent]="topicDocumentsCardComponent"
+                       [topicsConfigurationComponent]="topicsConfigurationComponent">
       </app-topics-text>
 
     </mat-tab>
@@ -70,10 +71,6 @@
 
     </mat-tab>
 
-    <!--
-      TODO: Implement this with modals: https://ng-bootstrap.github.io/#/components/modal/examples
-       or https://ng.ant.design/components/modal/en
-    -->
     <!-- Tab 3 -->
     <mat-tab>
       <!-- TODO: Try to decrease this tab header width -->
@@ -82,61 +79,13 @@
         <h3 class="tab-label-text">Configuración</h3>
         <mat-icon class="tab-icon">settings</mat-icon>
       </ng-template>
+
       <!-- Mat tab content -->
-      <!-- m-2 sets margin on 4 sides to $spacer * .5 -->
-      <div class="m-2" id="configuration-section">
+      <!-- Topics configuration -->
+      <app-topics-configuration [topicsTextComponent]="topicsTextComponent"></app-topics-configuration>
 
-        <!-- Wrap the configurations in a bootstrap card -->
-        <div class="card">
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item" id="configuration-section-text">
-              <h4>Formato Texto</h4>
-
-              <!-- Slider with min and max values at it sides -->
-              <span class="text-small text-secondary slider-min-value">{{numKeywordsTextFormatMinValue}}</span>
-              <mat-slider #sliderNumKeywordsTextFormat [max]="numKeywordsTextFormatMaxValue"
-                          [min]="numKeywordsTextFormatMinValue"
-                          [value]="numKeywordsTextFormat" color="primary"
-                          thumbLabel></mat-slider>
-              <span class="text-small text-secondary slider-max-value">{{numKeywordsTextFormatMaxValue}}</span>
-              <p class="slider-footer">Número de keywords</p>
-            </li>
-            <li class="list-group-item" id="configuration-section-wordcloud">
-              <h4>Formato Nube de palabras</h4>
-
-              <!-- Slider with min and max values at it sides -->
-              <span class="text-small text-secondary slider-min-value">{{numKeywordsWordcloudFormatMinValue}}</span>
-              <mat-slider #sliderNumKeywordsWordcloudFormat [max]="numKeywordsWordcloudFormatMaxValue"
-                          [min]="numKeywordsWordcloudFormatMinValue"
-                          [value]="numKeywordsWordcloudFormat" color="primary"
-                          thumbLabel></mat-slider>
-              <span class="text-small text-secondary slider-max-value">{{numKeywordsWordcloudFormatMaxValue}}</span>
-              <p class="slider-footer">Número de keywords</p>
-            </li>
-            <li class="list-group-item" id="configuration-section-topic-documents">
-              <h4>Documentos más representativos</h4>
-
-              <!-- Slider with min and max values at it sides -->
-              <span class="text-small text-secondary slider-min-value">{{numTopicDocumentsMinValue}}</span>
-              <mat-slider #sliderNumTopicDocuments [max]="numTopicDocumentsMaxValue" [min]="numTopicDocumentsMinValue"
-                          [value]="numTopicDocuments" color="primary" thumbLabel></mat-slider>
-              <span class="text-small text-secondary slider-max-value">{{numTopicDocumentsMaxValue}}</span>
-              <p class="slider-footer">Número de documentos</p>
-            </li>
-            <li class="list-group-item">
-              <!-- Button to confirm all changes -->
-              <button (click)="updateVariablesAndRefreshTopics(sliderNumKeywordsTextFormat.value,
-                                                       sliderNumKeywordsWordcloudFormat.value,
-                                                       sliderNumTopicDocuments.value)" color="primary"
-                      mat-raised-button>
-                Actualizar
-              </button>
-            </li>
-          </ul>
-        </div>
-
-      </div>
     </mat-tab>
+
   </mat-tab-group>
 </div>
 

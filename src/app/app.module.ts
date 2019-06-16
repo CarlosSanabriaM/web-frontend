@@ -24,6 +24,7 @@ import { TextOptionRelatedDocumentsComponent } from './text-section/text-options
 import { TextOptionTextSummaryComponent } from './text-section/text-options/text-option-text-summary/text-option-text-summary.component';
 import { TopicDocumentsCardComponent } from './topics-section/topic-documents-card/topic-documents-card.component';
 import { TopicsTextComponent } from './topics-section/topics-text/topics-text.component';
+import { TopicsConfigurationComponent } from './topics-section/topics-configuration/topics-configuration.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { TopicsTextComponent } from './topics-section/topics-text/topics-text.co
     TextOptionRelatedDocumentsComponent,
     TextOptionTextSummaryComponent,
     TopicDocumentsCardComponent,
-    TopicsTextComponent
+    TopicsTextComponent,
+    TopicsConfigurationComponent
   ],
   imports: [
     BrowserModule,

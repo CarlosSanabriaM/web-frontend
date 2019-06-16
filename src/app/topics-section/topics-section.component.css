@@ -1,18 +1,9 @@
-mat-slider {
-  /* TODO: Modify this to don't use absolute width when modal is used */
-  width: 300px;
-}
-
 .topic-wordcloud-image {
   width: 100%;
 }
 
 .topic-wordcloud-image-footer-button {
   width: 100%;
-}
-
-#configuration-section {
-  text-align: center;
 }
 
 .tab-label-text {
