@@ -18,6 +18,7 @@ import { TextareaComponent } from './text-section/textarea/textarea.component';
 import { RelatedTopicsCardComponent } from './text-section/related-topics-card/related-topics-card.component';
 import { RelatedDocumentsCardComponent } from './text-section/related-documents-card/related-documents-card.component';
 import { TextSummaryCardComponent } from './text-section/text-summary-card/text-summary-card.component';
+import { TextOptionsComponent } from './text-section/text-options/text-options.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { TextSummaryCardComponent } from './text-section/text-summary-card/text-
     TextareaComponent,
     RelatedTopicsCardComponent,
     RelatedDocumentsCardComponent,
-    TextSummaryCardComponent
+    TextSummaryCardComponent,
+    TextOptionsComponent
   ],
   imports: [
     BrowserModule,

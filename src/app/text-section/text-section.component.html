@@ -7,84 +7,16 @@
   </div>
   <!-- Options at the right in medium screen size or above, and down in small and extra small screen size  -->
   <div class="col-md" id="text-options">
-    <!-- TODO: Uncomment when TextOptionsComponent is created:
-          <app-text-options [textareaComponent]="textareaComponent"></app-text-options> -->
-    <mat-accordion>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>Topics relacionados</mat-panel-title>
-        </mat-expansion-panel-header>
-        <!-- Related topics options -->
-        <div class="text-option" id="related-topics-options">
-          <!-- Slider with min and max values at it sides -->
-          <span class="text-small text-secondary slider-min-value">{{maxNumTopicsMinValue}}</span>
-          <mat-slider #sliderMaxNumTopics [max]="maxNumTopicsMaxValue" [min]="maxNumTopicsMinValue"
-                      [value]="maxNumTopics" color="primary" thumbLabel></mat-slider>
-          <span class="text-small text-secondary slider-max-value">{{maxNumTopicsMaxValue}}</span>
-          <p class="slider-footer">Número máx. de topics devueltos</p>
-
-          <!-- TODO: Add checkbox "Show visualization" and implement that behaviour -->
-
-          <button (click)="getRelatedTopics(textareaComponent.getValue(), sliderMaxNumTopics.value)"
-                  [disabled]="relatedTopicsCardComponent.relatedTopicsLoading"
-                  color="primary" mat-raised-button>
-            Obtener
-          </button>
-        </div>
-      </mat-expansion-panel>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>Documentos similares</mat-panel-title>
-        </mat-expansion-panel-header>
-        <!-- Related documents options -->
-        <div class="text-option" id="related-documents-options">
-          <!-- Slider with min and max values at it sides -->
-          <span class="text-small text-secondary slider-min-value">{{numDocumentsMinValue}}</span>
-          <mat-slider #sliderNumDocuments [max]="numDocumentsMaxValue" [min]="numDocumentsMinValue"
-                      [value]="numDocuments" color="primary" thumbLabel></mat-slider>
-          <span class="text-small text-secondary slider-max-value">{{numDocumentsMaxValue}}</span>
-          <p class="slider-footer">Número de documentos devueltos</p>
-
-          <button (click)="getRelatedDocuments(textareaComponent.getValue(), sliderNumDocuments.value)"
-                  [disabled]="relatedDocumentsCardComponent.relatedDocumentsLoading" color="primary"
-                  mat-raised-button>
-            Obtener
-          </button>
-        </div>
-      </mat-expansion-panel>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>Resumir texto</mat-panel-title>
-        </mat-expansion-panel-header>
-        <!-- Text summary options -->
-        <div class="text-option" id="text-summary-options">
-          <!-- TODO: Content here -->
-          <div>
-            <mat-form-field appearance="fill">
-              <mat-label>Número de frases</mat-label>
-              <input #inputNumSummarySentences [formControl]="numSummarySentencesFormControl"
-                     matInput min="1" step="1" type="number">
-              <mat-error
-                *ngIf="numSummarySentencesFormControl.invalid">{{getNumSummarySentencesErrorMessage()}}</mat-error>
-              <mat-icon matSuffix>notes</mat-icon>
-            </mat-form-field>
-          </div>
-
-          <!-- Only get the text summary if the numSummarySentences value is valid and the text is not empty -->
-          <button (click)="numSummarySentencesFormControl.valid
-                           && getTextSummary(textareaComponent.getValue(), +inputNumSummarySentences.value)"
-                  [disabled]="textSummaryCardComponent.textSummaryLoading"
-                  color="primary" mat-raised-button>
-            Obtener
-          </button>
-        </div>
-      </mat-expansion-panel>
-    </mat-accordion>
+    <app-text-options [relatedDocumentsCardComponent]="relatedDocumentsCardComponent"
+                      [relatedTopicsCardComponent]="relatedTopicsCardComponent"
+                      [textSummaryCardComponent]="textSummaryCardComponent"
+                      [textareaComponent]="textareaComponent">
+    </app-text-options>
   </div>
 </div>
 
-<app-related-topics-card></app-related-topics-card>
+<app-related-topics-card #relatedTopicsCardComponent></app-related-topics-card>
 
-<app-related-documents-card></app-related-documents-card>
+<app-related-documents-card #relatedDocumentsCardComponent></app-related-documents-card>
 
-<app-text-summary-card></app-text-summary-card>
+<app-text-summary-card #textSummaryCardComponent></app-text-summary-card>
