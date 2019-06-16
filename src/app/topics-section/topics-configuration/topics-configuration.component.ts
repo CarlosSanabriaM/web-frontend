@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { TopicsTextComponent } from '../topics-text/topics-text.component';
 import { TopicsWordcloudComponent } from '../topics-wordcloud/topics-wordcloud.component';
 import { TopicDocumentsCardComponent } from '../topic-documents-card/topic-documents-card.component';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-topics-configuration',
@@ -15,8 +16,13 @@ export class TopicsConfigurationComponent implements OnInit {
   @Input() topicsWordcloudComponent: TopicsWordcloudComponent;
   @Input() topicDocumentsCardComponent: TopicDocumentsCardComponent;
 
+  /** Message displayed in the snack bar */
+  private readonly SNACK_BAR_MESSAGE = '¡La configuración de los topics ha sido actualizada correctamente!';
+  /** Duration in seconds of the snack bar */
+  private readonly SNACK_BAR_SECONDS = 3.5;
 
-  constructor() { }
+
+  constructor(private snackBar: MatSnackBar) { }
 
   ngOnInit() {
   }
@@ -36,6 +42,18 @@ export class TopicsConfigurationComponent implements OnInit {
     // Call the API with the new values to obtain the topics in text and wordcloud formats
     this.topicsTextComponent.getTopicsText();
     this.topicsWordcloudComponent.getTopicsWordcloudImagesUrls();
+    // Open the snack bar with a message
+    this.openSnackBar();
+  }
+
+  /**
+   * Opens an Angular Material Snack Bar with a message
+   * notifying the user that the topics configuration has been updated.
+   */
+  private openSnackBar(): void {
+    this.snackBar.open(this.SNACK_BAR_MESSAGE, '', {
+      duration: this.SNACK_BAR_SECONDS * 1000,
+    });
   }
 
 }
