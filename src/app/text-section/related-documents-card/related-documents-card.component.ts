@@ -9,14 +9,15 @@ import { Subscription } from 'rxjs';
 })
 export class RelatedDocumentsCardComponent implements OnInit {
 
+  /** Max number of characters of a document summary displayed in the card header */
+  private readonly RELATED_DOCUMENT_SUMMARY_MAX_LENGTH = 150;
+
   /** Stores the text related documents returned by the REST API */
   relatedDocuments: TextRelatedDoc[];
   /** If true, the related documents have been asked and are loading */
   relatedDocumentsLoading = false;
   /** Disposable resource to cancel the execution of the related documents Observable */
   relatedDocumentsSubscription: Subscription;
-  /** Max number of characters of a document summary displayed in the card header */
-  private readonly RELATED_DOCUMENT_SUMMARY_MAX_LENGTH = 150;
 
   constructor() { }
 

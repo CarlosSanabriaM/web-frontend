@@ -1,10 +1,12 @@
 <h2>{{sectionName}}</h2>
 
 <div class="row">
+
   <!-- Textarea at the left in medium screen size or above, and up in small and extra small screen size  -->
   <div class="col-md">
     <app-textarea #textareaComponent></app-textarea>
   </div>
+
   <!-- Options at the right in medium screen size or above, and down in small and extra small screen size  -->
   <div class="col-md" id="text-options">
     <app-text-options [relatedDocumentsCardComponent]="relatedDocumentsCardComponent"
@@ -13,6 +15,7 @@
                       [textareaComponent]="textareaComponent">
     </app-text-options>
   </div>
+
 </div>
 
 <app-related-topics-card #relatedTopicsCardComponent></app-related-topics-card>

@@ -1,6 +1,7 @@
 import { Keyword } from './keyword';
 
 export interface Topic {
-  topic: number;  // topic id
+  /** Topic id */
+  topic: number;
   keywords: Keyword[];
 }

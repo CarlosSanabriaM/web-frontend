@@ -4,7 +4,7 @@
     <mat-form-field appearance="fill">
       <mat-label>Número de frases</mat-label>
       <input #inputNumSummarySentences [formControl]="numSummarySentencesFormControl"
-             matInput min="1" step="1" type="number">
+             [min]="MIN_VALUE" [step]="STEP" matInput type="number">
       <mat-error *ngIf="numSummarySentencesFormControl.invalid">{{getNumSummarySentencesErrorMessage()}}</mat-error>
       <mat-icon matSuffix>notes</mat-icon>
     </mat-form-field>

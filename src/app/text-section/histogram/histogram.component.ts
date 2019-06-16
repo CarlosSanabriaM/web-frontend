@@ -20,7 +20,10 @@ export class HistogramComponent implements OnInit {
    */
   @Input() data: IChartistData;
 
-  /** Options for the bar chart in mobile screens */
+  /**
+   * Options for the bar chart for mobile screens
+   * (and for all screens if responsiveOptions aren't specified).
+   */
   private readonly options: IBarChartOptions = {
     axisX: {
       showGrid: false

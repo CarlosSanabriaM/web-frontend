@@ -7,6 +7,7 @@ import { FormControl, Validators } from '@angular/forms';
   styleUrls: [ './textarea.component.css' ]
 })
 export class TextareaComponent implements OnInit {
+
   /** Number of rows of the textarea element */
   private readonly TEXTAREA_NUM_ROWS = 20;
 

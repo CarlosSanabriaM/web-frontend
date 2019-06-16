@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TextService } from '../../../text.service';
+import { TextService } from '../../text.service';
 import { TextareaComponent } from '../../textarea/textarea.component';
 import { RelatedDocumentsCardComponent } from '../../related-documents-card/related-documents-card.component';
 

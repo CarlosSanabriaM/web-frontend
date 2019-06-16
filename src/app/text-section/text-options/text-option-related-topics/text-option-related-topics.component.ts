@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TextareaComponent } from '../../textarea/textarea.component';
 import { RelatedTopicsCardComponent } from '../../related-topics-card/related-topics-card.component';
-import { TextService } from '../../../text.service';
+import { TextService } from '../../text.service';
 
 @Component({
   selector: 'app-text-option-related-topics',

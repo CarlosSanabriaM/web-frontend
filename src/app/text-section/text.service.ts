@@ -1,20 +1,21 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../environments/environment';
+import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { TextTopicProb } from './dtos/text-topic-prob';
-import { TextRelatedDoc } from './dtos/text-related-doc';
-import { TextSummary } from './dtos/text-summary';
-import { UtilsService } from './utils.service';
+import { TextTopicProb } from '../dtos/text-topic-prob';
+import { TextRelatedDoc } from '../dtos/text-related-doc';
+import { TextSummary } from '../dtos/text-summary';
+import { UtilsService } from '../utils.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TextService {
 
+  /** URL to topics and summary API text 'section' */
+  private readonly API_TEXT_URL = `${environment.baseUrl}/user/api/text`;
 
-  private apiTextUrl = `${environment.baseUrl}/user/api/text`;  // URL to topics and summary API text 'section'
 
   constructor(private http: HttpClient,
               private utilsService: UtilsService) { }
@@ -25,7 +26,7 @@ export class TextService {
    * @param maxNumTopics: Max number of topics to retrieve.
    */
   getRelatedTopics(text: string, maxNumTopics: number): Observable<TextTopicProb[]> {
-    const url = `${this.apiTextUrl}/related/topics?max_num_topics=${maxNumTopics}`;
+    const url = `${this.API_TEXT_URL}/related/topics?max_num_topics=${maxNumTopics}`;
 
     // Create FormData object, because the API expects 'Content-Type': 'application/x-www-form-urlencoded' with text attribute
     const formData = new FormData();
@@ -44,7 +45,7 @@ export class TextService {
    * @param numDocuments: Number of documents to retrieve.
    */
   getRelatedDocuments(text: string, numDocuments: number): Observable<TextRelatedDoc[]> {
-    const url = `${this.apiTextUrl}/related/documents?num_documents=${numDocuments}`;
+    const url = `${this.API_TEXT_URL}/related/documents?num_documents=${numDocuments}`;
 
     // Create FormData object, because the API expects 'Content-Type': 'application/x-www-form-urlencoded' with text attribute
     const formData = new FormData();
@@ -63,7 +64,7 @@ export class TextService {
    * @param numSentences: Number of sentences that will contain the summary.
    */
   getTextSummary(text: string, numSentences: number): Observable<TextSummary> {
-    const url = `${this.apiTextUrl}/summary?num_summary_sentences=${numSentences}`;
+    const url = `${this.API_TEXT_URL}/summary?num_summary_sentences=${numSentences}`;
 
     // Create FormData object, because the API expects 'Content-Type': 'application/x-www-form-urlencoded' with text attribute
     const formData = new FormData();

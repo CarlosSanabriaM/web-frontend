@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TextSectionComponent implements OnInit {
 
+  /** Name of the text section */
   sectionName = 'Texto';
 
   constructor() { }

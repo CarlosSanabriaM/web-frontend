@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { TopicsService } from '../topics.service';
+import { TopicsService } from './topics.service';
 import { Topic } from '../dtos/topic';
 import { TopicImageUrl } from '../dtos/topic-image-url';
 import { ReprDocOfTopic } from '../dtos/repr-doc-of-topic';
-import { UtilsService } from '../utils.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -39,8 +38,7 @@ export class TopicsSectionComponent implements OnInit {
   readonly topicDocumentSummaryMaxLength = 150;
 
 
-  constructor(private topicsService: TopicsService,
-              private utilsService: UtilsService) { }
+  constructor(private topicsService: TopicsService) { }
 
   ngOnInit() {
     this.getTopicsText();

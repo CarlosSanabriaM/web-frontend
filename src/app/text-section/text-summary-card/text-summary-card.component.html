@@ -1,5 +1,7 @@
 <!-- If the text summary is loading or has been loaded, show a card -->
 <div *ngIf="textSummaryLoading || textSummary">
+
+  <!-- Alert showed if the summary wasn't generated with the model (it didn't converge) -->
   <ngb-alert (close)="summaryAlertClosed=true" *ngIf="!summaryAlertClosed" type="warning">
     El algoritmo PageRank utilizado para generar el resumen no ha convergido con el texto dado,
     por lo que no se ha podido generar el resumen utilizando dicho algoritmo.<br>
@@ -17,6 +19,7 @@
     </h3>
 
     <div class="card-body">
+
       <!-- If the text summary is loading, show a progress spinner and scroll the page to it -->
       <div *ngIf="textSummaryLoading; else textSummaryLoaded" appScroll>
         <mat-spinner color="primary"></mat-spinner>
@@ -26,7 +29,9 @@
       <ng-template #textSummaryLoaded>
         <pre class="card-text">{{textSummary.text_summary}}</pre>
       </ng-template>
+
     </div>
 
   </div>
+
 </div>

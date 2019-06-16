@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
 
+/**
+ * Service that contains utility functions used across the whole project.
+ */
 @Injectable({
   providedIn: 'root'
 })

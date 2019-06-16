@@ -1,4 +1,5 @@
 export interface TopicImageUrl {
-  topic: number;  // topic id
+  /** Topic id */
+  topic: number;
   image_url: string;
 }

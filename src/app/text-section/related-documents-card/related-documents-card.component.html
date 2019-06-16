@@ -9,7 +9,9 @@
     </button>
   </h3>
 
+
   <div class="card-body">
+
     <!-- If the related documents are loading, show a progress spinner and scroll the page to it -->
     <div *ngIf="relatedDocumentsLoading; else relatedDocumentsLoaded" appScroll>
       <mat-spinner color="primary"></mat-spinner>
@@ -20,6 +22,7 @@
       <!-- With multi, more than one panel can be opened at the same time -->
       <mat-accordion multi>
         <mat-expansion-panel *ngFor="let relatedDoc of relatedDocuments">
+
           <mat-expansion-panel-header>
             <mat-panel-title>
               {{relatedDoc.doc_content_summary | slice:0:RELATED_DOCUMENT_SUMMARY_MAX_LENGTH}}
@@ -31,12 +34,14 @@
               <span>Probabilidad: {{relatedDoc.doc_text_prob | percent:'1.2'}}</span>
             </mat-panel-description>
           </mat-expansion-panel-header>
-          <pre>
-            {{relatedDoc.doc_content}}
-          </pre>
+
+          <!-- Expansion panel content -->
+          <pre>{{relatedDoc.doc_content}}</pre>
+
         </mat-expansion-panel>
       </mat-accordion>
     </ng-template>
+
   </div>
 
 </div>

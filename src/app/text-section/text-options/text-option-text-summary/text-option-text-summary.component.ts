@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { TextService } from '../../../text.service';
+import { TextService } from '../../text.service';
 import { TextareaComponent } from '../../textarea/textarea.component';
 import { TextSummaryCardComponent } from '../../text-summary-card/text-summary-card.component';
 
@@ -15,10 +15,15 @@ export class TextOptionTextSummaryComponent implements OnInit {
   @Input() textareaComponent: TextareaComponent;
   @Input() textSummaryCardComponent: TextSummaryCardComponent;
 
-  /** Form Control that tracks the value and validation status of the num summary sentences input element */
-  private numSummarySentencesFormControl: FormControl;
+  /** Min value for the num summary sentences input */
+  private readonly MIN_VALUE = 1;
   /** Initial value for the num summary sentences input */
   private readonly INITIAL_VALUE = 2;
+  /** Step for the num summary sentences input */
+  private readonly STEP = 2;
+
+  /** Form Control that tracks the value and validation status of the num summary sentences input element */
+  private numSummarySentencesFormControl: FormControl;
 
   constructor(private textService: TextService) { }
 
@@ -26,7 +31,7 @@ export class TextOptionTextSummaryComponent implements OnInit {
     this.numSummarySentencesFormControl = new FormControl(this.INITIAL_VALUE, [
       Validators.required,
       Validators.pattern(/^[+]?\d+$/), // only integer values are admitted
-      Validators.min(1)
+      Validators.min(this.MIN_VALUE)
     ]);
   }
 
