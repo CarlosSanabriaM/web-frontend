@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TopicImageUrl } from '../../dtos/topic-image-url';
 import { TopicDocumentsCardComponent } from '../topic-documents-card/topic-documents-card.component';
-import { TopicsConfigurationComponent } from '../topics-configuration/topics-configuration.component';
 import { TopicsService } from '../topics.service';
 
 @Component({
@@ -13,7 +12,6 @@ export class TopicsWordcloudComponent implements OnInit {
 
   /* Inject the sibling components */
   @Input() topicDocumentsCardComponent: TopicDocumentsCardComponent;
-  @Input() topicsConfigurationComponent: TopicsConfigurationComponent;
 
   /**
    * Output event that notifies the parent component when the user asked for topic documents,
@@ -21,6 +19,15 @@ export class TopicsWordcloudComponent implements OnInit {
    */
   @Output() topicdocuments = new EventEmitter<number>();
 
+  /** Min value for the num keywords wordcloud format */
+  readonly NUM_KEYWORDS_MIN_VALUE = 1;
+  /** Initial value for the num keywords wordcloud format */
+  readonly NUM_KEYWORDS_INITIAL_VALUE = 20;
+  /** Max value for the num keywords wordcloud format */
+  readonly NUM_KEYWORDS_MAX_VALUE = 100;
+
+  /** Number of keywords to be displayed in wordcloud format */
+  numKeywords: number;
   /** Stores the topic documents returned by the REST API */
   topicImageUrls: TopicImageUrl[];
   /** If true, the wordcloud images have been asked and are loading */
@@ -30,6 +37,7 @@ export class TopicsWordcloudComponent implements OnInit {
   constructor(private topicsService: TopicsService) { }
 
   ngOnInit() {
+    this.numKeywords = this.NUM_KEYWORDS_INITIAL_VALUE;
     this.getTopicsWordcloudImagesUrls();
   }
 
@@ -42,7 +50,7 @@ export class TopicsWordcloudComponent implements OnInit {
     this.topicImageUrls = null;
     this.wordcloudImagesLoading = true;
 
-    this.topicsService.getTopicsWordcloudImagesUrls(this.topicsConfigurationComponent.numKeywordsWordcloudFormat)
+    this.topicsService.getTopicsWordcloudImagesUrls(this.numKeywords)
       .subscribe(topicImageUrls => {
         this.topicImageUrls = topicImageUrls;
         this.wordcloudImagesLoading = false;

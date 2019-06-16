@@ -9,12 +9,18 @@
         <h4>Formato Texto</h4>
 
         <!-- Slider with min and max values at it sides -->
-        <span class="text-small text-secondary slider-min-value">{{NUM_KEYWORDS_TEXT_FORMAT_MIN_VALUE}}</span>
-        <mat-slider #sliderNumKeywordsTextFormat [max]="NUM_KEYWORDS_TEXT_FORMAT_MAX_VALUE"
-                    [min]="NUM_KEYWORDS_TEXT_FORMAT_MIN_VALUE" [value]="numKeywordsTextFormat"
+        <span class="text-small text-secondary slider-min-value">
+          {{topicsTextComponent.NUM_KEYWORDS_MIN_VALUE}}
+        </span>
+        <mat-slider #sliderNumKeywordsTextFormat
+                    [max]="topicsTextComponent.NUM_KEYWORDS_MAX_VALUE"
+                    [min]="topicsTextComponent.NUM_KEYWORDS_MIN_VALUE"
+                    [value]="topicsTextComponent.numKeywords"
                     color="primary" thumbLabel>
         </mat-slider>
-        <span class="text-small text-secondary slider-max-value">{{NUM_KEYWORDS_TEXT_FORMAT_MAX_VALUE}}</span>
+        <span class="text-small text-secondary slider-max-value">
+          {{topicsTextComponent.NUM_KEYWORDS_MAX_VALUE}}
+        </span>
         <p class="slider-footer">Número de keywords</p>
       </li>
 
@@ -22,12 +28,18 @@
         <h4>Formato Nube de palabras</h4>
 
         <!-- Slider with min and max values at it sides -->
-        <span class="text-small text-secondary slider-min-value">{{NUM_KEYWORDS_WORDCLOUD_FORMAT_MIN_VALUE}}</span>
-        <mat-slider #sliderNumKeywordsWordcloudFormat [max]="NUM_KEYWORDS_WORDCLOUD_FORMAT_MAX_VALUE"
-                    [min]="NUM_KEYWORDS_WORDCLOUD_FORMAT_MIN_VALUE"
-                    [value]="numKeywordsWordcloudFormat" color="primary"
-                    thumbLabel></mat-slider>
-        <span class="text-small text-secondary slider-max-value">{{NUM_KEYWORDS_WORDCLOUD_FORMAT_MAX_VALUE}}</span>
+        <span class="text-small text-secondary slider-min-value">
+          {{topicsWordcloudComponent.NUM_KEYWORDS_MIN_VALUE}}
+        </span>
+        <mat-slider #sliderNumKeywordsWordcloudFormat
+                    [max]="topicsWordcloudComponent.NUM_KEYWORDS_MAX_VALUE"
+                    [min]="topicsWordcloudComponent.NUM_KEYWORDS_MIN_VALUE"
+                    [value]="topicsWordcloudComponent.numKeywords"
+                    color="primary" thumbLabel>
+        </mat-slider>
+        <span class="text-small text-secondary slider-max-value">
+          {{topicsWordcloudComponent.NUM_KEYWORDS_MAX_VALUE}}
+        </span>
         <p class="slider-footer">Número de keywords</p>
       </li>
 
@@ -35,10 +47,18 @@
         <h4>Documentos más representativos</h4>
 
         <!-- Slider with min and max values at it sides -->
-        <span class="text-small text-secondary slider-min-value">{{NUM_TOPIC_DOCUMENTS_MIN_VALUE}}</span>
-        <mat-slider #sliderNumTopicDocuments [max]="NUM_TOPIC_DOCUMENTS_MAX_VALUE" [min]="NUM_TOPIC_DOCUMENTS_MIN_VALUE"
-                    [value]="numTopicDocuments" color="primary" thumbLabel></mat-slider>
-        <span class="text-small text-secondary slider-max-value">{{NUM_TOPIC_DOCUMENTS_MAX_VALUE}}</span>
+        <span class="text-small text-secondary slider-min-value">
+          {{topicDocumentsCardComponent.NUM_DOCUMENTS_MIN_VALUE}}
+        </span>
+        <mat-slider #sliderNumTopicDocuments
+                    [max]="topicDocumentsCardComponent.NUM_DOCUMENTS_MAX_VALUE"
+                    [min]="topicDocumentsCardComponent.NUM_DOCUMENTS_MIN_VALUE"
+                    [value]="topicDocumentsCardComponent.numDocuments"
+                    color="primary" thumbLabel>
+        </mat-slider>
+        <span class="text-small text-secondary slider-max-value">
+          {{topicDocumentsCardComponent.NUM_DOCUMENTS_MAX_VALUE}}
+        </span>
         <p class="slider-footer">Número de documentos</p>
       </li>
 

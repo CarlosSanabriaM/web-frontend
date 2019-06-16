@@ -9,6 +9,15 @@ import { Subscription } from 'rxjs';
 })
 export class TopicDocumentsCardComponent implements OnInit {
 
+  /** Min value for the num topic documents */
+  readonly NUM_DOCUMENTS_MIN_VALUE = 1;
+  /** Initial value for the num topic documents */
+  readonly NUM_DOCUMENTS_INITIAL_VALUE = 2;
+  /** Max value for the num topic documents */
+  readonly NUM_DOCUMENTS_MAX_VALUE = 10;
+
+  /** Number of topic documents to be displayed */
+  numDocuments: number;
   /** Stores the topic documents returned by the REST API */
   topicDocuments: ReprDocOfTopic[];
   /** If true, the topic documents have been asked and are loading */
@@ -18,11 +27,13 @@ export class TopicDocumentsCardComponent implements OnInit {
   /** Selected topic id to obtain the topics documents */
   selectedTopicId: number;
   /** Max number of characters of a document summary displayed in the card header */
-  private readonly SUMMARY_MAX_LENGTH = 150;
+  private readonly SUMMARY_MAX_LENGTH = 250;
+
 
   constructor() { }
 
   ngOnInit() {
+    this.numDocuments = this.NUM_DOCUMENTS_INITIAL_VALUE;
   }
 
   /**

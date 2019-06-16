@@ -15,8 +15,7 @@
       <!-- Topics in text format -->
       <app-topics-text #topicsTextComponent
                        (topicdocuments)="getTopicDocuments($event)"
-                       [topicDocumentsCardComponent]="topicDocumentsCardComponent"
-                       [topicsConfigurationComponent]="topicsConfigurationComponent">
+                       [topicDocumentsCardComponent]="topicDocumentsCardComponent">
       </app-topics-text>
     </mat-tab>
 
@@ -32,8 +31,7 @@
       <!-- Topics in wordcloud format -->
       <app-topics-wordcloud #topicsWordcloudComponent
                             (topicdocuments)="getTopicDocuments($event)"
-                            [topicDocumentsCardComponent]="topicDocumentsCardComponent"
-                            [topicsConfigurationComponent]="topicsConfigurationComponent">
+                            [topicDocumentsCardComponent]="topicDocumentsCardComponent">
       </app-topics-wordcloud>
     </mat-tab>
 
@@ -48,6 +46,7 @@
       <!-- Mat tab content -->
       <!-- Topics configuration -->
       <app-topics-configuration [topicsTextComponent]="topicsTextComponent"
+                                [topicDocumentsCardComponent]="topicDocumentsCardComponent"
                                 [topicsWordcloudComponent]="topicsWordcloudComponent">
       </app-topics-configuration>
     </mat-tab>

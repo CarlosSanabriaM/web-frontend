@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TopicsService } from './topics.service';
 import { TopicDocumentsCardComponent } from './topic-documents-card/topic-documents-card.component';
-import { TopicsConfigurationComponent } from './topics-configuration/topics-configuration.component';
 
 @Component({
   selector: 'app-topics-section',
@@ -10,9 +9,8 @@ import { TopicsConfigurationComponent } from './topics-configuration/topics-conf
 })
 export class TopicsSectionComponent implements OnInit {
 
-  /* Inject the child components */
+  /* Inject the child components that will be used in this Typescript file */
   @ViewChild(TopicDocumentsCardComponent) topicDocumentsCardComponent: TopicDocumentsCardComponent;
-  @ViewChild(TopicsConfigurationComponent) topicsConfigurationComponent: TopicsConfigurationComponent;
 
   /** Name of the topics section */
   private readonly SECTION_NAME = 'Topics';
@@ -35,7 +33,7 @@ export class TopicsSectionComponent implements OnInit {
     this.topicDocumentsCardComponent.selectedTopicId = topicId;
 
     this.topicDocumentsCardComponent.topicDocumentsSubscription =
-      this.topicsService.getTopicDocuments(topicId, this.topicsConfigurationComponent.numTopicDocuments)
+      this.topicsService.getTopicDocuments(topicId, this.topicDocumentsCardComponent.numDocuments)
         .subscribe(topicDocuments => {
           this.topicDocumentsCardComponent.topicDocuments = topicDocuments;
           this.topicDocumentsCardComponent.topicDocumentsLoading = false;
