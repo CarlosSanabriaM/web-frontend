@@ -19,6 +19,7 @@ export class RelatedTopicsCardComponent implements OnInit {
   /** Data to be displayed in the histogram */
   relatedTopicsHistogramData: IChartistData;
 
+
   constructor() { }
 
   ngOnInit() {

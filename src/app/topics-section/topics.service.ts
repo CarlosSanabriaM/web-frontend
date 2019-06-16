@@ -13,7 +13,8 @@ import { UtilsService } from '../utils.service';
 })
 export class TopicsService {
 
-  private API_TOPICS_URL = `${environment.baseUrl}/user/api/topics`;  // URL to topics and summary API topics 'section'
+  /** URL to topics and summary API topics 'section' */
+  private API_TOPICS_URL = `${environment.baseUrl}/user/api/topics`;
 
   constructor(private http: HttpClient,
               private utilsService: UtilsService) { }

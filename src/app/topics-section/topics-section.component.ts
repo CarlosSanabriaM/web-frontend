@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TopicsService } from './topics.service';
 import { Topic } from '../dtos/topic';
 import { TopicImageUrl } from '../dtos/topic-image-url';
-import { ReprDocOfTopic } from '../dtos/repr-doc-of-topic';
-import { Subscription } from 'rxjs';
+import { TopicDocumentsCardComponent } from './topic-documents-card/topic-documents-card.component';
 
 @Component({
   selector: 'app-topics-section',
@@ -12,14 +11,15 @@ import { Subscription } from 'rxjs';
 })
 export class TopicsSectionComponent implements OnInit {
 
+  /* Inject the child components */
+  @ViewChild(TopicDocumentsCardComponent) topicDocumentsCardComponent: TopicDocumentsCardComponent;
+
+  /** Name of the topics section */
   sectionName = 'Topics';
+  /** Stores the topic documents returned by the REST API */
   topics: Topic[];
   topicImageUrls: TopicImageUrl[];
   wordcloudImagesLoading = false; // if true, the wordcloud images have been asked and are loading
-  topicDocuments: ReprDocOfTopic[];
-  topicDocumentsLoading = false; // if true, the topic document have been asked and are loading
-  topicDocumentsSubscription: Subscription; // disposable resource to cancel the execution of the topic documents Observable
-  selectedTopicId: number;  // selected topic id to obtain the topics documents
 
   // TODO: This values shouldn't be hardcoded here
   readonly numKeywordsTextFormatMinValue = 1; // min value for the num keywords text format slider
@@ -34,17 +34,15 @@ export class TopicsSectionComponent implements OnInit {
   numTopicDocuments = 2; // initial value for the num topic documents slider
   readonly numTopicDocumentsMaxValue = 10; // max value for the num topic documents slider
 
-  /** max number of characters of a document summary displayed in the card header */
-  readonly topicDocumentSummaryMaxLength = 150;
-
 
   constructor(private topicsService: TopicsService) { }
 
   ngOnInit() {
-    this.getTopicsText();
+    this.getTopicsText(); // TODO: Remove line when the TopicsTextComponent is created
     this.getTopicsWordcloudImagesUrls();
   }
 
+  // TODO: Remove method when the TopicsTextComponent is created
   /**
    * Calls the TopicsService to obtain the topics in text format and
    * stores the result in a variable.
@@ -77,14 +75,14 @@ export class TopicsSectionComponent implements OnInit {
    */
   getTopicDocuments(topicId: number): void {
     // Remove previous data and mark as loading
-    this.topicDocuments = null;
-    this.topicDocumentsLoading = true;
-    this.selectedTopicId = topicId;
+    this.topicDocumentsCardComponent.topicDocuments = null;
+    this.topicDocumentsCardComponent.topicDocumentsLoading = true;
+    this.topicDocumentsCardComponent.selectedTopicId = topicId;
 
-    this.topicDocumentsSubscription = this.topicsService.getTopicDocuments(topicId, this.numTopicDocuments)
+    this.topicDocumentsCardComponent.topicDocumentsSubscription = this.topicsService.getTopicDocuments(topicId, this.numTopicDocuments)
       .subscribe(topicDocuments => {
-        this.topicDocuments = topicDocuments;
-        this.topicDocumentsLoading = false;
+        this.topicDocumentsCardComponent.topicDocuments = topicDocuments;
+        this.topicDocumentsCardComponent.topicDocumentsLoading = false;
       });
   }
 
@@ -103,21 +101,6 @@ export class TopicsSectionComponent implements OnInit {
     // Call the API with the new values to obtain the topics in text and wordcloud formats
     this.getTopicsText();
     this.getTopicsWordcloudImagesUrls();
-  }
-
-  /**
-   * Closes the topic documents card.
-   * If the topic documents are loading, unsubscribes from the Observable.
-   */
-  closeTopicDocumentsCard() {
-    if (this.topicDocumentsLoading) {
-      // If topic documents are loading, cancel the subscription and mark as not loading
-      this.topicDocumentsSubscription.unsubscribe();
-      this.topicDocumentsLoading = false;
-    } else {
-      // If topic documents have been loaded, remove them
-      this.topicDocuments = null;
-    }
   }
 
 }

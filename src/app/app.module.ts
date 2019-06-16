@@ -22,6 +22,7 @@ import { TextOptionsComponent } from './text-section/text-options/text-options.c
 import { TextOptionRelatedTopicsComponent } from './text-section/text-options/text-option-related-topics/text-option-related-topics.component';
 import { TextOptionRelatedDocumentsComponent } from './text-section/text-options/text-option-related-documents/text-option-related-documents.component';
 import { TextOptionTextSummaryComponent } from './text-section/text-options/text-option-text-summary/text-option-text-summary.component';
+import { TopicDocumentsCardComponent } from './topics-section/topic-documents-card/topic-documents-card.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { TextOptionTextSummaryComponent } from './text-section/text-options/text
     TextOptionsComponent,
     TextOptionRelatedTopicsComponent,
     TextOptionRelatedDocumentsComponent,
-    TextOptionTextSummaryComponent
+    TextOptionTextSummaryComponent,
+    TopicDocumentsCardComponent
   ],
   imports: [
     BrowserModule,

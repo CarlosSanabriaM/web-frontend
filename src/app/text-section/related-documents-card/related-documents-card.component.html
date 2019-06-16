@@ -25,8 +25,8 @@
 
           <mat-expansion-panel-header>
             <mat-panel-title>
-              {{relatedDoc.doc_content_summary | slice:0:RELATED_DOCUMENT_SUMMARY_MAX_LENGTH}}
-              {{relatedDoc.doc_content_summary.length > RELATED_DOCUMENT_SUMMARY_MAX_LENGTH ? '...' : ''}}
+              {{relatedDoc.doc_content_summary | slice:0:SUMMARY_MAX_LENGTH}}
+              {{relatedDoc.doc_content_summary.length > SUMMARY_MAX_LENGTH ? '...' : ''}}
             </mat-panel-title>
             <mat-panel-description>
               <span>Topic: {{relatedDoc.doc_topic}}</span>
