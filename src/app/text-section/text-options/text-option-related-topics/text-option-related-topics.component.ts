@@ -14,12 +14,12 @@ export class TextOptionRelatedTopicsComponent implements OnInit {
   @Input() textareaComponent: TextareaComponent;
   @Input() relatedTopicsCardComponent: RelatedTopicsCardComponent;
 
-  /** Min value for the max num topics slider */
-  private readonly maxNumTopicsMinValue = 1;
-  /** Initial value for the max num topics slider */
-  private readonly maxNumTopics = 6;
-  /** Max value for the max num topics slider */
-  private readonly maxNumTopicsMaxValue = 17;
+  /** Min value for the max num topics */
+  private readonly MIN_VALUE = 1;
+  /** Initial value for the max num topics */
+  private readonly INITIAL_VALUE = 6;
+  /** Max value for the max num topics */
+  private readonly MAX_VALUE = 17;
 
   constructor(private textService: TextService) { }
 

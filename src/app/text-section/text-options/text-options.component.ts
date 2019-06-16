@@ -22,15 +22,6 @@ export class TextOptionsComponent implements OnInit {
   /** Form Control that tracks the value and validation status of the num summary sentences input element */
   numSummarySentencesFormControl: FormControl;
 
-  // TODO: This values shouldn't be hardcoded here
-
-  /** Min value for the num documents slider */
-  readonly numDocumentsMinValue = 1;
-  /** Initial value for the num documents slider */
-  numDocuments = 2;
-  /** Max value for the num documents slider */
-  readonly numDocumentsMaxValue = 10;
-
   /** Initial value for the num summary sentences input */
   initialNumSummarySentences = 2;
 
@@ -43,33 +34,6 @@ export class TextOptionsComponent implements OnInit {
       Validators.pattern(/^[+]?\d+$/),
       Validators.min(1)
     ]);
-  }
-
-  /**
-   * Calls the TopicsService to obtain the documents more related
-   * to the given text and stores the result in a variable.
-   * @param text: Text used to obtain the related documents.
-   * @param numDocuments: Number of documents to retrieve.
-   */
-  getRelatedDocuments(text: string, numDocuments: number) {
-    if (text.length === 0) {
-      // If the text of the textarea is empty, mark it as touched to allow
-      // the FormControl Validators show an error message, and return
-      this.textareaComponent.markFormControlAsTouched();
-
-      return;
-    }
-
-    // Remove previous data and mark as loading
-    this.relatedDocumentsCardComponent.relatedDocuments = null;
-    this.relatedDocumentsCardComponent.relatedDocumentsLoading = true;
-
-    // Get related documents subscribing to an Observable, and store the subscription to have the possibility to cancel it
-    this.relatedDocumentsCardComponent.relatedDocumentsSubscription = this.textService.getRelatedDocuments(text, numDocuments)
-      .subscribe(relatedDocuments => {
-        this.relatedDocumentsCardComponent.relatedDocuments = relatedDocuments;
-        this.relatedDocumentsCardComponent.relatedDocumentsLoading = false;
-      });
   }
 
   /**

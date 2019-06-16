@@ -14,20 +14,11 @@
       <mat-panel-title>Documentos similares</mat-panel-title>
     </mat-expansion-panel-header>
     <!-- Related documents options -->
-    <div class="text-option" id="related-documents-options">
-      <!-- Slider with min and max values at it sides -->
-      <span class="text-small text-secondary slider-min-value">{{numDocumentsMinValue}}</span>
-      <mat-slider #sliderNumDocuments [max]="numDocumentsMaxValue" [min]="numDocumentsMinValue"
-                  [value]="numDocuments" color="primary" thumbLabel></mat-slider>
-      <span class="text-small text-secondary slider-max-value">{{numDocumentsMaxValue}}</span>
-      <p class="slider-footer">Número de documentos devueltos</p>
+    <!-- Forward the sibling components of TextOptionsComponent to this child component using @Input() -->
+    <app-text-option-related-documents [relatedDocumentsCardComponent]="relatedDocumentsCardComponent"
+                                       [textareaComponent]="textareaComponent">
 
-      <button (click)="getRelatedDocuments(textareaComponent.getValue(), sliderNumDocuments.value)"
-              [disabled]="relatedDocumentsCardComponent.relatedDocumentsLoading" color="primary"
-              mat-raised-button>
-        Obtener
-      </button>
-    </div>
+    </app-text-option-related-documents>
   </mat-expansion-panel>
   <mat-expansion-panel>
     <mat-expansion-panel-header>
