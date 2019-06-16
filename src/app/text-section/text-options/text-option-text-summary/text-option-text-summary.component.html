@@ -1,0 +1,21 @@
+<div class="text-option" id="text-summary-options">
+
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Número de frases</mat-label>
+      <input #inputNumSummarySentences [formControl]="numSummarySentencesFormControl"
+             matInput min="1" step="1" type="number">
+      <mat-error *ngIf="numSummarySentencesFormControl.invalid">{{getNumSummarySentencesErrorMessage()}}</mat-error>
+      <mat-icon matSuffix>notes</mat-icon>
+    </mat-form-field>
+  </div>
+
+
+  <!-- Only get the text summary if the numSummarySentences value is valid and the text is not empty -->
+  <button (click)="numSummarySentencesFormControl.valid
+                   && getTextSummary(textareaComponent.getValue(), +inputNumSummarySentences.value)"
+          [disabled]="textSummaryCardComponent.textSummaryLoading" color="primary" mat-raised-button>
+    Obtener
+  </button>
+
+</div>

@@ -21,6 +21,7 @@ import { TextSummaryCardComponent } from './text-section/text-summary-card/text-
 import { TextOptionsComponent } from './text-section/text-options/text-options.component';
 import { TextOptionRelatedTopicsComponent } from './text-section/text-options/text-option-related-topics/text-option-related-topics.component';
 import { TextOptionRelatedDocumentsComponent } from './text-section/text-options/text-option-related-documents/text-option-related-documents.component';
+import { TextOptionTextSummaryComponent } from './text-section/text-options/text-option-text-summary/text-option-text-summary.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { TextOptionRelatedDocumentsComponent } from './text-section/text-options
     TextSummaryCardComponent,
     TextOptionsComponent,
     TextOptionRelatedTopicsComponent,
-    TextOptionRelatedDocumentsComponent
+    TextOptionRelatedDocumentsComponent,
+    TextOptionTextSummaryComponent
   ],
   imports: [
     BrowserModule,
