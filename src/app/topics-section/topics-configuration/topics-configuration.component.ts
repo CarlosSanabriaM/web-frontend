@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TopicsTextComponent } from '../topics-text/topics-text.component';
+import { TopicsWordcloudComponent } from '../topics-wordcloud/topics-wordcloud.component';
 
 @Component({
   selector: 'app-topics-configuration',
@@ -10,7 +11,8 @@ export class TopicsConfigurationComponent implements OnInit {
 
   /* Inject the sibling components */
   @Input() topicsTextComponent: TopicsTextComponent;
-  // TODO: @Input() topicsWordcloudComponent: TopicsWordcloudComponent;
+  @Input() topicsWordcloudComponent: TopicsWordcloudComponent;
+
   /** Value of the num keywords text format */
   numKeywordsTextFormat = 5;
   /** Value of the num keywords wordcloud format */
@@ -50,7 +52,7 @@ export class TopicsConfigurationComponent implements OnInit {
     this.numTopicDocuments = numTopicDocuments;
     // Call the API with the new values to obtain the topics in text and wordcloud formats
     this.topicsTextComponent.getTopicsText();
-    //this.getTopicsWordcloudImagesUrls(); // TODO: this.topicsWordcloudComponent.getTopicsWordcloudImagesUrls();
+    this.topicsWordcloudComponent.getTopicsWordcloudImagesUrls();
   }
 
 }

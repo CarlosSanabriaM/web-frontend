@@ -1,0 +1,12 @@
+.topic-wordcloud-image {
+  width: 100%;
+}
+
+.topic-wordcloud-image-footer-button {
+  width: 100%;
+}
+
+mat-spinner {
+  margin-top: 15px;
+  margin-bottom: 20px;
+}

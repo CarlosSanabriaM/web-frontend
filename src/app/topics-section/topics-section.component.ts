@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TopicsService } from './topics.service';
-import { TopicImageUrl } from '../dtos/topic-image-url';
 import { TopicDocumentsCardComponent } from './topic-documents-card/topic-documents-card.component';
 import { TopicsConfigurationComponent } from './topics-configuration/topics-configuration.component';
 
@@ -16,32 +15,12 @@ export class TopicsSectionComponent implements OnInit {
   @ViewChild(TopicsConfigurationComponent) topicsConfigurationComponent: TopicsConfigurationComponent;
 
   /** Name of the topics section */
-  sectionName = 'Topics';
-
-  topicImageUrls: TopicImageUrl[];
-  wordcloudImagesLoading = false; // if true, the wordcloud images have been asked and are loading
+  private readonly SECTION_NAME = 'Topics';
 
 
   constructor(private topicsService: TopicsService) { }
 
   ngOnInit() {
-    this.getTopicsWordcloudImagesUrls();
-  }
-
-  /**
-   * Calls the TopicsService to obtain the topics in wordcloud format and
-   * stores the result in a variable.
-   */
-  getTopicsWordcloudImagesUrls(): void {
-    // Remove previous data and mark as loading
-    this.topicImageUrls = null;
-    this.wordcloudImagesLoading = true;
-
-    this.topicsService.getTopicsWordcloudImagesUrls(this.topicsConfigurationComponent.numKeywordsWordcloudFormat)
-      .subscribe(topicImageUrls => {
-        this.topicImageUrls = topicImageUrls;
-        this.wordcloudImagesLoading = false;
-      });
   }
 
   /**

@@ -25,6 +25,7 @@ import { TextOptionTextSummaryComponent } from './text-section/text-options/text
 import { TopicDocumentsCardComponent } from './topics-section/topic-documents-card/topic-documents-card.component';
 import { TopicsTextComponent } from './topics-section/topics-text/topics-text.component';
 import { TopicsConfigurationComponent } from './topics-section/topics-configuration/topics-configuration.component';
+import { TopicsWordcloudComponent } from './topics-section/topics-wordcloud/topics-wordcloud.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { TopicsConfigurationComponent } from './topics-section/topics-configurat
     TextOptionTextSummaryComponent,
     TopicDocumentsCardComponent,
     TopicsTextComponent,
-    TopicsConfigurationComponent
+    TopicsConfigurationComponent,
+    TopicsWordcloudComponent
   ],
   imports: [
     BrowserModule,
