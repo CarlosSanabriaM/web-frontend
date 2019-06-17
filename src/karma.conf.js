@@ -25,7 +25,26 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome'],
+    // browsers: ['Chrome'],
+
+
+    /* Introduced to execute tests in the Docker container */
+    browsers: ['ChromeHeadless'],
+    // new
+    customLaunchers: {
+      'ChromeHeadless': {
+        base: 'Chrome',
+        flags: [
+          '--no-sandbox',
+          '--headless',
+          '--disable-gpu',
+          '--remote-debugging-port=9222'
+        ]
+      }
+    },
+    /* Introduced to execute tests in the Docker container */
+
+
     singleRun: false,
     restartOnFileChange: true
   });
