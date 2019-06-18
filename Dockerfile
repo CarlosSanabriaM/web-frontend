@@ -5,22 +5,23 @@
 # This Dockerfile uses Multistage build (https://docs.docker.com/develop/develop-images/multistage-build/)
 # to create a temporary image used for building the artifact that is then copied over to the production image.
 
-# This Dockerfile uses 2 environment variables:
-#  - PORT: Port where the frontend will be listening inside the container. Must be > 1024.
-#  - PROD: true or false. If true, sets the Angular build configuration to the production target.
-#          Set this value to true when the web_backend is in production.
-# For local testing, the environment variables can be set with the -e option in the 'docker run' command
+# This Dockerfile uses 2 variables:
+#  - PROD (build-time variable): true or false. If true, sets the Angular build configuration to the production target.
+#          This variable is set in the build command with --build-arg. Set this value to true when the web_backend is in production.
+#  - PORT (environment variable): Port where the frontend will be listening inside the container. Must be > 1024.
+#          This variable can be set in the run command with -e.
 
 
 # To build the image execute:
-#  $ docker build . -t web_frontend:latest
+#  $ docker build . -t web_frontend:latest --build-arg PROD=<true/false>
+# If PROD is true, sets the Angular build configuration to the production target.
 
 # To create a container that directly runs the frontend execute:
-#  $ docker run --name web_frontend -p <host-port>:8080 -e PORT=8080 -e PROD=<true/false> -i -t web_frontend:latest
+#  $ docker run --name web_frontend -p <host-port>:8080 -e PORT=8080 -i -t web_frontend:latest
 # where <host-port> is the port where the frontend will be mapped in the host.
 
 # To create a container and enter inside it execute:
-#  $ docker run --name web_frontend -p <host-port>:8080 -e PORT=8080 -e PROD=<true/false> -i -t web_frontend:latest /bin/bash
+#  $ docker run --name web_frontend -p <host-port>:8080 -e PORT=8080 -i -t web_frontend:latest /bin/bash
 # <host-port> is the port where the frontend will be mapped in the host.
 
 #############
@@ -58,6 +59,12 @@ COPY . /app
 # End to end tests
 #RUN ng e2e --port 4202
 
+# Define the build-time variable that specifies if the Angular app have to be built in production mode or not.
+# By default, is true.
+ARG PROD=true
+# The ARG instruction defines a variable that users can pass at build-time to the builder
+# with the docker build command using the --build-arg <varname>=<value> flag.
+
 # Generate build
 RUN ng build --output-path=dist --prod=$PROD
 
@@ -71,9 +78,9 @@ FROM nginx:1.16.0-alpine
 # Copy artifact build from the 'build environment'
 COPY --from=build /app/dist /usr/share/nginx/html
 
-# Expose the port $PORT of the container.
+# Expose the port 8080 of the container.
 # Expose is NOT supported by Heroku and will be ignored there.
-EXPOSE $PORT
+EXPOSE 8080
 # The EXPOSE instruction does not actually publish the port.
 # It functions as a type of documentation between the person who builds the image
 # and the person who runs the container, about which ports are intended to be published.
@@ -105,7 +112,6 @@ USER myuser
 # If no command is specified when running the container, the container will
 # start the frontend server and it will be accesible via the <host-port> port of the host specified in docker run.
 
-# TODO: Modify to use the environment.prod.ts file
 # run nginx
 CMD sed -i -e 's/$PORT/'"$PORT"'/g' /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'
 # Replace the string $PORT in the nginx.conf file with the environmental variable PORT
@@ -113,5 +119,5 @@ CMD sed -i -e 's/$PORT/'"$PORT"'/g' /etc/nginx/conf.d/default.conf && nginx -g '
 # For containers this is useful as best practice is for one container = one process. One server (container) has only one service.
 
 # To specify a different command that will be executed when the container runs, execute:
-# $ docker run --name web_frontend -p <host-port>:8080 -e PORT=8080 -e PROD=<true/false> -i -t web_frontend:latest <command-to-be-executed>
+# $ docker run --name web_frontend -p <host-port>:8080 -e PORT=8080 -i -t web_frontend:latest <command-to-be-executed>
 # where <command-to-be-executed> is the command to be executed.
