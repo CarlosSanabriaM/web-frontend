@@ -16,14 +16,14 @@ export class TextOptionTextSummaryComponent implements OnInit {
   @Input() textSummaryCardComponent: TextSummaryCardComponent;
 
   /** Min value for the num summary sentences input */
-  private readonly MIN_VALUE = 1;
+  readonly MIN_VALUE = 1;
   /** Initial value for the num summary sentences input */
-  private readonly INITIAL_VALUE = 2;
+  readonly INITIAL_VALUE = 2;
   /** Step for the num summary sentences input */
-  private readonly STEP = 2;
+  readonly STEP = 2;
 
   /** Form Control that tracks the value and validation status of the num summary sentences input element */
-  private numSummarySentencesFormControl: FormControl;
+  numSummarySentencesFormControl: FormControl;
 
   constructor(private textService: TextService) { }
 

@@ -13,7 +13,7 @@ export class TopicsSectionComponent implements OnInit {
   @ViewChild(TopicDocumentsCardComponent) topicDocumentsCardComponent: TopicDocumentsCardComponent;
 
   /** Name of the topics section */
-  private readonly SECTION_NAME = 'Topics';
+  readonly SECTION_NAME = 'Topics';
 
 
   constructor(private topicsService: TopicsService) { }

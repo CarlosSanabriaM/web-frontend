@@ -15,11 +15,11 @@ export class TextOptionRelatedDocumentsComponent implements OnInit {
   @Input() relatedDocumentsCardComponent: RelatedDocumentsCardComponent;
 
   /** Min value for the num documents */
-  private readonly MIN_VALUE = 1;
+  readonly MIN_VALUE = 1;
   /** Initial value for the num documents */
-  private readonly INITIAL_VALUE = 2;
+  readonly INITIAL_VALUE = 2;
   /** Max value for the num documents */
-  private readonly MAX_VALUE = 10;
+  readonly MAX_VALUE = 10;
 
   constructor(private textService: TextService) { }
 

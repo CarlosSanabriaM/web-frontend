@@ -15,11 +15,11 @@ export class TextOptionRelatedTopicsComponent implements OnInit {
   @Input() relatedTopicsCardComponent: RelatedTopicsCardComponent;
 
   /** Min value for the max num topics */
-  private readonly MIN_VALUE = 1;
+  readonly MIN_VALUE = 1;
   /** Initial value for the max num topics */
-  private readonly INITIAL_VALUE = 6;
+  readonly INITIAL_VALUE = 6;
   /** Max value for the max num topics */
-  private readonly MAX_VALUE = 17;
+  readonly MAX_VALUE = 17;
 
   constructor(private textService: TextService) { }
 

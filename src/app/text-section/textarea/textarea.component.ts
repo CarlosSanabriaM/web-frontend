@@ -9,12 +9,12 @@ import { FormControl, Validators } from '@angular/forms';
 export class TextareaComponent implements OnInit {
 
   /** Number of rows of the textarea element */
-  private readonly TEXTAREA_NUM_ROWS = 20;
+  readonly TEXTAREA_NUM_ROWS = 20;
 
   /** Form Control that tracks the value and validation status of the textarea element */
-  private textAreaFormControl: FormControl;
+  textAreaFormControl: FormControl;
   /** Is true when the textarea element receives a dragover event */
-  private textAreaIsDragOver = false;
+  textAreaIsDragOver = false;
 
 
   constructor() {

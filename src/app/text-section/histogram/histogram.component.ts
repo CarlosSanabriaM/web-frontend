@@ -24,7 +24,7 @@ export class HistogramComponent implements OnInit {
    * Options for the bar chart for mobile screens
    * (and for all screens if responsiveOptions aren't specified).
    */
-  private readonly options: IBarChartOptions = {
+  readonly options: IBarChartOptions = {
     axisX: {
       showGrid: false
     }
