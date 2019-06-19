@@ -17,8 +17,7 @@ export class TextService {
   private readonly API_TEXT_URL = `${environment.baseUrl}/user/api/text`;
 
 
-  constructor(private http: HttpClient,
-              private utilsService: UtilsService) { }
+  constructor(private http: HttpClient) { }
 
   /**
    * POST the given text to the REST API and return the text-topics probabilities.
@@ -35,7 +34,7 @@ export class TextService {
     return this.http.post<TextTopicProb[]>(url, formData).pipe(
       // TODO: Modify tap?
       tap(_ => console.log(`fetched related topics with max_num_topics=${maxNumTopics}`)),
-      catchError(this.utilsService.handleError)
+      catchError(UtilsService.handleError)
     );
   }
 
@@ -54,7 +53,7 @@ export class TextService {
     return this.http.post<TextRelatedDoc[]>(url, formData).pipe(
       // TODO: Modify tap?
       tap(_ => console.log(`fetched related documents with num_documents=${numDocuments}`)),
-      catchError(this.utilsService.handleError)
+      catchError(UtilsService.handleError)
     );
   }
 
@@ -73,7 +72,7 @@ export class TextService {
     return this.http.post<TextSummary>(url, formData).pipe(
       // TODO: Modify tap?
       tap(_ => console.log(`fetched text summary with num_summary_sentences=${numSentences}`)),
-      catchError(this.utilsService.handleError)
+      catchError(UtilsService.handleError)
     );
   }
 

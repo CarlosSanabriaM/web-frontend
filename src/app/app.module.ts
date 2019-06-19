@@ -1,53 +1,22 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AngularMaterialModule } from './angular-material.module';
-import { AngularBootstrapModule } from './angular-bootstrap.module';
-import { TextSectionComponent } from './text-section/text-section.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
-import { ChartistModule } from 'ng-chartist';
-import { HistogramComponent } from './text-section/histogram/histogram.component';
-import { TextareaComponent } from './text-section/textarea/textarea.component';
-import { RelatedTopicsCardComponent } from './text-section/related-topics-card/related-topics-card.component';
-import { RelatedDocumentsCardComponent } from './text-section/related-documents-card/related-documents-card.component';
-import { TextSummaryCardComponent } from './text-section/text-summary-card/text-summary-card.component';
-import { TextOptionsComponent } from './text-section/text-options/text-options.component';
-import { TextOptionRelatedTopicsComponent } from './text-section/text-options/text-option-related-topics/text-option-related-topics.component';
-import { TextOptionRelatedDocumentsComponent } from './text-section/text-options/text-option-related-documents/text-option-related-documents.component';
-import { TextOptionTextSummaryComponent } from './text-section/text-options/text-option-text-summary/text-option-text-summary.component';
 import { TopicsModule } from './topics/topics.module';
+import { TextModule } from './text/text.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TextSectionComponent,
     FooterComponent,
     HeaderComponent,
-    HistogramComponent,
-    TextareaComponent,
-    RelatedTopicsCardComponent,
-    RelatedDocumentsCardComponent,
-    TextSummaryCardComponent,
-    TextOptionsComponent,
-    TextOptionRelatedTopicsComponent,
-    TextOptionRelatedDocumentsComponent,
-    TextOptionTextSummaryComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    AngularMaterialModule,
-    AngularBootstrapModule,
-    ChartistModule,
     // application modules
     TopicsModule,
+    TextModule
   ],
   providers: [],
   bootstrap: [ AppComponent ]

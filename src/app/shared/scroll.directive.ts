@@ -14,8 +14,7 @@ export class ScrollDirective implements OnInit {
   private readonly elementRef: ElementRef;
 
   // Inject a reference to the host DOM element, and store it in a variable
-  constructor(element: ElementRef,
-              private utilsService: UtilsService) {
+  constructor(element: ElementRef) {
     this.elementRef = element;
   }
 
@@ -23,7 +22,7 @@ export class ScrollDirective implements OnInit {
    * When this directive is created, the page is scrolled to the host DOM element.
    */
   ngOnInit(): void {
-    this.utilsService.scrollToElement(this.elementRef.nativeElement);
+    UtilsService.scrollToElement(this.elementRef.nativeElement);
   }
 
 }

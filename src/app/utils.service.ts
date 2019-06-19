@@ -16,7 +16,7 @@ export class UtilsService {
    * Scrolls the page to the given HTML element.
    * @param element: Element where the page will be scrolled
    */
-  scrollToElement(element: HTMLElement) {
+  static scrollToElement(element: HTMLElement) {
     element.scrollIntoView({
       behavior: 'smooth',
       block: 'center'
@@ -27,7 +27,7 @@ export class UtilsService {
   /**
    * Method for handling http errors.
    */
-  handleError(error: HttpErrorResponse) {
+  static handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
       console.error('An error occurred:', error.error.message);

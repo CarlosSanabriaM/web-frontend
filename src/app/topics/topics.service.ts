@@ -16,8 +16,7 @@ export class TopicsService {
   /** URL to topics and summary API topics 'section' */
   private API_TOPICS_URL = `${environment.baseUrl}/user/api/topics`;
 
-  constructor(private http: HttpClient,
-              private utilsService: UtilsService) { }
+  constructor(private http: HttpClient) { }
 
   /**
    * GET topics in text format from the REST API.
@@ -29,7 +28,7 @@ export class TopicsService {
     return this.http.get<Topic[]>(url).pipe(
       // TODO: Modify tap?
       tap(_ => console.log(`fetched topics in text format with num_keywords=${numKeywords}`)),
-      catchError(this.utilsService.handleError)
+      catchError(UtilsService.handleError)
     );
   }
 
@@ -48,7 +47,7 @@ export class TopicsService {
         topic: topicImageUrl.topic,
         image_url: `${environment.baseUrl}${topicImageUrl.image_url}`
       }))),
-      catchError(this.utilsService.handleError)
+      catchError(UtilsService.handleError)
     );
   }
 
@@ -63,7 +62,7 @@ export class TopicsService {
     return this.http.get<ReprDocOfTopic[]>(url).pipe(
       // TODO: Modify tap?
       tap(_ => console.log(`fetched the ${numDocuments} most representative documents of topic ${topicId}`)),
-      catchError(this.utilsService.handleError)
+      catchError(UtilsService.handleError)
     );
   }
 
