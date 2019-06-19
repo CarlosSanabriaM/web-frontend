@@ -1,17 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material.module';
 import { AngularBootstrapModule } from './angular-bootstrap.module';
-import { TopicsSectionComponent } from './topics-section/topics-section.component';
 import { TextSectionComponent } from './text-section/text-section.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
-import { ScrollDirective } from './scroll.directive';
 import { ChartistModule } from 'ng-chartist';
 import { HistogramComponent } from './text-section/histogram/histogram.component';
 import { TextareaComponent } from './text-section/textarea/textarea.component';
@@ -22,19 +19,14 @@ import { TextOptionsComponent } from './text-section/text-options/text-options.c
 import { TextOptionRelatedTopicsComponent } from './text-section/text-options/text-option-related-topics/text-option-related-topics.component';
 import { TextOptionRelatedDocumentsComponent } from './text-section/text-options/text-option-related-documents/text-option-related-documents.component';
 import { TextOptionTextSummaryComponent } from './text-section/text-options/text-option-text-summary/text-option-text-summary.component';
-import { TopicDocumentsCardComponent } from './topics-section/topic-documents-card/topic-documents-card.component';
-import { TopicsTextComponent } from './topics-section/topics-text/topics-text.component';
-import { TopicsConfigurationComponent } from './topics-section/topics-configuration/topics-configuration.component';
-import { TopicsWordcloudComponent } from './topics-section/topics-wordcloud/topics-wordcloud.component';
+import { TopicsModule } from './topics/topics.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TopicsSectionComponent,
     TextSectionComponent,
     FooterComponent,
     HeaderComponent,
-    ScrollDirective,
     HistogramComponent,
     TextareaComponent,
     RelatedTopicsCardComponent,
@@ -43,11 +35,7 @@ import { TopicsWordcloudComponent } from './topics-section/topics-wordcloud/topi
     TextOptionsComponent,
     TextOptionRelatedTopicsComponent,
     TextOptionRelatedDocumentsComponent,
-    TextOptionTextSummaryComponent,
-    TopicDocumentsCardComponent,
-    TopicsTextComponent,
-    TopicsConfigurationComponent,
-    TopicsWordcloudComponent
+    TextOptionTextSummaryComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +45,9 @@ import { TopicsWordcloudComponent } from './topics-section/topics-wordcloud/topi
     BrowserAnimationsModule,
     AngularMaterialModule,
     AngularBootstrapModule,
-    ChartistModule
+    ChartistModule,
+    // application modules
+    TopicsModule,
   ],
   providers: [],
   bootstrap: [ AppComponent ]

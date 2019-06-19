@@ -1,5 +1,5 @@
 import { Directive, ElementRef, OnInit } from '@angular/core';
-import { UtilsService } from './utils.service';
+import { UtilsService } from '../utils.service';
 
 /**
  * Directive that scrolls the page to the host DOM element

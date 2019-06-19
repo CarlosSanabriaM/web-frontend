@@ -3,11 +3,11 @@ import { TopicsService } from './topics.service';
 import { TopicDocumentsCardComponent } from './topic-documents-card/topic-documents-card.component';
 
 @Component({
-  selector: 'app-topics-section',
-  templateUrl: './topics-section.component.html',
-  styleUrls: [ './topics-section.component.css' ]
+  selector: 'app-topics',
+  templateUrl: './topics.component.html',
+  styleUrls: [ './topics.component.css' ]
 })
-export class TopicsSectionComponent implements OnInit {
+export class TopicsComponent implements OnInit {
 
   /* Inject the child components that will be used in this Typescript file */
   @ViewChild(TopicDocumentsCardComponent) topicDocumentsCardComponent: TopicDocumentsCardComponent;
