@@ -30,14 +30,14 @@ import { ChartistModule } from 'ng-chartist';
   declarations: [
     TextComponent,
     TextareaComponent,
-    HistogramComponent,
-    RelatedTopicsCardComponent,
-    RelatedDocumentsCardComponent,
-    TextSummaryCardComponent,
     TextOptionsComponent,
     TextOptionRelatedTopicsComponent,
     TextOptionRelatedDocumentsComponent,
-    TextOptionTextSummaryComponent
+    TextOptionTextSummaryComponent,
+    RelatedTopicsCardComponent,
+    HistogramComponent,
+    RelatedDocumentsCardComponent,
+    TextSummaryCardComponent
   ],
   // declare all the modules needed in this module, even if they are imported in another modules
   imports: [
