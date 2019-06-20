@@ -26,8 +26,7 @@ export class TopicsService {
     const url = `${this.API_TOPICS_URL}/text?num_keywords=${numKeywords}`;
 
     return this.http.get<Topic[]>(url).pipe(
-      // TODO: Modify tap?
-      tap(_ => console.log(`fetched topics in text format with num_keywords=${numKeywords}`)),
+      tap(_ => console.log(`Fetched topics in text format with num_keywords=${numKeywords}`)),
       catchError(UtilsService.handleError)
     );
   }
@@ -40,8 +39,7 @@ export class TopicsService {
     const url = `${this.API_TOPICS_URL}/wordcloud?num_keywords=${numKeywords}`;
 
     return this.http.get<TopicImageUrl[]>(url).pipe(
-      // TODO: Modify tap?
-      tap(_ => console.log(`fetched topics in wordcloud image format with num_keywords=${numKeywords}`)),
+      tap(_ => console.log(`Fetched topics in wordcloud image format with num_keywords=${numKeywords}`)),
       // Create new TopicImageUrl objects with the baseUrl added at the beginning of the image_url
       map(topicImageUrls => topicImageUrls.map(topicImageUrl => ({
         topic: topicImageUrl.topic,
@@ -60,8 +58,7 @@ export class TopicsService {
     const url = `${this.API_TOPICS_URL}/${topicId}/documents?num_documents=${numDocuments}`;
 
     return this.http.get<ReprDocOfTopic[]>(url).pipe(
-      // TODO: Modify tap?
-      tap(_ => console.log(`fetched the ${numDocuments} most representative documents of topic ${topicId}`)),
+      tap(_ => console.log(`Fetched the ${numDocuments} most representative documents of topic ${topicId}`)),
       catchError(UtilsService.handleError)
     );
   }

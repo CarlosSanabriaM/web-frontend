@@ -78,7 +78,6 @@ export class TextareaComponent implements OnInit {
         '';
   }
 
-  // TODO: Move this method to UtilsService?
   /**
    * Reads the content of the file and stores it in the textarea, using the HTML5 File API.
    */

@@ -1,12 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
-/* Import Angular Material CSS */
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
-/* Import Bootstrap CSS */
-/* TODO: This line shouldn't be needed if bootstrap.min.css is specified in the styles array of angular.json file */
-@import "~bootstrap/dist/css/bootstrap.min.css";
-/* Import Chartist CSS */
-@import "~chartist/dist/chartist.css";
+/* Note: Other CSS style files are imported in the styles array of the angular.json file */
 
 /* Application-wide Styles */
 h2 {
@@ -20,7 +14,6 @@ h3 {
   font-size: 125%;
 }
 
-/* TODO: Check if this is needed */
 html, body {
   height: 100%;
 }
@@ -122,7 +115,7 @@ mat-spinner {
 /* TODO: This should be included in histogram.component.css, but it doesn't work! */
 /* Override bar styles on bar charts. */
 .ct-series-a .ct-bar {
-  /* Colour of  bars */
+  /* Color of bars */
   stroke: #0502d7;
   /* Width of bars */
   stroke-width: 5%;

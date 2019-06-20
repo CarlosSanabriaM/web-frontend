@@ -32,8 +32,7 @@ export class TextService {
     formData.append('text', text);
 
     return this.http.post<TextTopicProb[]>(url, formData).pipe(
-      // TODO: Modify tap?
-      tap(_ => console.log(`fetched related topics with max_num_topics=${maxNumTopics}`)),
+      tap(_ => console.log(`Fetched related topics with max_num_topics=${maxNumTopics}`)),
       catchError(UtilsService.handleError)
     );
   }
@@ -51,8 +50,7 @@ export class TextService {
     formData.append('text', text);
 
     return this.http.post<TextRelatedDoc[]>(url, formData).pipe(
-      // TODO: Modify tap?
-      tap(_ => console.log(`fetched related documents with num_documents=${numDocuments}`)),
+      tap(_ => console.log(`Fetched related documents with num_documents=${numDocuments}`)),
       catchError(UtilsService.handleError)
     );
   }
@@ -70,8 +68,7 @@ export class TextService {
     formData.append('text', text);
 
     return this.http.post<TextSummary>(url, formData).pipe(
-      // TODO: Modify tap?
-      tap(_ => console.log(`fetched text summary with num_summary_sentences=${numSentences}`)),
+      tap(_ => console.log(`Fetched text summary with num_summary_sentences=${numSentences}`)),
       catchError(UtilsService.handleError)
     );
   }
