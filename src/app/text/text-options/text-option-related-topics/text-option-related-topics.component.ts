@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { TextareaComponent } from '../../textarea/textarea.component';
 import { RelatedTopicsCardComponent } from '../../related-topics-card/related-topics-card.component';
 import { TextService } from '../../text.service';
+import { UtilsService } from '../../../utils.service';
 
 @Component({
   selector: 'app-text-option-related-topics',
@@ -21,7 +22,8 @@ export class TextOptionRelatedTopicsComponent implements OnInit {
   /** Max value for the max num topics */
   readonly MAX_VALUE = 17;
 
-  constructor(private textService: TextService) { }
+  constructor(private textService: TextService,
+              private utilsService: UtilsService) { }
 
   ngOnInit() {
   }
@@ -48,17 +50,20 @@ export class TextOptionRelatedTopicsComponent implements OnInit {
 
     // Get related topics subscribing to an Observable, and store the subscription to have the possibility to cancel it
     this.relatedTopicsCardComponent.relatedTopicsSubscription = this.textService.getRelatedTopics(text, maxNumTopics)
-      .subscribe(relatedTopics => {
-        this.relatedTopicsCardComponent.relatedTopics = relatedTopics;
+      .subscribe(
+        relatedTopics => {
+          this.relatedTopicsCardComponent.relatedTopics = relatedTopics;
 
-        // Sort the related topics by the topic id and create a histogram data object
-        const sortedRelatedTopics = relatedTopics.slice().sort((a, b) => a.topic - b.topic);
-        this.relatedTopicsCardComponent.relatedTopicsHistogramData = {
-          labels: sortedRelatedTopics.map(topic => topic.topic.toString()),
-          series: [ sortedRelatedTopics.map(topic => topic.text_topic_prob * 100) ]
-        };
-        this.relatedTopicsCardComponent.relatedTopicsLoading = false;
-      });
+          // Sort the related topics by the topic id and create a histogram data object
+          const sortedRelatedTopics = relatedTopics.slice().sort((a, b) => a.topic - b.topic);
+          this.relatedTopicsCardComponent.relatedTopicsHistogramData = {
+            labels: sortedRelatedTopics.map(topic => topic.topic.toString()),
+            series: [ sortedRelatedTopics.map(topic => topic.text_topic_prob * 100) ]
+          };
+          this.relatedTopicsCardComponent.relatedTopicsLoading = false;
+        },
+        error => this.utilsService.showError(error)
+      );
   }
 
 }

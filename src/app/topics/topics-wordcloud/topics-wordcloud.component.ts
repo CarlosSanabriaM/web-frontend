@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TopicImageUrl } from '../../dtos/topic-image-url';
 import { TopicDocumentsCardComponent } from '../topic-documents-card/topic-documents-card.component';
 import { TopicsService } from '../topics.service';
+import { UtilsService } from '../../utils.service';
 
 @Component({
   selector: 'app-topics-wordcloud',
@@ -34,7 +35,8 @@ export class TopicsWordcloudComponent implements OnInit {
   wordcloudImagesLoading = false;
 
 
-  constructor(private topicsService: TopicsService) { }
+  constructor(private topicsService: TopicsService,
+              private utilsService: UtilsService) { }
 
   ngOnInit() {
     this.numKeywords = this.NUM_KEYWORDS_INITIAL_VALUE;
@@ -51,10 +53,13 @@ export class TopicsWordcloudComponent implements OnInit {
     this.wordcloudImagesLoading = true;
 
     this.topicsService.getTopicsWordcloudImagesUrls(this.numKeywords)
-      .subscribe(topicImageUrls => {
-        this.topicImageUrls = topicImageUrls;
-        this.wordcloudImagesLoading = false;
-      });
+      .subscribe(
+        topicImageUrls => {
+          this.topicImageUrls = topicImageUrls;
+          this.wordcloudImagesLoading = false;
+        },
+        error => this.utilsService.showError(error)
+      );
   }
 
   /**

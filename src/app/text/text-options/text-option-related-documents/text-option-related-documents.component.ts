@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { TextService } from '../../text.service';
 import { TextareaComponent } from '../../textarea/textarea.component';
 import { RelatedDocumentsCardComponent } from '../../related-documents-card/related-documents-card.component';
+import { UtilsService } from '../../../utils.service';
 
 @Component({
   selector: 'app-text-option-related-documents',
@@ -21,7 +22,8 @@ export class TextOptionRelatedDocumentsComponent implements OnInit {
   /** Max value for the num documents */
   readonly MAX_VALUE = 10;
 
-  constructor(private textService: TextService) { }
+  constructor(private textService: TextService,
+              private utilsService: UtilsService) { }
 
   ngOnInit() {
   }
@@ -47,10 +49,13 @@ export class TextOptionRelatedDocumentsComponent implements OnInit {
 
     // Get related documents subscribing to an Observable, and store the subscription to have the possibility to cancel it
     this.relatedDocumentsCardComponent.relatedDocumentsSubscription = this.textService.getRelatedDocuments(text, numDocuments)
-      .subscribe(relatedDocuments => {
-        this.relatedDocumentsCardComponent.relatedDocuments = relatedDocuments;
-        this.relatedDocumentsCardComponent.relatedDocumentsLoading = false;
-      });
+      .subscribe(
+        relatedDocuments => {
+          this.relatedDocumentsCardComponent.relatedDocuments = relatedDocuments;
+          this.relatedDocumentsCardComponent.relatedDocumentsLoading = false;
+        },
+        error => this.utilsService.showError(error)
+      );
   }
 
 }

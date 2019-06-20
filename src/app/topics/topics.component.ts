@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TopicsService } from './topics.service';
 import { TopicDocumentsCardComponent } from './topic-documents-card/topic-documents-card.component';
+import { UtilsService } from '../utils.service';
 
 @Component({
   selector: 'app-topics',
@@ -16,7 +17,8 @@ export class TopicsComponent implements OnInit {
   readonly SECTION_NAME = 'Topics';
 
 
-  constructor(private topicsService: TopicsService) { }
+  constructor(private topicsService: TopicsService,
+              private utilsService: UtilsService) { }
 
   ngOnInit() {
   }
@@ -34,10 +36,13 @@ export class TopicsComponent implements OnInit {
 
     this.topicDocumentsCardComponent.topicDocumentsSubscription =
       this.topicsService.getTopicDocuments(topicId, this.topicDocumentsCardComponent.numDocuments)
-        .subscribe(topicDocuments => {
-          this.topicDocumentsCardComponent.topicDocuments = topicDocuments;
-          this.topicDocumentsCardComponent.topicDocumentsLoading = false;
-        });
+        .subscribe(
+          topicDocuments => {
+            this.topicDocumentsCardComponent.topicDocuments = topicDocuments;
+            this.topicDocumentsCardComponent.topicDocumentsLoading = false;
+          },
+          error => this.utilsService.showError(error)
+        );
   }
 
 }

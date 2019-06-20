@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ScrollDirective } from './scroll.directive';
+import { ErrorSnackBarComponent } from './error-snack-bar/error-snack-bar.component';
 
 /**
  * Shared module that allows to organize the code.
@@ -14,7 +15,16 @@ import { ScrollDirective } from './scroll.directive';
  */
 @NgModule({
   imports: [ CommonModule ],
-  declarations: [ ScrollDirective ],
-  exports: [ ScrollDirective ]
+  declarations: [
+    ScrollDirective,
+    ErrorSnackBarComponent
+  ],
+  exports: [
+    ScrollDirective,
+    ErrorSnackBarComponent
+  ],
+  // List of components that should be compiled when this module is defined.
+  // Is needed to access ErrorSnackBarComponent component from the UtilsService.
+  entryComponents: [ ErrorSnackBarComponent ]
 })
 export class SharedModule {}

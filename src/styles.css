@@ -133,3 +133,10 @@ mat-expansion-panel-header.mat-expanded:hover {
 .mat-expansion-panel-body {
   margin-top: 10px;
 }
+
+/* Styles for the error snackbar panel */
+.error-snackbar-panel {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}

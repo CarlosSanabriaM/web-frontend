@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Topic } from '../../dtos/topic';
 import { TopicsService } from '../topics.service';
 import { TopicDocumentsCardComponent } from '../topic-documents-card/topic-documents-card.component';
+import { UtilsService } from '../../utils.service';
 
 @Component({
   selector: 'app-topics-text',
@@ -32,7 +33,8 @@ export class TopicsTextComponent implements OnInit {
   topics: Topic[];
 
 
-  constructor(private topicsService: TopicsService) { }
+  constructor(private topicsService: TopicsService,
+              private utilsService: UtilsService) { }
 
   ngOnInit() {
     this.numKeywords = this.NUM_KEYWORDS_INITIAL_VALUE;
@@ -45,7 +47,10 @@ export class TopicsTextComponent implements OnInit {
    */
   getTopicsText(): void {
     this.topicsService.getTopicsText(this.numKeywords)
-      .subscribe(topics => this.topics = topics);
+      .subscribe(
+        topics => this.topics = topics,
+        error => this.utilsService.showError(error)
+      );
   }
 
   /**

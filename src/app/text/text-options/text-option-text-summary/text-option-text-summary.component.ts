@@ -3,6 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { TextService } from '../../text.service';
 import { TextareaComponent } from '../../textarea/textarea.component';
 import { TextSummaryCardComponent } from '../../text-summary-card/text-summary-card.component';
+import { UtilsService } from '../../../utils.service';
 
 @Component({
   selector: 'app-text-option-text-summary',
@@ -25,7 +26,8 @@ export class TextOptionTextSummaryComponent implements OnInit {
   /** Form Control that tracks the value and validation status of the num summary sentences input element */
   numSummarySentencesFormControl: FormControl;
 
-  constructor(private textService: TextService) { }
+  constructor(private textService: TextService,
+              private utilsService: UtilsService) { }
 
   ngOnInit() {
     this.numSummarySentencesFormControl = new FormControl(this.INITIAL_VALUE, [
@@ -55,13 +57,16 @@ export class TextOptionTextSummaryComponent implements OnInit {
     this.textSummaryCardComponent.textSummaryLoading = true;
 
     this.textSummaryCardComponent.textSummarySubscription = this.textService.getTextSummary(text, numSentences)
-      .subscribe(textSummary => {
-        this.textSummaryCardComponent.textSummary = textSummary;
-        this.textSummaryCardComponent.textSummaryLoading = false;
-        // Update the value of the alert
-        this.textSummaryCardComponent.summaryAlertClosed = textSummary.summary_generated_with_the_model;
-        this.textSummaryCardComponent.summaryAlertNumSentences = numSentences;
-      });
+      .subscribe(
+        textSummary => {
+          this.textSummaryCardComponent.textSummary = textSummary;
+          this.textSummaryCardComponent.textSummaryLoading = false;
+          // Update the value of the alert
+          this.textSummaryCardComponent.summaryAlertClosed = textSummary.summary_generated_with_the_model;
+          this.textSummaryCardComponent.summaryAlertNumSentences = numSentences;
+        },
+        error => this.utilsService.showError(error)
+      );
   }
 
   /**
