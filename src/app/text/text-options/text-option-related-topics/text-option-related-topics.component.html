@@ -8,8 +8,9 @@
   <p class="slider-footer">Número máx. de topics devueltos</p>
 
 
+  <!-- The button is disabled when the related topics or the related documents of the text are loading -->
   <button (click)="getRelatedTopics(textareaComponent.getValue(), sliderMaxNumTopics.value)"
-          [disabled]="relatedTopicsCardComponent.relatedTopicsLoading"
+          [disabled]="relatedTopicsCardComponent.relatedTopicsLoading || relatedDocumentsCardComponent.relatedDocumentsLoading"
           color="primary" mat-raised-button>
     Obtener
   </button>

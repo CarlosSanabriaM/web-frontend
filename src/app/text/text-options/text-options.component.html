@@ -8,6 +8,7 @@
     <!-- Related topics options -->
     <!-- Forward the sibling components of TextOptionsComponent to this child component using @Input() -->
     <app-text-option-related-topics [relatedTopicsCardComponent]="relatedTopicsCardComponent"
+                                    [relatedDocumentsCardComponent]="relatedDocumentsCardComponent"
                                     [textareaComponent]="textareaComponent">
     </app-text-option-related-topics>
   </mat-expansion-panel>
@@ -21,8 +22,8 @@
     <!-- Related documents options -->
     <!-- Forward the sibling components of TextOptionsComponent to this child component using @Input() -->
     <app-text-option-related-documents [relatedDocumentsCardComponent]="relatedDocumentsCardComponent"
+                                       [relatedTopicsCardComponent]="relatedTopicsCardComponent"
                                        [textareaComponent]="textareaComponent">
-
     </app-text-option-related-documents>
   </mat-expansion-panel>
 

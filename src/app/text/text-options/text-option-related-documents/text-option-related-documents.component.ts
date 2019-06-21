@@ -3,6 +3,7 @@ import { TextService } from '../../text.service';
 import { TextareaComponent } from '../../textarea/textarea.component';
 import { RelatedDocumentsCardComponent } from '../../related-documents-card/related-documents-card.component';
 import { UtilsService } from '../../../utils.service';
+import { RelatedTopicsCardComponent } from '../../related-topics-card/related-topics-card.component';
 
 @Component({
   selector: 'app-text-option-related-documents',
@@ -13,6 +14,7 @@ export class TextOptionRelatedDocumentsComponent implements OnInit {
 
   /* Inject the uncles components */
   @Input() textareaComponent: TextareaComponent;
+  @Input() relatedTopicsCardComponent: RelatedTopicsCardComponent;
   @Input() relatedDocumentsCardComponent: RelatedDocumentsCardComponent;
 
   /** Min value for the num documents */

@@ -8,9 +8,10 @@
   <p class="slider-footer">Número de documentos devueltos</p>
 
 
+  <!-- The button is disabled when the related topics or the related documents of the text are loading -->
   <button (click)="getRelatedDocuments(textareaComponent.getValue(), sliderNumDocuments.value)"
-          [disabled]="relatedDocumentsCardComponent.relatedDocumentsLoading" color="primary"
-          mat-raised-button>
+          [disabled]="relatedTopicsCardComponent.relatedTopicsLoading || relatedDocumentsCardComponent.relatedDocumentsLoading"
+          color="primary" mat-raised-button>
     Obtener
   </button>
 
