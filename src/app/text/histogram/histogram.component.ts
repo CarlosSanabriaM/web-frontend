@@ -20,6 +20,9 @@ export class HistogramComponent implements OnInit {
    */
   @Input() data: IChartistData;
 
+  /** Height of the char in px. */
+  private readonly CHAR_HEIGHT = 300;
+
   /**
    * Options for the bar chart for mobile screens
    * (and for all screens if responsiveOptions aren't specified).
@@ -27,7 +30,8 @@ export class HistogramComponent implements OnInit {
   readonly options: IBarChartOptions = {
     axisX: {
       showGrid: false
-    }
+    },
+    height: this.CHAR_HEIGHT
   };
 
   constructor() { }
