@@ -45,7 +45,10 @@ This is better explained in the *'Additional documentation'* section of
 To render and serve the documentation follow this steps:
 
 1. Move to the project root folder: `cd <project-root-folder>`
-2. Execute this command: `compodoc -p tsconfig.json -s --assetsFolder images --includes additional-documentation-sources`
+2. Execute this command: `./generate-and-serve-documentation.sh`
 3. Access the HTML page in [http://127.0.0.1:8080/](http://127.0.0.1:8080/).
+
+The generate-and-serve-documentation.sh executes the following command: 
+`compodoc -p tsconfig.json -s --assetsFolder images --includes additional-documentation-sources`.
 
 For more info about compodoc, visit the [Compodoc Usage page](https://compodoc.app/guides/usage.html).
