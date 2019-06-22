@@ -5,6 +5,7 @@ import { RelatedDocumentsCardComponent } from '../../related-documents-card/rela
 import { UtilsService } from '../../../utils.service';
 import { RelatedTopicsCardComponent } from '../../related-topics-card/related-topics-card.component';
 
+/** Component that represents the configuration options for the text related documents of the text section. */
 @Component({
   selector: 'app-text-option-related-documents',
   templateUrl: './text-option-related-documents.component.html',
@@ -33,8 +34,8 @@ export class TextOptionRelatedDocumentsComponent implements OnInit {
   /**
    * Calls the TopicsService to obtain the documents more related
    * to the given text and stores the result in a variable.
-   * @param text: Text used to obtain the related documents.
-   * @param numDocuments: Number of documents to retrieve.
+   * @param text Text used to obtain the related documents.
+   * @param numDocuments Number of documents to retrieve.
    */
   getRelatedDocuments(text: string, numDocuments: number) {
     if (text.length === 0) {

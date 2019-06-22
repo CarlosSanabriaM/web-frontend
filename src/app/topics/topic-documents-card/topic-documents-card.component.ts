@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ReprDocOfTopic } from '../../dtos/repr-doc-of-topic';
 import { Subscription } from 'rxjs';
 
+
+/** Component that represents the card where the topic documents will be presented in the text section. */
 @Component({
   selector: 'app-topic-documents-card',
   templateUrl: './topic-documents-card.component.html',
@@ -32,6 +34,9 @@ export class TopicDocumentsCardComponent implements OnInit {
 
   constructor() { }
 
+  /**
+   * Initializes the number of documents.
+   */
   ngOnInit() {
     this.numDocuments = this.NUM_DOCUMENTS_INITIAL_VALUE;
   }

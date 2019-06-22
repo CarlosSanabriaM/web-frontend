@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { IBarChartOptions, IChartistData } from 'chartist';
 
 
+/** Component that represents the text-topic probabilities histogram. */
 @Component({
   selector: 'app-histogram',
   templateUrl: './histogram.component.html',

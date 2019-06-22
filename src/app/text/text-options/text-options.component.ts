@@ -4,6 +4,7 @@ import { RelatedTopicsCardComponent } from '../related-topics-card/related-topic
 import { RelatedDocumentsCardComponent } from '../related-documents-card/related-documents-card.component';
 import { TextSummaryCardComponent } from '../text-summary-card/text-summary-card.component';
 
+/** Component that represents the configuration options of the text section. */
 @Component({
   selector: 'app-text-options',
   templateUrl: './text-options.component.html',

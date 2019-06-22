@@ -5,6 +5,7 @@ import { TextService } from '../../text.service';
 import { UtilsService } from '../../../utils.service';
 import { RelatedDocumentsCardComponent } from '../../related-documents-card/related-documents-card.component';
 
+/** Component that represents the configuration options for the text related topics of the text section. */
 @Component({
   selector: 'app-text-option-related-topics',
   templateUrl: './text-option-related-topics.component.html',
@@ -33,8 +34,8 @@ export class TextOptionRelatedTopicsComponent implements OnInit {
   /**
    * Calls the TopicsService to obtain the text-topic probabilities
    * and stores the result in a variable.
-   * @param text: Text used to obtain the related topics.
-   * @param maxNumTopics: Max number of topics to retrieve.
+   * @param text Text used to obtain the related topics.
+   * @param maxNumTopics Max number of topics to retrieve.
    */
   getRelatedTopics(text: string, maxNumTopics: number) {
     if (text.length === 0) {

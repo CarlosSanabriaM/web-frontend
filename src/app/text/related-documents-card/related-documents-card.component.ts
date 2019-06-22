@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TextRelatedDoc } from '../../dtos/text-related-doc';
 import { Subscription } from 'rxjs';
 
+/** Component that represents the card where the text related documents will be presented in the topics section. */
 @Component({
   selector: 'app-related-documents-card',
   templateUrl: './related-documents-card.component.html',

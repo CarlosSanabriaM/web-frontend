@@ -2,8 +2,11 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+/** Environment variables with values used in development mode. */
 export const environment = {
+  /** If true, production mode is enabled. */
   production: false,
+  /** Base url of the web backend. */
   baseUrl: 'http://127.0.0.1:5000'
 };
 

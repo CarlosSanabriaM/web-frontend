@@ -4,6 +4,7 @@ import { TopicDocumentsCardComponent } from '../topic-documents-card/topic-docum
 import { TopicsService } from '../topics.service';
 import { UtilsService } from '../../utils.service';
 
+/** Component that represents the topics in wordcloud images format subsection of the topics section. */
 @Component({
   selector: 'app-topics-wordcloud',
   templateUrl: './topics-wordcloud.component.html',
@@ -38,6 +39,10 @@ export class TopicsWordcloudComponent implements OnInit {
   constructor(private topicsService: TopicsService,
               private utilsService: UtilsService) { }
 
+  /**
+   * Initializes the number of keywords of the wordcloud images and
+   * loads that images using the TopicsService.
+   */
   ngOnInit() {
     this.numKeywords = this.NUM_KEYWORDS_INITIAL_VALUE;
     this.getTopicsWordcloudImagesUrls();
@@ -66,7 +71,7 @@ export class TopicsWordcloudComponent implements OnInit {
    * Method called when the user presses a document icon.
    * Stores the value of the topic id in the EventEmitter,
    * notifying the parent that topic documents where asked.
-   * @param topicId: Id of the topic which documents want to be retrieved
+   * @param topicId Id of the topic which documents want to be retrieved
    */
   getTopicDocuments(topicId: number): void {
     this.topicdocuments.emit(topicId);

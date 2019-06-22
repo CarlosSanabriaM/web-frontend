@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TextSummary } from '../../dtos/text-summary';
 import { Subscription } from 'rxjs';
 
+/** Component that represents the card where the text summary will be presented in the topics section. */
 @Component({
   selector: 'app-text-summary-card',
   templateUrl: './text-summary-card.component.html',

@@ -4,9 +4,7 @@ import { throwError } from 'rxjs';
 import { MatSnackBar } from '@angular/material';
 import { ErrorSnackBarComponent } from './shared/error-snack-bar/error-snack-bar.component';
 
-/**
- * Service that contains utility functions used across the whole project.
- */
+/** Service that contains utility functions used across the whole project. */
 @Injectable({
   providedIn: 'root'
 })
@@ -16,11 +14,14 @@ export class UtilsService {
   private readonly ERROR_SNACK_BAR_SECONDS = 8;
 
 
+  /**
+   * @param errorSnackBar Angular Material Snackbar for the error messages.
+   */
   constructor(private errorSnackBar: MatSnackBar) { }
 
   /**
    * Scrolls the page to the given HTML element.
-   * @param element: Element where the page will be scrolled
+   * @param element Element where the page will be scrolled
    */
   static scrollToElement(element: HTMLElement) {
     element.scrollIntoView({

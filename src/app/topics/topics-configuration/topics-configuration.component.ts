@@ -4,6 +4,7 @@ import { TopicsWordcloudComponent } from '../topics-wordcloud/topics-wordcloud.c
 import { TopicDocumentsCardComponent } from '../topic-documents-card/topic-documents-card.component';
 import { MatSnackBar } from '@angular/material';
 
+/** Component that represents the configuration subsection of the topics section. */
 @Component({
   selector: 'app-topics-configuration',
   templateUrl: './topics-configuration.component.html',
@@ -22,6 +23,10 @@ export class TopicsConfigurationComponent implements OnInit {
   private readonly SNACK_BAR_SECONDS = 3.5;
 
 
+  /**
+   * @param snackBar Angular Material Snackbar for the confirmation message
+   * after updating the topics section configuration.
+   */
   constructor(private snackBar: MatSnackBar) { }
 
   ngOnInit() {

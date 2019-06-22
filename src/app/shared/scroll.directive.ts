@@ -13,7 +13,10 @@ export class ScrollDirective implements OnInit {
   /** Host DOM element */
   private readonly elementRef: ElementRef;
 
-  // Inject a reference to the host DOM element, and store it in a variable
+  /**
+   * Injects a reference to the host DOM element, and stores it in a variable.
+   * @param element Reference to the host DOM element.
+   */
   constructor(element: ElementRef) {
     this.elementRef = element;
   }

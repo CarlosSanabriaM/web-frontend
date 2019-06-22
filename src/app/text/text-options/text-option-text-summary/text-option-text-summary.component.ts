@@ -5,6 +5,7 @@ import { TextareaComponent } from '../../textarea/textarea.component';
 import { TextSummaryCardComponent } from '../../text-summary-card/text-summary-card.component';
 import { UtilsService } from '../../../utils.service';
 
+/** Component that represents the configuration options for the text summary of the text section. */
 @Component({
   selector: 'app-text-option-text-summary',
   templateUrl: './text-option-text-summary.component.html',
@@ -29,6 +30,13 @@ export class TextOptionTextSummaryComponent implements OnInit {
   constructor(private textService: TextService,
               private utilsService: UtilsService) { }
 
+  /**
+   * Initializes the form control with the num summary sentences initial value and with the following validators:
+   *
+   * * Required
+   * * Only integers
+   * * Min value
+   */
   ngOnInit() {
     this.numSummarySentencesFormControl = new FormControl(this.INITIAL_VALUE, [
       Validators.required,
@@ -40,8 +48,8 @@ export class TextOptionTextSummaryComponent implements OnInit {
   /**
    * Calls the TopicsService to obtain a summary of the given text
    * and stores the result in a variable.
-   * @param text: Text used to obtain it's summary.
-   * @param numSentences: Number of sentences of the summary.
+   * @param text Text used to obtain it's summary.
+   * @param numSentences Number of sentences of the summary.
    */
   getTextSummary(text: string, numSentences: number) {
     if (text.length === 0) {

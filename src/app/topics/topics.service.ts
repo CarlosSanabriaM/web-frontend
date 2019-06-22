@@ -8,6 +8,7 @@ import { TopicImageUrl } from '../dtos/topic-image-url';
 import { ReprDocOfTopic } from '../dtos/repr-doc-of-topic';
 import { UtilsService } from '../utils.service';
 
+/** Service that communicates with the topics section of the web backend REST API. */
 @Injectable({
   providedIn: 'root'
 })
@@ -20,7 +21,7 @@ export class TopicsService {
 
   /**
    * GET topics in text format from the REST API.
-   * @param numKeywords: Number of keywords to retrieve for each topic
+   * @param numKeywords Number of keywords to retrieve for each topic
    */
   getTopicsText(numKeywords: number): Observable<Topic[]> {
     const url = `${this.API_TOPICS_URL}/text?num_keywords=${numKeywords}`;
@@ -33,7 +34,7 @@ export class TopicsService {
 
   /**
    * GET topics in wordcloud image format from the REST API.
-   * @param numKeywords: Number of keywords to retrieve for each topic image
+   * @param numKeywords Number of keywords to retrieve for each topic image
    */
   getTopicsWordcloudImagesUrls(numKeywords: number): Observable<TopicImageUrl[]> {
     const url = `${this.API_TOPICS_URL}/wordcloud?num_keywords=${numKeywords}`;
@@ -51,8 +52,8 @@ export class TopicsService {
 
   /**
    * GET the most representative documents of a topic from the REST API.
-   * @param topicId: Id of the topic which documents want to be retrieved
-   * @param numDocuments: Number of documents to retrieve
+   * @param topicId Id of the topic which documents want to be retrieved
+   * @param numDocuments Number of documents to retrieve
    */
   getTopicDocuments(topicId: number, numDocuments: number): Observable<ReprDocOfTopic[]> {
     const url = `${this.API_TOPICS_URL}/${topicId}/documents?num_documents=${numDocuments}`;

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
+/** Component that represents the textarea of text section where the user inserts the text. */
 @Component({
   selector: 'app-textarea',
   templateUrl: './textarea.component.html',
@@ -8,21 +9,23 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class TextareaComponent implements OnInit {
 
-  /** Number of rows of the textarea element */
+  /** Number of rows of the textarea element. */
   readonly TEXTAREA_NUM_ROWS = 20;
 
-  /** Form Control that tracks the value and validation status of the textarea element */
+  /** Form Control that tracks the value and validation status of the textarea element. */
   textAreaFormControl: FormControl;
-  /** Is true when the textarea element receives a dragover event */
+  /** Is true when the textarea element receives a dragover event. */
   textAreaIsDragOver = false;
 
 
   constructor() {
   }
 
+  /**
+   * Initializes the form control with empty value ('') and
+   * with required validator (if the value is empty, an error is raised in the textarea).
+   */
   ngOnInit() {
-    // Initialize the form control with empty value ('') and
-    // with required validator (if the value is empty, an error is raised)
     this.textAreaFormControl = new FormControl('', [ Validators.required ]);
   }
 

@@ -26,6 +26,9 @@ This application consumes the REST API served by the [web_backend](https://githu
 * **Contains a Dockerfile to create a Docker image to execute the frontend in an isolated environment or deploy it.**
 
 
+![Coverage badge documentation](images/coverage-badge-documentation.svg)
+
+
 
 ## Dependencies, Installation and Usage
 All this information and more is present in the [documentation](documentation).

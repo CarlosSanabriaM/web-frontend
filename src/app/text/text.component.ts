@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+/** Root component of the text module that represents the text section. */
 @Component({
   selector: 'app-text',
   templateUrl: './text.component.html',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TextComponent implements OnInit {
 
-  /** Name of the text section */
+  /** Name of the text section. */
   readonly SECTION_NAME = 'Texto';
 
   constructor() { }

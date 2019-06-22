@@ -3,6 +3,7 @@ import { TextTopicProb } from '../../dtos/text-topic-prob';
 import { Subscription } from 'rxjs';
 import { IChartistData } from 'chartist';
 
+/** Component that represents the card where the text related topics will be presented in the topics section. */
 @Component({
   selector: 'app-related-topics-card',
   templateUrl: './related-topics-card.component.html',

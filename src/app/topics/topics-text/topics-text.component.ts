@@ -4,6 +4,7 @@ import { TopicsService } from '../topics.service';
 import { TopicDocumentsCardComponent } from '../topic-documents-card/topic-documents-card.component';
 import { UtilsService } from '../../utils.service';
 
+/** Component that represents the topics in text format subsection of the topics section. */
 @Component({
   selector: 'app-topics-text',
   templateUrl: './topics-text.component.html',
@@ -36,6 +37,10 @@ export class TopicsTextComponent implements OnInit {
   constructor(private topicsService: TopicsService,
               private utilsService: UtilsService) { }
 
+  /**
+   * Initializes the number of keywords and
+   * loads the topics in text format using the TopicsService.
+   */
   ngOnInit() {
     this.numKeywords = this.NUM_KEYWORDS_INITIAL_VALUE;
     this.getTopicsText();
@@ -57,7 +62,7 @@ export class TopicsTextComponent implements OnInit {
    * Method called when the user presses a document icon.
    * Stores the value of the topic id in the EventEmitter,
    * notifying the parent that topic documents where asked.
-   * @param topicId: Id of the topic which documents want to be retrieved
+   * @param topicId Id of the topic which documents want to be retrieved
    */
   getTopicDocuments(topicId: number): void {
     this.topicdocuments.emit(topicId);
