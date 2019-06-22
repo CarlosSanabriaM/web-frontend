@@ -35,11 +35,15 @@ All this information and more is present in the [documentation](documentation).
 
 To generate the documentation and visualize it, follow this steps:
 
-1. Install compodoc via npm: `npm install -g @compodoc/compodoc`
-2. Render the documentation, and serve it with compodoc: `compodoc -p tsconfig.json -s --assetsFolder images`
+1. Install compodoc 1.1.8 via npm: `npm install -g @compodoc/compodoc@1.1.8`
+2. Render the documentation, and serve it with compodoc: `compodoc -p tsconfig.json -s --assetsFolder images --includes additional-documentation-sources`
 3. Access the HTML page in [http://127.0.0.1:8080/](http://127.0.0.1:8080/).
 
-For more info, visit the [Compodoc Usage page](https://compodoc.app/guides/usage.html).
+Compodoc 1.1.9 has a bug that fails to render source code blocks in Markdown files, 
+so for the moment better install compodoc 1.1.8. 
+See this [issue](https://github.com/compodoc/compodoc/issues/750) for more info.
+
+For more info about compodoc, visit the [Compodoc Usage page](https://compodoc.app/guides/usage.html).
 
 
 ## Angular default info

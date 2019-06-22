@@ -2,8 +2,11 @@
 # That means that those files won't be able to be used by the dockerfile commands COPY and ADD
 
 # Ignore the following files
-node_modules
 .git
 .gitignore
 README.md
-Vagrantfile
+node_modules
+dist
+documentation
+additional-documentation-sources
+images

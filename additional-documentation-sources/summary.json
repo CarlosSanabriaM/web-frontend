@@ -1,0 +1,24 @@
+[
+  {
+    "title": "Execution and Deployment",
+    "file": "execution-and-deployment.md"
+  },
+  {
+    "title": "Development",
+    "file": "development.md",
+    "children": [
+      {
+        "title": "Development: API",
+        "file": "development/api.md"
+      },
+      {
+        "title": "Development: Documentation",
+        "file": "development/documentation.md"
+      },
+      {
+        "title": "Future Improvements",
+        "file": "development/future-improvements.md"
+      }
+    ]
+  }
+]
