@@ -12,6 +12,9 @@ This project is an Angular application that represents the web frontend of my fi
 
 This application consumes the REST API served by the [web_backend](https://github.com/CarlosSanabriaM/web_backend).
 
+It's deployed in Heroku in the following URL: 
+[https://topics-and-summary-web-front.herokuapp.com](https://topics-and-summary-web-front.herokuapp.com)
+
 
 
 ## Main features
@@ -24,6 +27,7 @@ This application consumes the REST API served by the [web_backend](https://githu
 * **Shows error messages in Angular Material Snack bar.**
 * **It's completely adaptable, changing the layout and other small details depending on the screen size.**
 * **Contains a Dockerfile to create a Docker image to execute the frontend in an isolated environment or deploy it.**
+* **Deployed on Heroku.**
 
 
 ![Coverage badge documentation](images/coverage-badge-documentation.svg)
