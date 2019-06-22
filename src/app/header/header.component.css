@@ -1,5 +1,21 @@
+/* Extra small devices (portrait phones, less than 576px) */
+/* No media query for `xs` since this is the default in Bootstrap */
 h1 {
-  color: #3f51b4;
+  font-size: 9vw;
+  background-color: #3f51b4;
+  color: white;
   text-align: center;
-  margin-top: 0.5em;
+  margin: 0;
+  padding: 10px;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  h1 {
+    font-size: 3.5em;
+    background-color: unset;
+    color: #3f51b4;
+    margin-top: 0.25em;
+    padding-bottom: 0;
+  }
 }

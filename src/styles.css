@@ -3,15 +3,25 @@
 /* Note: Other CSS style files are imported in the styles array of the angular.json file */
 
 /* Application-wide Styles */
+
+/* Extra small devices (portrait phones, less than 576px) */
 h2 {
+  font-size: 7vw;
   color: #444;
-  font-size: 250%;
-  margin: 20px 0;
+  margin: 4% 0;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  h2 {
+    font-size: 250%;
+    margin: 20px 0;
+  }
 }
 
 h3 {
-  color: #444;
   font-size: 125%;
+  color: #444;
 }
 
 html, body {
@@ -98,13 +108,25 @@ pre {
   margin-top: 1%;
 }
 
-/* The min and max values at both sides of a slider are separated of it by 5px */
+/* Extra small devices (portrait phones, less than 576px) */
 .slider-min-value {
-  margin-right: 5px;
+  margin-right: 0;
 }
 
 .slider-max-value {
-  margin-left: 5px;
+  margin-left: 0;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  /* The min and max values at both sides of a slider are separated of it by 5px */
+  .slider-min-value {
+    margin-right: 5px;
+  }
+
+  .slider-max-value {
+    margin-left: 5px;
+  }
 }
 
 /* Horizontal center Angular Material Progress Spinner */
