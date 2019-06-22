@@ -20,7 +20,7 @@ export class HistogramComponent implements OnInit {
    */
   @Input() data: IChartistData;
 
-  /** Height of the char in px. */
+  /** Height of the chart in px. */
   private readonly CHAR_HEIGHT = 300;
 
   /**
