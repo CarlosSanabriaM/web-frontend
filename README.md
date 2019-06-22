@@ -1,27 +1,9 @@
 # Web Frontend
 
-<p float="left" id="images">
-  <img src="images/topics-section.png" alt="Image of the topics section" class="app-image">
-  <img src="images/text-section.png" alt="Image of the text section" class="app-image">
+<p float="left" id="images" style="text-align: center;">
+  <img src="images/topics-section.png" alt="Image of the topics section" width="49%">
+  <img src="images/text-section.png" alt="Image of the text section" width="49%">
 </p>
-
-<style>
-  #images {
-    text-align: center;
-  }
-
-  .app-image {
-    width: 95%;
-    margin-bottom: 10px;
-  }
-  
-  @media (min-width: 768px) {
-    .app-image {
-      width: 49%;
-      margin: 0px;
-    }
-  }
-</style>
 
 
 
