@@ -35,7 +35,7 @@ It's deployed in Heroku in the following URL:
 
 
 ## Dependencies, Installation and Usage
-All this information and more is present in the [documentation](documentation).
+All this information and more is present in the **documentation**.
 
 To generate the documentation and visualize it, follow this steps:
 
