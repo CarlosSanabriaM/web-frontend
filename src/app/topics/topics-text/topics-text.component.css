@@ -5,3 +5,11 @@ table {
 table td, table th {
   vertical-align: middle;
 }
+
+.keyword-probability-pair {
+  margin-left: 5px;
+  margin-right: 5px;
+  /* Avoid separating keyword name and keyword probability,
+  but keeping all keyword-probability pairs inline. */
+  display: inline-block;
+}
