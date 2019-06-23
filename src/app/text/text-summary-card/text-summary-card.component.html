@@ -11,11 +11,20 @@
   <div class="card">
 
     <h3 class="card-header">
-      Texto resumido
-      <!-- Button to close the card -->
-      <button (click)="closeCard()" aria-label="Close" class="close">
-        <span aria-hidden="true">&times;</span>
-      </button>
+      <div class="row">
+
+        <div class="col-10 card-header-text">
+          Texto resumido
+        </div>
+
+        <div class="col-2 card-header-close-button">
+          <!-- Button to close the card -->
+          <button (click)="closeCard()" aria-label="Close" class="close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+      </div>
     </h3>
 
     <div class="card-body">

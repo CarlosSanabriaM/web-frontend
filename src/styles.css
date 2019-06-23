@@ -112,6 +112,15 @@ pre {
   margin-top: 1%;
 }
 
+/* Set the padding at the right of the card header text and at the left of the card header close button to 5px. */
+.card-header-text {
+  padding-right: 5px;
+}
+
+.card-header-close-button {
+  padding-left: 5px;
+}
+
 /* Extra small devices (portrait phones, less than 576px) */
 .slider-min-value {
   margin-right: 0;
