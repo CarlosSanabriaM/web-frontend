@@ -9,5 +9,6 @@
   .tab-label-text {
     display: inherit;
     margin-bottom: 0;
+    font-size: 165%;
   }
 }

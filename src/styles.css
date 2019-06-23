@@ -11,17 +11,21 @@ h2 {
   margin: 4% 0;
 }
 
+h3 {
+  font-size: 125%;
+  color: #444;
+}
+
+h4 {
+  font-size: 120%;
+}
+
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
   h2 {
     font-size: 250%;
     margin: 20px 0;
   }
-}
-
-h3 {
-  font-size: 125%;
-  color: #444;
 }
 
 html, body {
