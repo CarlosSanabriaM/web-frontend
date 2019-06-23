@@ -33,15 +33,24 @@
         <mat-expansion-panel *ngFor="let relatedDoc of relatedDocuments">
 
           <mat-expansion-panel-header>
-            <mat-panel-title>
-              {{relatedDoc.doc_content_summary | slice:0:SUMMARY_MAX_LENGTH}}
-              {{relatedDoc.doc_content_summary.length > SUMMARY_MAX_LENGTH ? '...' : ''}}
-            </mat-panel-title>
-            <mat-panel-description>
-              <span>Topic: {{relatedDoc.doc_topic}}</span>
-              &nbsp;&nbsp;
-              <span>Probabilidad: {{relatedDoc.doc_text_prob | percent:'1.2'}}</span>
-            </mat-panel-description>
+            <div class="row mat-panel-header-row">
+
+              <div class="col-md-9 col-12 mat-panel-title-div">
+                <mat-panel-title>
+                  {{relatedDoc.doc_content_summary | slice:0:SUMMARY_MAX_LENGTH}}
+                  {{relatedDoc.doc_content_summary.length > SUMMARY_MAX_LENGTH ? '...' : ''}}
+                </mat-panel-title>
+              </div>
+
+              <div class="col-md-3 col-12 mat-panel-description-div">
+                <mat-panel-description>
+                  <span>Topic: {{relatedDoc.doc_topic}}</span>
+                  &nbsp;&nbsp;
+                  <span>Probabilidad: {{relatedDoc.doc_text_prob | percent:'1.2'}}</span>
+                </mat-panel-description>
+              </div>
+
+            </div>
           </mat-expansion-panel-header>
 
           <!-- Expansion panel content -->

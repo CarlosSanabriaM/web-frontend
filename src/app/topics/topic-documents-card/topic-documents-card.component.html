@@ -33,13 +33,22 @@
         <mat-expansion-panel *ngFor="let topicDocument of topicDocuments">
 
           <mat-expansion-panel-header>
-            <mat-panel-title>
-              {{topicDocument.doc_content_summary | slice:0:SUMMARY_MAX_LENGTH}}
-              {{topicDocument.doc_content_summary.length > SUMMARY_MAX_LENGTH ? '...' : ''}}
-            </mat-panel-title>
-            <mat-panel-description>
-              Probabilidad: {{topicDocument.doc_topic_prob | percent:'1.2'}}
-            </mat-panel-description>
+            <div class="row mat-panel-header-row">
+
+              <div class="col-md-10 col-12 mat-panel-title-div">
+                <mat-panel-title>
+                  {{topicDocument.doc_content_summary | slice:0:SUMMARY_MAX_LENGTH}}
+                  {{topicDocument.doc_content_summary.length > SUMMARY_MAX_LENGTH ? '...' : ''}}
+                </mat-panel-title>
+              </div>
+
+              <div class="col-md-2 col-12 mat-panel-description-div">
+                <mat-panel-description>
+                  Probabilidad: {{topicDocument.doc_topic_prob | percent:'1.2'}}
+                </mat-panel-description>
+              </div>
+
+            </div>
           </mat-expansion-panel-header>
 
           <!-- Expansion panel content -->

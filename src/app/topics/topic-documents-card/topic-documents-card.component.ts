@@ -29,7 +29,7 @@ export class TopicDocumentsCardComponent implements OnInit {
   /** Selected topic id to obtain the topics documents */
   selectedTopicId: number;
   /** Max number of characters of a document summary displayed in the card header */
-  readonly SUMMARY_MAX_LENGTH = 250;
+  readonly SUMMARY_MAX_LENGTH = 500;
 
 
   constructor() { }

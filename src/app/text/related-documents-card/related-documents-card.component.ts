@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 export class RelatedDocumentsCardComponent implements OnInit {
 
   /** Max number of characters of a document summary displayed in the card header */
-  readonly SUMMARY_MAX_LENGTH = 150;
+  readonly SUMMARY_MAX_LENGTH = 500;
 
   /** Stores the text related documents returned by the REST API */
   relatedDocuments: TextRelatedDoc[];

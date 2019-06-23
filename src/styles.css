@@ -28,6 +28,7 @@ h4 {
   }
 }
 
+
 html, body {
   height: 100%;
 }
@@ -35,6 +36,7 @@ html, body {
 body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
 
 /** Styles for Angular Material Icons **/
 /* Rules for sizing the icon. */
@@ -72,27 +74,44 @@ body {
   color: rgba(255, 255, 255, 0.3);
 }
 
+
 /* Text below the slider doesn't have top margin */
 .slider-footer {
-  margin-top: 0px;
+  margin-top: 0;
 }
+
 
 /* Angular Material expansion panel header fits the text height, but with a min height of 48px */
 mat-expansion-panel-header {
-  min-height: 48px;
+  min-height: 50px;
   height: 100% !important;
 }
 
-/* Right align the description of the Angular Material expansion panel header */
-.mat-expansion-panel-header-description {
-  display: flex;
-  justify-content: flex-end;
+
+/* Styles for the mat-expansion-panel-header of the topic documents and related documents. */
+.mat-panel-description-div {
+  margin-top: 15px;
 }
+
+.mat-panel-header-row {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .mat-panel-description-div {
+    margin-top: 0;
+  }
+}
+
 
 /* Tab icons have a margin of 8px at the left */
 .tab-icon {
   margin-left: 8px;
 }
+
 
 /* TODO: Try to find a more elegant solution. This specifies values for the different browsers */
 /* Wrap lines in <pre> tags that are larger than the screen width */
@@ -107,6 +126,7 @@ pre {
   font-size: 100%;
 }
 
+
 /* Add a margin at the top of Bootstrap cards to avoid collisions with other components */
 .card {
   margin-top: 1%;
@@ -120,6 +140,7 @@ pre {
 .card-header-close-button {
   padding-left: 5px;
 }
+
 
 /* Extra small devices (portrait phones, less than 576px) */
 .slider-min-value {
@@ -142,10 +163,12 @@ pre {
   }
 }
 
+
 /* Horizontal center Angular Material Progress Spinner */
 mat-spinner {
   margin: 0 auto;
 }
+
 
 /* TODO: This should be included in histogram.component.css, but it doesn't work! */
 /* Override bar styles on bar charts. */
@@ -156,6 +179,7 @@ mat-spinner {
   stroke-width: 5%;
 }
 
+
 /* Expansion panel header has a different color when it's expanded */
 mat-expansion-panel-header.mat-expanded, mat-expansion-panel-header.mat-expanded:focus {
   background-color: rgba(0, 0, 0, .05) !important;
@@ -165,9 +189,11 @@ mat-expansion-panel-header.mat-expanded:hover {
   background-color: white !important;
 }
 
+/* Expansion panel has more margin in the top of the body */
 .mat-expansion-panel-body {
   margin-top: 10px;
 }
+
 
 /* Styles for the error snackbar panel */
 .error-snackbar-panel {
