@@ -13,7 +13,7 @@ This project is an Angular application that represents the web frontend of my fi
 This application consumes the REST API served by the [web_backend](https://github.com/CarlosSanabriaM/web_backend).
 
 It's deployed in Heroku in the following URL: 
-[https://topics-and-summary-web-front.herokuapp.com](http://topics-and-summary-web-front.herokuapp.com)
+[http://topics-and-summary-web-front.herokuapp.com](http://topics-and-summary-web-front.herokuapp.com)
 
 
 
