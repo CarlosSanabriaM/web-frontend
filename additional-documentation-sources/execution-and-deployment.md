@@ -56,7 +56,7 @@ docker run --name web_frontend -p <host-port>:8080 -e PORT=8080 -i -t web_fronte
 
 # Deploy to Heroku
 
-The web frontend is deployed in Heroku in the following url: https://topics-and-summary-web-front.herokuapp.com/.
+The web frontend is deployed in Heroku in the following url: http://topics-and-summary-web-front.herokuapp.com/.
 
 This was done creating an Heroku app called **topics-and-summary-web-front**.
 
