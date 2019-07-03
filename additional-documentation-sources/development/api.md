@@ -2,10 +2,17 @@
 
 This page explains:
 
+* The [style guide](#style-guide) used in the project
 * The most [important libraries](#important-libraries) used in the source code
 * The [directory structure and important files](#directory-structure-and-important-files)
 * [Important source code details](#important-source-code-details)
 * Tips to [extend the library](#extend-the-library)
+
+
+
+## Style guide
+
+The style guide used in this project is the [Angular Style Guide](https://angular.io/guide/styleguide).
 
 
 
