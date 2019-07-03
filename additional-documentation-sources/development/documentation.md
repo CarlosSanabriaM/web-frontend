@@ -51,4 +51,7 @@ To render and serve the documentation follow this steps:
 The generate-and-serve-documentation.sh executes the following command: 
 `compodoc -p tsconfig.json -s --assetsFolder images --includes additional-documentation-sources`.
 
+After generating the documentation, it's not needed to serve it to visualize it. 
+It can be accessed directly, opening the **documentation/index.html** file in a web browser.
+
 For more info about compodoc, visit the [Compodoc Usage page](https://compodoc.app/guides/usage.html).

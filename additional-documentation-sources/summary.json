@@ -1,5 +1,9 @@
 [
   {
+    "title": "Installation",
+    "file": "installation.md"
+  },
+  {
     "title": "Execution and Deployment",
     "file": "execution-and-deployment.md"
   },
